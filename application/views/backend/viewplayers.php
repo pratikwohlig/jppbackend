@@ -2,7 +2,7 @@
 <div class="col s12">
 <div class="row">
 <div class="col s12 drawchintantable">
-<?php $this->chintantable->createsearch(" List of players");?>
+<?php $this->chintantable->createsearch(" Players");?>
 <table class="highlight responsive-table">
 <thead>
 <tr>
