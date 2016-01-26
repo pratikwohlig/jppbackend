@@ -1055,4 +1055,9 @@ $id=$this->input->get_post("id");
 $data["message"]=$this->subscribe_model->getsinglesubscribe($id);
 $this->load->view("json",$data);
 }
+ public function test()
+{
+$data=$this->gallery_model->getdropdown();
+     print_r($data);
+}
 } ?>

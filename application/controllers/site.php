@@ -1402,12 +1402,13 @@ $data["page"]="viewgalleryslide";
 $data["page2"]="block/galleryblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
-$data["base_url"]=site_url("site/viewgalleryslidejson");
+$data["base_url"]=site_url("site/viewgalleryslidejson?id=".$this->input->get('id'));
 $data["title"]="View galleryslide";
 $this->load->view("templatewith2",$data);
 }
 function viewgalleryslidejson()
 {
+$id=$this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`jpp_galleryslide`.`id`";
@@ -1448,7 +1449,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_galleryslide`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_galleryslide`","WHERE `jpp_galleryslide`.`gallery`='$id'");
 $this->load->view("json",$data);
 }
 
@@ -1459,8 +1460,8 @@ $this->checkaccess($access);
 $data["page"]="creategalleryslide";
 $data["page2"]="block/galleryblock";
 $data["before1"]=$this->input->get('id');
-$data["gallery"]=$this->gallery_model->getdropdown();
 $data["before2"]=$this->input->get('id');
+$data["gallery"]=$this->gallery_model->getdropdown();
 $data["title"]="Create galleryslide";
 $this->load->view("templatewith2",$data);
 }
@@ -1475,7 +1476,6 @@ $this->form_validation->set_rules("image","Image","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
-$data["gallery"]=$this->gallery_model->getdropdown();
 $data["gallery"]=$this->gallery_model->getdropdown();
 $data["page"]="creategalleryslide";
 $data["title"]="Create galleryslide";
@@ -1503,8 +1503,8 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editgalleryslide";
 $data["page2"]="block/galleryblock";
-$data["before1"]=$this->input->get('id');
-$data["before2"]=$this->input->get('id');
+$data["before1"]=$this->input->get('galleryid');
+$data["before2"]=$this->input->get('galleryid');
 $data["gallery"]=$this->gallery_model->getdropdown();
 $data["title"]="Edit galleryslide";
 $data["before"]=$this->galleryslide_model->beforeedit($this->input->get("id"));
@@ -1966,9 +1966,12 @@ public function editwallpapercategory()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editwallpapercategory";
+$data["page2"]="block/wallpaperblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
 $data["title"]="Edit wallpapercategory";
 $data["before"]=$this->wallpapercategory_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editwallpapercategorysubmit()
 {
@@ -2014,12 +2017,16 @@ public function viewwallpaper()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewwallpaper";
-$data["base_url"]=site_url("site/viewwallpaperjson");
+$data["page2"]="block/wallpaperblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewwallpaperjson?id=").$this->input->get("id");
 $data["title"]="View wallpaper";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewwallpaperjson()
 {
+$id=$this->input->get("id");
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`jpp_wallpaper`.`id`";
@@ -2080,7 +2087,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpaper`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpaper`","WHERE `jpp_wallpaper`.`wallpapercategory`='$id'");
 $this->load->view("json",$data);
 }
 
@@ -2088,9 +2095,13 @@ public function createwallpaper()
 {
 $access=array("1");
 $this->checkaccess($access);
+$data["wallpapercategory"]=$this->wallpapercategory_model->getdropdown();
 $data["page"]="createwallpaper";
+$data["page2"]="block/wallpaperblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
 $data["title"]="Create wallpaper";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createwallpapersubmit() 
 {
@@ -2107,6 +2118,7 @@ $this->form_validation->set_rules("image6","Image6","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["wallpapercategory"]=$this->wallpapercategory_model->getdropdown();
 $data["page"]="createwallpaper";
 $data["title"]="Create wallpaper";
 $this->load->view("template",$data);
@@ -2116,24 +2128,57 @@ else
 $id=$this->input->get_post("id");
 $wallpapercategory=$this->input->get_post("wallpapercategory");
 $name=$this->input->get_post("name");
-$image1=$this->input->get_post("image1");
-$image2=$this->input->get_post("image2");
-$image3=$this->input->get_post("image3");
-$image4=$this->input->get_post("image4");
-$image5=$this->input->get_post("image5");
-$image6=$this->input->get_post("image6");
-$image1=$this->menu_model->createImage();
-$image2=$this->menu_model->createImage();
-$image3=$this->menu_model->createImage();
-$image4=$this->menu_model->createImage();
-$image5=$this->menu_model->createImage();
-$image6=$this->menu_model->createImage();
+ $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$this->load->library('upload', $config);
+			$filename="image1";
+			$image1="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image1=$uploaddata['file_name'];
+			}
+			$filename="image2";
+			$image2="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image2=$uploaddata['file_name'];
+			}
+    $filename="image3";
+			$image3="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image3=$uploaddata['file_name'];
+			}
+    $filename="image4";
+			$image4="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image4=$uploaddata['file_name'];
+			}
+    $filename="image5";
+			$image5="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image5=$uploaddata['file_name'];
+			}
+    $filename="image6";
+			$image6="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image6=$uploaddata['file_name'];
+			}
 if($this->wallpaper_model->create($wallpapercategory,$name,$image1,$image2,$image3,$image4,$image5,$image6)==0)
 $data["alerterror"]="New wallpaper could not be created.";
 else
 $data["alertsuccess"]="wallpaper created Successfully.";
-$data["redirect"]="site/viewwallpaper";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewwallpaper?id=".$wallpapercategory;
+$this->load->view("redirect2",$data);
 }
 }
 public function editwallpaper()
@@ -2141,9 +2186,13 @@ public function editwallpaper()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editwallpaper";
+$data["page2"]="block/wallpaperblock";
+$data["before1"]=$this->input->get('wallpapercategoryid');
+$data["before2"]=$this->input->get('wallpapercategoryid');
+$data["wallpapercategory"]=$this->wallpapercategory_model->getdropdown();
 $data["title"]="Edit wallpaper";
 $data["before"]=$this->wallpaper_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editwallpapersubmit()
 {
@@ -2162,6 +2211,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editwallpaper";
+$data["wallpapercategory"]=$this->wallpapercategory_model->getdropdown();
 $data["title"]="Edit wallpaper";
 $data["before"]=$this->wallpaper_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -2171,24 +2221,57 @@ else
 $id=$this->input->get_post("id");
 $wallpapercategory=$this->input->get_post("wallpapercategory");
 $name=$this->input->get_post("name");
-$image1=$this->input->get_post("image1");
-$image2=$this->input->get_post("image2");
-$image3=$this->input->get_post("image3");
-$image4=$this->input->get_post("image4");
-$image5=$this->input->get_post("image5");
-$image6=$this->input->get_post("image6");
-$image1=$this->menu_model->createImage();
-$image2=$this->menu_model->createImage();
-$image3=$this->menu_model->createImage();
-$image4=$this->menu_model->createImage();
-$image5=$this->menu_model->createImage();
-$image6=$this->menu_model->createImage();
+ $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$this->load->library('upload', $config);
+			$filename="image1";
+			$image1="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image1=$uploaddata['file_name'];
+			}
+			$filename="image2";
+			$image2="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image2=$uploaddata['file_name'];
+			}
+    $filename="image3";
+			$image3="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image3=$uploaddata['file_name'];
+			}
+    $filename="image4";
+			$image4="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image4=$uploaddata['file_name'];
+			}
+    $filename="image5";
+			$image5="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image5=$uploaddata['file_name'];
+			}
+    $filename="image6";
+			$image6="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image6=$uploaddata['file_name'];
+			}
 if($this->wallpaper_model->edit($id,$wallpapercategory,$name,$image1,$image2,$image3,$image4,$image5,$image6)==0)
 $data["alerterror"]="New wallpaper could not be Updated.";
 else
 $data["alertsuccess"]="wallpaper Updated Successfully.";
-$data["redirect"]="site/viewwallpaper";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewwallpaper?id=".$wallpapercategory;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletewallpaper()
@@ -2196,8 +2279,9 @@ public function deletewallpaper()
 $access=array("1");
 $this->checkaccess($access);
 $this->wallpaper_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewwallpaper";
-$this->load->view("redirect",$data);
+$wallpapercategoryid=$this->input->get('wallpapercategoryid');
+$data["redirect"]="site/viewwallpaper?id=".$wallpapercategoryid;
+$this->load->view("redirect2",$data);
 }
 public function viewpages()
 {
@@ -2685,9 +2769,12 @@ public function editvideogallery()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editvideogallery";
+$data["page2"]="block/videoblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
 $data["title"]="Edit videogallery";
 $data["before"]=$this->videogallery_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editvideogallerysubmit()
 {
@@ -2733,12 +2820,16 @@ public function viewvideos()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewvideos";
-$data["base_url"]=site_url("site/viewvideosjson");
+$data["page2"]="block/videoblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewvideosjson?id=").$this->input->get('id');
 $data["title"]="View videos";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewvideosjson()
 {
+    $id=$this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`jpp_videos`.`id`";
@@ -2784,7 +2875,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_videos`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_videos`","WHERE `jpp_videos`.`videogallery`='$id'");
 $this->load->view("json",$data);
 }
 
@@ -2793,8 +2884,12 @@ public function createvideos()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createvideos";
+$data["page2"]="block/videoblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["videogallery"]=$this->videogallery_model->getdropdown();
 $data["title"]="Create videos";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createvideossubmit() 
 {
@@ -2808,6 +2903,7 @@ $this->form_validation->set_rules("image","Image","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["videogallery"]=$this->videogallery_model->getdropdown();
 $data["page"]="createvideos";
 $data["title"]="Create videos";
 $this->load->view("template",$data);
@@ -2825,8 +2921,8 @@ if($this->videos_model->create($videogallery,$order,$name,$url,$image)==0)
 $data["alerterror"]="New videos could not be created.";
 else
 $data["alertsuccess"]="videos created Successfully.";
-$data["redirect"]="site/viewvideos";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewvideos?id=".$videogallery;
+$this->load->view("redirect2",$data);
 }
 }
 public function editvideos()
@@ -2834,9 +2930,13 @@ public function editvideos()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editvideos";
+$data["page2"]="block/videoblock";
+$data["before1"]=$this->input->get('videogalleryid');
+$data["before2"]=$this->input->get('videogalleryid');
+$data["videogallery"]=$this->videogallery_model->getdropdown();
 $data["title"]="Edit videos";
 $data["before"]=$this->videos_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editvideossubmit()
 {
@@ -2852,6 +2952,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editvideos";
+$data["videogallery"]=$this->videogallery_model->getdropdown();
 $data["title"]="Edit videos";
 $data["before"]=$this->videos_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -2869,8 +2970,8 @@ if($this->videos_model->edit($id,$videogallery,$order,$name,$url,$image)==0)
 $data["alerterror"]="New videos could not be Updated.";
 else
 $data["alertsuccess"]="videos Updated Successfully.";
-$data["redirect"]="site/viewvideos";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewvideos?id=".$videogallery;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletevideos()
@@ -2878,8 +2979,9 @@ public function deletevideos()
 $access=array("1");
 $this->checkaccess($access);
 $this->videos_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewvideos";
-$this->load->view("redirect",$data);
+$video=$this->input->get('videogalleryid');
+$data["redirect"]="site/viewvideos?id=".$video;
+$this->load->view("redirect2",$data);
 }
 public function viewcontactus()
 {

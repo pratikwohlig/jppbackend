@@ -48,15 +48,15 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_gallery` ORDER BY `id` ASC")->row();
-$return=array(
-"" => "Select Option"
-);
-foreach($query as $row)
-{
-$return[$row->id]=$row->name;
-}
-return $return;
+    $query=$this->db->query("SELECT * FROM `jpp_gallery` ORDER BY `id` ASC")->result();
+    $return=array(
+    "" => "Select Option"
+    );
+    foreach($query as $row)
+    {
+    $return[$row->id]=$row->name;
+    }
+    return $return;
 }
 }
 ?>

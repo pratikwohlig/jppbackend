@@ -26,10 +26,38 @@ return $query;
 }
 public function edit($id,$wallpapercategory,$name,$image1,$image2,$image3,$image4,$image5,$image6)
 {
-if($image=="")
+if($image1=="")
 {
-$image=$this->wallpaper_model->getimagebyid($id);
-$image=$image->image;
+$image1=$this->wallpaper_model->getimage1byid($id);
+$image1=$image1->image1;
+}
+    if($image2=="")
+{
+$image2=$this->wallpaper_model->getimage2byid($id);
+$image2=$image2->image2;
+}
+     if($image3=="")
+{
+$image3=$this->wallpaper_model->getimage3byid($id);
+$image3=$image3->image3;
+}
+    
+     if($image4=="")
+{
+$image4=$this->wallpaper_model->getimage4byid($id);
+$image4=$image4->image4;
+}
+    
+     if($image5=="")
+{
+$image5=$this->wallpaper_model->getimage5byid($id);
+$image5=$image5->image5;
+}
+    
+    if($image6=="")
+{
+$image6=$this->wallpaper_model->getimage6byid($id);
+$image6=$image6->image6;
 }
 $data=array("wallpapercategory" => $wallpapercategory,"name" => $name,"image1" => $image1,"image2" => $image2,"image3" => $image3,"image4" => $image4,"image5" => $image5,"image6" => $image6);
 $this->db->where( "id", $id );
@@ -41,15 +69,39 @@ public function delete($id)
 $query=$this->db->query("DELETE FROM `jpp_wallpaper` WHERE `id`='$id'");
 return $query;
 }
-public function getimagebyid($id)
+public function getimage1byid($id)
 {
-$query=$this->db->query("SELECT `image` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+$query=$this->db->query("SELECT `image1` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage2byid($id)
+{
+$query=$this->db->query("SELECT `image2` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage3byid($id)
+{
+$query=$this->db->query("SELECT `image3` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage4byid($id)
+{
+$query=$this->db->query("SELECT `image4` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage5byid($id)
+{
+$query=$this->db->query("SELECT `image5` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage6byid($id)
+{
+$query=$this->db->query("SELECT `image6` FROM `jpp_wallpaper` WHERE `id`='$id'")->row();
 return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_wallpaper` ORDER BY `id` 
-                    ASC")->row();
+$query=$this->db->query("SELECT * FROM `jpp_wallpaper` ORDER BY `id` ASC")->row();
 $return=array(
 "" => "Select Option"
 );
