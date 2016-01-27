@@ -4,6 +4,12 @@
 </div>
 <form class='col s12' method='post' action='<?php echo site_url("site/createpointsubmit");?>' enctype= 'multipart/form-data'>
 <div class="row">
+<div class=" input-field col s12 m6">
+<?php echo form_dropdown("team",$team,set_value('team'));?>
+<label for="team">Team</label>
+</div>
+</div>
+<div class="row">
 <div class="input-field col s6">
 <label for="played">played</label>
 <input type="text" id="played" name="played" value='<?php echo set_value('played');?>'>

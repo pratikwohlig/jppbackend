@@ -735,6 +735,7 @@ public function createpoint()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createpoint";
+$data["team"]=$this->team_model->getdropdown();
 $data["title"]="Create point";
 $this->load->view("template",$data);
 }
@@ -750,6 +751,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createpoint";
+$data["team"]=$this->team_model->getdropdown();
 $data["title"]="Create point";
 $this->load->view("template",$data);
 }
@@ -760,7 +762,8 @@ $played=$this->input->get_post("played");
 $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
 $point=$this->input->get_post("point");
-if($this->point_model->create($played,$wins,$lost,$point)==0)
+$team=$this->input->get_post("team");
+if($this->point_model->create($played,$wins,$lost,$point,$team)==0)
 $data["alerterror"]="New point could not be created.";
 else
 $data["alertsuccess"]="point created Successfully.";
@@ -773,6 +776,7 @@ public function editpoint()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editpoint";
+$data["team"]=$this->team_model->getdropdown();
 $data["title"]="Edit point";
 $data["before"]=$this->point_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -789,6 +793,7 @@ $this->form_validation->set_rules("point","Point","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["team"]=$this->team_model->getdropdown();
 $data["page"]="editpoint";
 $data["title"]="Edit point";
 $data["before"]=$this->point_model->beforeedit($this->input->get("id"));
@@ -801,7 +806,8 @@ $played=$this->input->get_post("played");
 $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
 $point=$this->input->get_post("point");
-if($this->point_model->edit($id,$played,$wins,$lost,$point)==0)
+$team=$this->input->get_post("team");
+if($this->point_model->edit($id,$played,$wins,$lost,$point,$team)==0)
 $data["alerterror"]="New point could not be Updated.";
 else
 $data["alertsuccess"]="point Updated Successfully.";

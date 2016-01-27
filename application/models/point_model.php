@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class point_model extends CI_Model
 {
-public function create($played,$wins,$lost,$point)
+public function create($played,$wins,$lost,$point,$team)
 {
-$data=array("played" => $played,"wins" => $wins,"lost" => $lost,"point" => $point);
+$data=array("played" => $played,"wins" => $wins,"lost" => $lost,"point" => $point,"team" => $team);
 $query=$this->db->insert( "jpp_point", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,10 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_point")->row();
 return $query;
 }
-public function edit($id,$played,$wins,$lost,$point)
+public function edit($id,$played,$wins,$lost,$point,$team)
 {
-if($image=="")
-{
-$image=$this->point_model->getimagebyid($id);
-$image=$image->image;
-}
-$data=array("played" => $played,"wins" => $wins,"lost" => $lost,"point" => $point);
+
+$data=array("played" => $played,"wins" => $wins,"lost" => $lost,"point" => $point,"team" => $team);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_point", $data );
 return 1;
@@ -48,8 +44,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_point` ORDER BY `id` 
-                    ASC")->row();
+$query=$this->db->query("SELECT * FROM `jpp_point` ORDER BY `id` ASC")->result();
 $return=array(
 "" => "Select Option"
 );

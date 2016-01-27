@@ -47,33 +47,35 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`jpp_point`.`played`";
 $elements[1]->sort="1";
 $elements[1]->header="played";
 $elements[1]->alias="played";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`jpp_point`.`wins`";
 $elements[2]->sort="1";
 $elements[2]->header="Wins";
 $elements[2]->alias="wins";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`jpp_point`.`lost`";
 $elements[3]->sort="1";
 $elements[3]->header="Lost";
 $elements[3]->alias="lost";
 
-$elements=array();
 $elements[4]=new stdClass();
 $elements[4]->field="`jpp_point`.`point`";
 $elements[4]->sort="1";
 $elements[4]->header="Point";
 $elements[4]->alias="point";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_team`.`name`";
+$elements[5]->sort="1";
+$elements[5]->header="name";
+$elements[5]->alias="name";
 
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
@@ -88,7 +90,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_point`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team`");
 $this->load->view("json",$data);
 }
 public function getsinglepoint()
