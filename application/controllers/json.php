@@ -40,57 +40,57 @@ $this->load->view("json",$data);
 }
 function getallpoint()
 {
-$elements=array();
-$elements[0]=new stdClass();
-$elements[0]->field="`jpp_point`.`id`";
-$elements[0]->sort="1";
-$elements[0]->header="ID";
-$elements[0]->alias="id";
-
-$elements[1]=new stdClass();
-$elements[1]->field="`jpp_point`.`played`";
-$elements[1]->sort="1";
-$elements[1]->header="played";
-$elements[1]->alias="played";
-
-$elements[2]=new stdClass();
-$elements[2]->field="`jpp_point`.`wins`";
-$elements[2]->sort="1";
-$elements[2]->header="Wins";
-$elements[2]->alias="wins";
-
-$elements[3]=new stdClass();
-$elements[3]->field="`jpp_point`.`lost`";
-$elements[3]->sort="1";
-$elements[3]->header="Lost";
-$elements[3]->alias="lost";
-
-$elements[4]=new stdClass();
-$elements[4]->field="`jpp_point`.`point`";
-$elements[4]->sort="1";
-$elements[4]->header="Point";
-$elements[4]->alias="point";
-    
-$elements[5]=new stdClass();
-$elements[5]->field="`jpp_team`.`name`";
-$elements[5]->sort="1";
-$elements[5]->header="name";
-$elements[5]->alias="name";
-
-$search=$this->input->get_post("search");
-$pageno=$this->input->get_post("pageno");
-$orderby=$this->input->get_post("orderby");
-$orderorder=$this->input->get_post("orderorder");
-$maxrow=$this->input->get_post("maxrow");
-if($maxrow=="")
-{
-}
-if($orderby=="")
-{
-$orderby="id";
-$orderorder="ASC";
-}
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team`");
+//$elements=array();
+//$elements[0]=new stdClass();
+//$elements[0]->field="`jpp_point`.`id`";
+//$elements[0]->sort="1";
+//$elements[0]->header="ID";
+//$elements[0]->alias="id";
+//
+//$elements[1]=new stdClass();
+//$elements[1]->field="`jpp_point`.`played`";
+//$elements[1]->sort="1";
+//$elements[1]->header="played";
+//$elements[1]->alias="played";
+//
+//$elements[2]=new stdClass();
+//$elements[2]->field="`jpp_point`.`wins`";
+//$elements[2]->sort="1";
+//$elements[2]->header="Wins";
+//$elements[2]->alias="wins";
+//
+//$elements[3]=new stdClass();
+//$elements[3]->field="`jpp_point`.`lost`";
+//$elements[3]->sort="1";
+//$elements[3]->header="Lost";
+//$elements[3]->alias="lost";
+//
+//$elements[4]=new stdClass();
+//$elements[4]->field="`jpp_point`.`point`";
+//$elements[4]->sort="1";
+//$elements[4]->header="Point";
+//$elements[4]->alias="point";
+//    
+//$elements[5]=new stdClass();
+//$elements[5]->field="`jpp_team`.`name`";
+//$elements[5]->sort="1";
+//$elements[5]->header="name";
+//$elements[5]->alias="name";
+//
+//$search=$this->input->get_post("search");
+//$pageno=$this->input->get_post("pageno");
+//$orderby=$this->input->get_post("orderby");
+//$orderorder=$this->input->get_post("orderorder");
+//$maxrow=$this->input->get_post("maxrow");
+//if($maxrow=="")
+//{
+//}
+//if($orderby=="")
+//{
+//$orderby="point";
+//$orderorder="DESC";
+//}
+$data["message"]=$this->restapi_model->getAllPoints();
 $this->load->view("json",$data);
 }
 public function getsinglepoint()
@@ -292,21 +292,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`jpp_gallery`.`order`";
 $elements[1]->sort="1";
 $elements[1]->header="Order";
 $elements[1]->alias="order";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`jpp_gallery`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Name";
 $elements[2]->alias="name";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`jpp_gallery`.`image`";
 $elements[3]->sort="1";
@@ -323,13 +320,20 @@ if($maxrow=="")
 }
 if($orderby=="")
 {
-$orderby="id";
+$orderby="order";
 $orderorder="ASC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_gallery`");
 $this->load->view("json",$data);
 }
-public function getsinglegallery()
+public function getGallerySlide()
+{
+$data = json_decode(file_get_contents('php://input'), true);
+        $id = $data['galleryid'];
+        $data['message'] = $this->restapi_model->getGallerySlide($id);
+        $this->load->view('json', $data);
+}
+ public function getsinglegallery()
 {
 $id=$this->input->get_post("id");
 $data["message"]=$this->gallery_model->getsinglegallery($id);
@@ -422,7 +426,6 @@ $elements[3]->header="Image";
 $elements[3]->alias="image";
 
 $elements[4]=new stdClass();
-//$elements[4]->field="`jpp_news`.`timestamp`";
 $elements[4]->field=" DATE_FORMAT(`jpp_news`.`timestamp`, '%D %M %Y')";
 $elements[4]->sort="1";
 $elements[4]->header="Timestamp";
@@ -444,7 +447,7 @@ if($maxrow=="")
 }
 if($orderby=="")
 {
-$orderby="timestamp";
+$orderby="id";
 $orderorder="DESC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_news`");
@@ -1051,6 +1054,11 @@ public function getsinglesubscribe()
 {
 $id=$this->input->get_post("id");
 $data["message"]=$this->subscribe_model->getsinglesubscribe($id);
+$this->load->view("json",$data);
+}
+ public function getHomeContent()
+{
+$data["message"]=$this->restapi_model->getHomeContent($id);
 $this->load->view("json",$data);
 }
  public function test()

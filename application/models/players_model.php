@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob)
 {
-if($image=="")
-{
-$image=$this->players_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("order" => $order,"type" => $type,"name" => $name,"nationality" => $nationality,"jerseyno" => $jerseyno,"about" => $about,"dob" => $dob);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_players", $data );

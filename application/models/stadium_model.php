@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$name)
 {
-if($image=="")
-{
-$image=$this->stadium_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("name" => $name);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_stadium", $data );
@@ -48,8 +43,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_stadium` ORDER BY `id` 
-                    ASC")->row();
+$query=$this->db->query("SELECT * FROM `jpp_stadium` ORDER BY `id` ASC")->result();
 $return=array(
 "" => "Select Option"
 );

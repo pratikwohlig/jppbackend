@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$email,$name,$phone,$timestamp,$comment)
 {
-if($image=="")
-{
-$image=$this->contactus_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("email" => $email,"name" => $name,"phone" => $phone,"timestamp" => $timestamp,"comment" => $comment);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_contactus", $data );

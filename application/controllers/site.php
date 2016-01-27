@@ -841,17 +841,17 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 $elements[1]=new stdClass();
-$elements[1]->field="`jpp_schedule`.`stadium`";
+$elements[1]->field="`jpp_stadium`.`name`";
 $elements[1]->sort="1";
-$elements[1]->header="stadium";
+$elements[1]->header="Stadium";
 $elements[1]->alias="stadium";
 $elements[2]=new stdClass();
-$elements[2]->field="`jpp_schedule`.`team1`";
+$elements[2]->field="`jppteam1`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Team1";
 $elements[2]->alias="team1";
 $elements[3]=new stdClass();
-$elements[3]->field="`jpp_schedule`.`team2`";
+$elements[3]->field="`jppteam2`.`name`";
 $elements[3]->sort="1";
 $elements[3]->header="Team2";
 $elements[3]->alias="team2";
@@ -879,7 +879,8 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_schedule`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_schedule` 
+LEFT OUTER JOIN `jpp_team` as `jppteam1` ON `jppteam1`.`id`=`jpp_schedule`.`team1` LEFT OUTER JOIN `jpp_team` as `jppteam2` ON `jppteam2`.`id`=`jpp_schedule`.`team2` LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`");
 $this->load->view("json",$data);
 }
 
@@ -888,6 +889,9 @@ public function createschedule()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createschedule";
+$data["stadium"]=$this->stadium_model->getdropdown();
+$data["team1"]=$this->team_model->getdropdown();
+$data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
 }
@@ -903,6 +907,9 @@ $this->form_validation->set_rules("timestamp","Timestamp","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["stadium"]=$this->stadium_model->getdropdown();
+$data["team1"]=$this->team_model->getdropdown();
+$data["team2"]=$this->team_model->getdropdown();
 $data["page"]="createschedule";
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
@@ -914,7 +921,11 @@ $stadium=$this->input->get_post("stadium");
 $team1=$this->input->get_post("team1");
 $team2=$this->input->get_post("team2");
 $bookticket=$this->input->get_post("bookticket");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp)==0)
+$starttime=$this->input->get_post("starttime");
+$score1=$this->input->get_post("score1");
+$score2=$this->input->get_post("score2");
+$startdate=$this->input->get_post("startdate");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -927,8 +938,12 @@ public function editschedule()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editschedule";
+$data["stadium"]=$this->stadium_model->getdropdown();
+$data["team1"]=$this->team_model->getdropdown();
+$data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
+    $data['exp'] = explode(':', $data['before']->starttime);
 $this->load->view("template",$data);
 }
 public function editschedulesubmit()
@@ -945,6 +960,9 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editschedule";
+$data["stadium"]=$this->stadium_model->getdropdown();
+$data["team1"]=$this->team_model->getdropdown();
+$data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -957,7 +975,11 @@ $team1=$this->input->get_post("team1");
 $team2=$this->input->get_post("team2");
 $bookticket=$this->input->get_post("bookticket");
 $timestamp=$this->input->get_post("timestamp");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp)==0)
+$starttime=$this->input->get_post("starttime");
+$score1=$this->input->get_post("score1");
+$score2=$this->input->get_post("score2");
+    $startdate=$this->input->get_post("startdate");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";

@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$name,$content)
 {
-if($image=="")
-{
-$image=$this->pages_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("name" => $name,"content" => $content);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_pages", $data );

@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$email,$timestamp)
 {
-if($image=="")
-{
-$image=$this->subscribe_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("email" => $email,"timestamp" => $timestamp);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_subscribe", $data );
