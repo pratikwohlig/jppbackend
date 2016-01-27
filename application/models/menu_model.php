@@ -188,8 +188,8 @@ class Menu_model extends CI_Model
     } 
     function createImage()
     {
-            $config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+           $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
 			$this->load->library('upload', $config);
 			$filename="image";
 			$image="";
@@ -197,30 +197,6 @@ class Menu_model extends CI_Model
 			{
 				$uploaddata = $this->upload->data();
 				$image=$uploaddata['file_name'];
-                
-                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
-                $config_r['maintain_ratio'] = TRUE;
-                $config_t['create_thumb'] = FALSE;///add this
-                $config_r['width']   = 800;
-                $config_r['height'] = 800;
-                $config_r['quality']    = 100;
-                //end of configs
-
-                $this->load->library('image_lib', $config_r); 
-                $this->image_lib->initialize($config_r);
-                if(!$this->image_lib->resize())
-                {
-                    echo "Failed." . $this->image_lib->display_errors();
-                    //return false;
-                }  
-                else
-                {
-                    //print_r($this->image_lib->dest_image);
-                    //dest_image
-                    $image=$this->image_lib->dest_image;
-                    //return false;
-                }
-                
 			}
         return $image;
     }
