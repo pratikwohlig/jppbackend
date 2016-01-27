@@ -160,8 +160,7 @@ class Menu_model extends CI_Model
     function getTodaysDate()
     {
         $todaysdate=date("Y-m-d");
-        $firstdate=date('Y-m-01', strtotime($todaysdate));
-        $lastdate=date('Y-m-t', strtotime($todaysdate));
+        return $todaysdate;
     }
      function getFirstDate()
     {

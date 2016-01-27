@@ -400,57 +400,7 @@ $this->load->view("json",$data);
 }
 function getallnews()
 {
-$elements=array();
-$elements[0]=new stdClass();
-$elements[0]->field="`jpp_news`.`id`";
-$elements[0]->sort="1";
-$elements[0]->header="ID";
-$elements[0]->alias="id";
-
-$elements[1]=new stdClass();
-$elements[1]->field="`jpp_news`.`type`";
-$elements[1]->sort="1";
-$elements[1]->header="Type";
-$elements[1]->alias="type";
-
-$elements[2]=new stdClass();
-$elements[2]->field="`jpp_news`.`name`";
-$elements[2]->sort="1";
-$elements[2]->header="Name";
-$elements[2]->alias="name";
-
-$elements[3]=new stdClass();
-$elements[3]->field="`jpp_news`.`image`";
-$elements[3]->sort="1";
-$elements[3]->header="Image";
-$elements[3]->alias="image";
-
-$elements[4]=new stdClass();
-$elements[4]->field=" DATE_FORMAT(`jpp_news`.`timestamp`, '%D %M %Y')";
-$elements[4]->sort="1";
-$elements[4]->header="Timestamp";
-$elements[4]->alias="timestamp";
-
-$elements[5]=new stdClass();
-$elements[5]->field="`jpp_news`.`content`";
-$elements[5]->sort="1";
-$elements[5]->header="Content";
-$elements[5]->alias="content";
-
-$search=$this->input->get_post("search");
-$pageno=$this->input->get_post("pageno");
-$orderby=$this->input->get_post("orderby");
-$orderorder=$this->input->get_post("orderorder");
-$maxrow=$this->input->get_post("maxrow");
-if($maxrow=="")
-{
-}
-if($orderby=="")
-{
-$orderby="id";
-$orderorder="DESC";
-}
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_news`");
+$data["message"]=$this->restapi_model->getallnews();
 $this->load->view("json",$data);
 }
 public function getsinglenews()
