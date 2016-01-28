@@ -21,6 +21,17 @@ class restapi_model extends CI_Model
              $row1->videogallery=$this->db->query("SELECT `id`, `videogallery`, `order`, `name`, `url`, `image` FROM `jpp_videos` WHERE `videogallery`='$row1->id' ORDER BY `order` ASC")->result();
         }
         return $query;
+    }   
+    public function getVideos()
+    {   
+        //VIDEOS
+        
+        $query['videos']=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` ASC")->result();
+        foreach($query['videos'] as $row1)
+        {
+             $row1->videogallery=$this->db->query("SELECT `id`, `videogallery`, `order`, `name`, `url`, `image` FROM `jpp_videos` WHERE `videogallery`='$row1->id' ORDER BY `order` ASC")->result();
+        }
+        return $query;
     }
     public function getAllPoints()
     {

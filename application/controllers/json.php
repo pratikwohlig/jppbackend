@@ -300,6 +300,13 @@ $data = json_decode(file_get_contents('php://input'), true);
         $data['message'] = $this->restapi_model->getGallerySlide($id);
         $this->load->view('json', $data);
 }
+ public function getVideos()
+{
+$data = json_decode(file_get_contents('php://input'), true);
+        $id = $data['videogalleryid'];
+        $data['message'] = $this->restapi_model->getVideos($id);
+        $this->load->view('json', $data);
+}
  public function getsinglegallery()
 {
 $id=$this->input->get_post("id");
