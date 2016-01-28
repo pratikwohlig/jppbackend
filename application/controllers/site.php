@@ -712,6 +712,12 @@ $elements[4]->field="`jpp_point`.`point`";
 $elements[4]->sort="1";
 $elements[4]->header="Point";
 $elements[4]->alias="point";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_team`.`name`";
+$elements[5]->sort="1";
+$elements[5]->header="Team Name";
+$elements[5]->alias="teamname";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -726,7 +732,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_point`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team`");
 $this->load->view("json",$data);
 }
 
