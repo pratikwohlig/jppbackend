@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2016 at 01:08 PM
+-- Generation Time: Jan 28, 2016 at 02:38 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -347,15 +347,18 @@ CREATE TABLE IF NOT EXISTS `jpp_videogallery` (
   `id` int(11) NOT NULL,
   `order` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `image` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_videogallery`
 --
 
-INSERT INTO `jpp_videogallery` (`id`, `order`, `name`, `image`) VALUES
-(1, 1, 'demo', 'g7.jpg');
+INSERT INTO `jpp_videogallery` (`id`, `order`, `name`, `image`, `url`) VALUES
+(1, 1, 'demo', 'g7.jpg', 'UDU09A-N4bU'),
+(2, 1, 'demo1', 'bachan.jpg', 'C8ibvDo11uk'),
+(3, 3, 'demo 3', '', '32ZipINYTJg');
 
 -- --------------------------------------------------------
 
@@ -395,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `jpp_wallpaper` (
   `image4` varchar(255) NOT NULL,
   `image5` varchar(255) NOT NULL,
   `image6` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_wallpaper`
@@ -405,7 +408,9 @@ INSERT INTO `jpp_wallpaper` (`id`, `wallpapercategory`, `name`, `image1`, `image
 (1, 1, 'demo', 'g3.jpg', '', '', '', '', ''),
 (3, 1, 'demo', 'g81.jpg', 'logo1.png', 'plt_social_batch_sw_18_3_1x1.jpg', 'SFA_Schoolprofile.png', 'SFA_Studentprofile.png', 'images.jpg'),
 (5, 2, 'demo', 'fixtures.jpg', '', '', '', '', ''),
-(6, 2, 'demo1', 'gallery.jpg', '', '', '', '', '');
+(6, 2, 'demo1', 'gallery.jpg', '', '', '', '', ''),
+(7, 3, 'demo1 for iOS', 'about-us.jpg', '', '', '', '', ''),
+(8, 3, 'demo2 for iOS', 'player1.jpg', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -418,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `jpp_wallpapercategory` (
   `order` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_wallpapercategory`
@@ -426,7 +431,8 @@ CREATE TABLE IF NOT EXISTS `jpp_wallpapercategory` (
 
 INSERT INTO `jpp_wallpapercategory` (`id`, `order`, `name`, `image`) VALUES
 (1, 1, 'Desktop', 'g52.jpg'),
-(2, 2, 'Mobile', 'g1.jpg');
+(2, 2, 'Mobile', 'g1.jpg'),
+(3, 3, 'iOS', 'n32.jpg');
 
 -- --------------------------------------------------------
 
@@ -927,7 +933,7 @@ ALTER TABLE `jpp_team`
 -- AUTO_INCREMENT for table `jpp_videogallery`
 --
 ALTER TABLE `jpp_videogallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `jpp_videos`
 --
@@ -937,12 +943,12 @@ ALTER TABLE `jpp_videos`
 -- AUTO_INCREMENT for table `jpp_wallpaper`
 --
 ALTER TABLE `jpp_wallpaper`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `jpp_wallpapercategory`
 --
 ALTER TABLE `jpp_wallpapercategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `logintype`
 --
