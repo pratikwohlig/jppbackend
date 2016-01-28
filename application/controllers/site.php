@@ -3290,6 +3290,153 @@ $this->subscribe_model->delete($this->input->get("id"));
 $data["redirect"]="site/viewsubscribe";
 $this->load->view("redirect",$data);
 }
+    
+    // SLIDER
+    
+    public function viewslider()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewslider";
+$data["base_url"]=site_url("site/viewsliderjson");
+$data["title"]="View slider";
+$this->load->view("template",$data);
+}
+function viewsliderjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`jpp_slider`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`jpp_slider`.`order`";
+$elements[1]->sort="1";
+$elements[1]->header="Order";
+$elements[1]->alias="order";
+$elements[2]=new stdClass();
+$elements[2]->field="`jpp_slider`.`name`";
+$elements[2]->sort="1";
+$elements[2]->header="Name";
+$elements[2]->alias="name";
+$elements[3]=new stdClass();
+$elements[3]->field="`jpp_slider`.`image`";
+$elements[3]->sort="1";
+$elements[3]->header="Image";
+$elements[3]->alias="image";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_slider`");
+$this->load->view("json",$data);
+}
+
+public function createslider()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createslider";
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data["title"]="Create slider";
+$this->load->view("template",$data);
+}
+public function createslidersubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("order","Order","trim");
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data["page"]="createslider";
+$data["title"]="Create slider";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$order=$this->input->get_post("order");
+$name=$this->input->get_post("name");
+$image=$this->input->get_post("image");
+$status=$this->input->get_post("status");
+$image=$this->menu_model->createImage();
+if($this->slider_model->create($order,$name,$image,$status)==0)
+$data["alerterror"]="New slider could not be created.";
+else
+$data["alertsuccess"]="slider created Successfully.";
+$data["redirect"]="site/viewslider";
+$this->load->view("redirect",$data);
+}
+}
+public function editslider()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editslider";
+$data["page2"]="block/sliderblock";
+$data["before1"]=$this->input->get('id');
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data["before2"]=$this->input->get('id');
+$data["title"]="Edit slider";
+$data["before"]=$this->slider_model->beforeedit($this->input->get("id"));
+$this->load->view("templatewith2",$data);
+}
+public function editslidersubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("order","Order","trim");
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editslider";
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data["title"]="Edit slider";
+$data["before"]=$this->slider_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$order=$this->input->get_post("order");
+$name=$this->input->get_post("name");
+$image=$this->input->get_post("image");
+$status=$this->input->get_post("status");
+$image=$this->menu_model->createImage();
+if($this->slider_model->edit($id,$order,$name,$image,$status)==0)
+$data["alerterror"]="New slider could not be Updated.";
+else
+$data["alertsuccess"]="slider Updated Successfully.";
+$data["redirect"]="site/viewslider";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteslider()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->slider_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewslider";
+$this->load->view("redirect",$data);
+}
 
 }
 ?>
