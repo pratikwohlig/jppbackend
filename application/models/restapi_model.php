@@ -48,6 +48,11 @@ class restapi_model extends CI_Model
          $query=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` ASC")->result();
         return $query;
     } 
+    public function getAllSliders()
+    {
+         $query=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status` FROM `jpp_slider` WHERE `status`=1 ORDER BY `order` ASC")->result();
+        return $query;
+    } 
     public function getallnews()
     {
          $query=$this->db->query("SELECT `jpp_news`.`id` AS `id` , `jpp_news`.`name` AS `name` , `jpp_news`.`image` AS `image` , DATE_FORMAT(`jpp_news`.`timestamp`, '%d %b %Y') as `timestamp` , `jpp_news`.`content` AS `content` FROM `jpp_news` ORDER BY `id` DESC")->result();
