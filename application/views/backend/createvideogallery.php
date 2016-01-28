@@ -16,6 +16,12 @@
 </div>
 </div>
 <div class="row">
+<div class="input-field col s6">
+<label for="url">url</label>
+<input type="text" id="url" name="url" value='<?php echo set_value('url');?>'>
+</div>
+</div>
+<div class="row">
 			<div class="file-field input-field col m6 s12">
 				<div class="btn blue darken-4">
 					<span>Image</span>

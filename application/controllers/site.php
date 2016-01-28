@@ -2795,8 +2795,9 @@ $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+$url=$this->input->get_post("url");
 $image=$this->menu_model->createImage();
-if($this->videogallery_model->create($order,$name,$image)==0)
+if($this->videogallery_model->create($order,$name,$image,$url)==0)
 $data["alerterror"]="New videogallery could not be created.";
 else
 $data["alertsuccess"]="videogallery created Successfully.";
@@ -2809,12 +2810,11 @@ public function editvideogallery()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editvideogallery";
-$data["page2"]="block/videoblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit videogallery";
 $data["before"]=$this->videogallery_model->beforeedit($this->input->get("id"));
-$this->load->view("templatewith2",$data);
+$this->load->view("template",$data);
 }
 public function editvideogallerysubmit()
 {
@@ -2838,8 +2838,9 @@ $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+$url=$this->input->get_post("url");
 $image=$this->menu_model->createImage();
-if($this->videogallery_model->edit($id,$order,$name,$image)==0)
+if($this->videogallery_model->edit($id,$order,$name,$image,$url)==0)
 $data["alerterror"]="New videogallery could not be Updated.";
 else
 $data["alertsuccess"]="videogallery Updated Successfully.";
