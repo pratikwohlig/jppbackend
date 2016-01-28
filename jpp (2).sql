@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2016 at 09:13 AM
+-- Generation Time: Jan 28, 2016 at 11:49 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `jpp_galleryslide` (
 --
 
 INSERT INTO `jpp_galleryslide` (`id`, `order`, `gallery`, `name`, `image`) VALUES
-(1, 1, 1, 'Jaipur Pink Panther V/S Patna Pirates 1', 'g4.jpg'),
-(2, 2, 1, 'Jaipur Pink Panther V/S Patna Pirates 2', 'g6.jpg');
+(1, 1, 2, 'Jaipur Pink Panther V/S Patna Pirates 1', 'g4.jpg'),
+(2, 2, 2, 'Jaipur Pink Panther V/S Patna Pirates 2', 'g6.jpg');
 
 -- --------------------------------------------------------
 
@@ -124,16 +124,17 @@ CREATE TABLE IF NOT EXISTS `jpp_news` (
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `content` text NOT NULL
+  `content` text NOT NULL,
+  `link` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_news`
 --
 
-INSERT INTO `jpp_news` (`id`, `type`, `name`, `image`, `timestamp`, `content`) VALUES
-(1, 0, 'Lorem Ipsum', 'n11.jpg', '2016-01-27 06:44:10', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
-(2, 0, 'Lorem Ipsum 2', 'n2.jpg', '2016-01-27 12:21:13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum');
+INSERT INTO `jpp_news` (`id`, `type`, `name`, `image`, `timestamp`, `content`, `link`) VALUES
+(1, 0, 'Lorem Ipsum', 'n11.jpg', '2016-01-27 06:44:10', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', ''),
+(2, 0, 'Lorem Ipsum 2', 'n2.jpg', '2016-01-27 12:21:13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '');
 
 -- --------------------------------------------------------
 
@@ -254,15 +255,16 @@ CREATE TABLE IF NOT EXISTS `jpp_slider` (
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `order` int(11) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `link` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jpp_slider`
 --
 
-INSERT INTO `jpp_slider` (`id`, `name`, `image`, `order`, `status`) VALUES
-(2, 'demo', 'player.jpg', 1, 1);
+INSERT INTO `jpp_slider` (`id`, `name`, `image`, `order`, `status`, `link`) VALUES
+(2, 'demo', 'player.jpg', 1, 1, '');
 
 -- --------------------------------------------------------
 
