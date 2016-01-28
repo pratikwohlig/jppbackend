@@ -26,7 +26,7 @@
 				</div>
 			</div>
 				   <span style=" display: block;
-    padding-top: 30px;">800px X 800px</span>
+    padding-top: 30px;">1920px X 1080px</span>
 		</div>
 <!--
 <div class="row">

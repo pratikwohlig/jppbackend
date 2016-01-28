@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			  <span style=" display: block;
-">800px X 800px</span>
+">1920px X 1080px</span>
 		</div>
 <!--
 <div class="row">
