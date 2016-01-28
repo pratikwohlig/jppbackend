@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			 <span style=" display: block;
-   "> 360px X 330px</span>
+   "> 717px X 564px</span>
 		</div>
 		<div class="row">
 <div class="input-field col s6">
