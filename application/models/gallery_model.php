@@ -39,6 +39,7 @@ return 1;
 public function delete($id)
 {
 $query=$this->db->query("DELETE FROM `jpp_gallery` WHERE `id`='$id'");
+$query1=$this->db->query("DELETE FROM `jpp_galleryslide` WHERE `gallery`='$id'");
 return $query;
 }
 public function getimagebyid($id)
