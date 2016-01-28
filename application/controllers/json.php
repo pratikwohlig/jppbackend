@@ -288,6 +288,12 @@ function getAllGallery()
 $data["message"]=$this->restapi_model->getAllGallery();
 $this->load->view("json",$data);
 }
+ function getWallpaper()
+{
+$type=$this->input->get_post('type');
+$data["message"]=$this->restapi_model->getWallpaper($type);
+$this->load->view("json",$data);
+}
  function getAllVideoGallery()
 {
 $data["message"]=$this->restapi_model->getAllVideoGallery();

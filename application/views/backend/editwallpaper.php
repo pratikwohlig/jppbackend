@@ -33,7 +33,10 @@
 					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image1',$before->image1);?>">
 				</div>
 			</div>
+			  <span style=" display: block;
+">800px X 800px</span>
 		</div>
+<!--
 <div class="row">
 			<div class="file-field input-field col m6 s12">
 				<span class="img-center big">
@@ -114,6 +117,7 @@
 				</div>
 			</div>
 		</div>
+-->
 <div class="row">
 <div class="col s6">
 <button type="submit" class="btn btn-primary waves-effect waves-light  blue darken-4">Save</button>

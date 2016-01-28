@@ -41,6 +41,25 @@ class restapi_model extends CI_Model
          $query=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status` FROM `jpp_slider` WHERE `status`=1 ORDER BY `order` ASC")->result();
         return $query;
     } 
+    public function getWallpaper($type)
+    {
+        if($type==1)
+        {
+            //for mobile
+            $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` FROM `jpp_wallpaper` WHERE `wallpapercategory`='2'")->result();
+        }
+        else if($type==2){
+            //for desktop
+            $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` FROM `jpp_wallpaper` WHERE `wallpapercategory`='1'")->result();
+        }
+        if($query){
+            return $query;
+        }
+         else{
+             return false;
+         }
+        
+    } 
     public function getallnews()
     {
          $query=$this->db->query("SELECT `jpp_news`.`id` AS `id` , `jpp_news`.`name` AS `name` , `jpp_news`.`image` AS `image` , DATE_FORMAT(`jpp_news`.`timestamp`, '%d %b %Y') as `timestamp` , `jpp_news`.`content` AS `content` FROM `jpp_news` ORDER BY `id` DESC")->result();
