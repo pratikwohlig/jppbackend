@@ -28,6 +28,12 @@
 			 <span style=" display: block;
     padding-top: 30px;"> 360px X 330px</span>
 		</div>
+		<div class="row">
+<div class="input-field col s6">
+<label for="link">Link</label>
+<input type="text" id="link" name="link" value='<?php echo set_value('link');?>'>
+</div>
+</div>
 <div class="row">
 <div class="input-field col s12">
 <textarea name="content" class="materialize-textarea" length="400"><?php echo set_value( 'content');?></textarea>

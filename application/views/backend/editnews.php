@@ -36,6 +36,12 @@
 			 <span style=" display: block;
    "> 360px X 330px</span>
 		</div>
+		<div class="row">
+<div class="input-field col s6">
+<label for="link">Link</label>
+<input type="text" id="link" name="link" value='<?php echo set_value('link',$before->link);?>'>
+</div>
+</div>
 <div class="row">
 <div class="input-field col s6">
 <label for="Timestamp">Timestamp</label>

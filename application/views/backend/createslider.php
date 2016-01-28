@@ -29,6 +29,12 @@
     padding-top: 30px;">1278px X 637px</span>
 		</div>
 		<div class="row">
+<div class="input-field col s6">
+<label for="link">Link</label>
+<input type="text" id="link" name="link" value='<?php echo set_value('link');?>'>
+</div>
+</div>
+		<div class="row">
 			<div class="input-field col m6 s12">
 				<?php echo form_dropdown( 'status',$status,set_value( 'status')); ?>
 					<label>Status</label>
