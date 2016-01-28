@@ -50,7 +50,11 @@ class restapi_model extends CI_Model
         }
         else if($type==2){
             //for desktop
-            $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` FROM `jpp_wallpaper` WHERE `wallpapercategory`='1'")->result();
+            $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` FROM `jpp_wallpaper`")->result();
+        } 
+        else if($type==3){
+            //for iOS
+            $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` FROM `jpp_wallpaper` WHERE `wallpapercategory`='3'")->result();
         }
         if($query){
             return $query;
