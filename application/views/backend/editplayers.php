@@ -12,10 +12,10 @@
 <input type="text" id="Order" name="order" value='<?php echo set_value('order',$before->order);?>'>
 </div>
 </div>
-<div class=" row">
-<div class=" input-field col s12 m6">
-<?php echo form_dropdown("type",$type,set_value('type',$before->type));?>
-<label for="Type">Type</label>
+<div class="row">
+<div class="input-field col s6">
+<label for="type">Type</label>
+<input type="text" id="type" name="type" value='<?php echo set_value('type',$before->type);?>'>
 </div>
 </div>
 <div class="row">

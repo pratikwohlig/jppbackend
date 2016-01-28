@@ -288,6 +288,11 @@ function getAllGallery()
 $data["message"]=$this->restapi_model->getAllGallery();
 $this->load->view("json",$data);
 }
+ function getVideoGallery()
+{
+$data["message"]=$this->restapi_model->getAllVideoGallery();
+$this->load->view("json",$data);
+}
 public function getGallerySlide()
 {
 $data = json_decode(file_get_contents('php://input'), true);
