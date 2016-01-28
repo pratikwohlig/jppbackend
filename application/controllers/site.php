@@ -1677,10 +1677,12 @@ $id=$this->input->get_post("id");
 $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+$logo=$this->input->get_post("logo");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->news_model->create($type,$name,$image,$timestamp,$content,$link)==0)
+$logo=$this->menu_model->createImage();
+if($this->news_model->create($type,$name,$image,$timestamp,$content,$link,$logo)==0)
 $data["alerterror"]="New news could not be created.";
 else
 $data["alertsuccess"]="news created Successfully.";
@@ -1721,11 +1723,13 @@ $id=$this->input->get_post("id");
 $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+$logo=$this->input->get_post("logo");
 $timestamp=$this->input->get_post("timestamp");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link)==0)
+$logo=$this->menu_model->createImage();
+if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link,$logo)==0)
 $data["alerterror"]="New news could not be Updated.";
 else
 $data["alertsuccess"]="news Updated Successfully.";

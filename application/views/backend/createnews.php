@@ -29,6 +29,19 @@
     padding-top: 30px;"> 717px X 564px</span>
 		</div>
 		<div class="row">
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Logo</span>
+					<input name="logo" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('logo');?>">
+				</div>
+			</div>
+			 <span style=" display: block;
+    padding-top: 30px;"></span>
+		</div>
+		<div class="row">
 <div class="input-field col s6">
 <label for="link">Link</label>
 <input type="text" id="link" name="link" value='<?php echo set_value('link');?>'>

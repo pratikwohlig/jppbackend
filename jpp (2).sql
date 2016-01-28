@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2016 at 11:49 AM
+-- Generation Time: Jan 28, 2016 at 01:08 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -125,16 +125,17 @@ CREATE TABLE IF NOT EXISTS `jpp_news` (
   `image` varchar(255) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `content` text NOT NULL,
-  `link` varchar(255) NOT NULL
+  `link` varchar(255) NOT NULL,
+  `logo` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_news`
 --
 
-INSERT INTO `jpp_news` (`id`, `type`, `name`, `image`, `timestamp`, `content`, `link`) VALUES
-(1, 0, 'Lorem Ipsum', 'n11.jpg', '2016-01-27 06:44:10', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', ''),
-(2, 0, 'Lorem Ipsum 2', 'n2.jpg', '2016-01-27 12:21:13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '');
+INSERT INTO `jpp_news` (`id`, `type`, `name`, `image`, `timestamp`, `content`, `link`, `logo`) VALUES
+(1, 0, 'Lorem Ipsum', 'n11.jpg', '2016-01-27 06:44:10', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', ''),
+(2, 0, 'Lorem Ipsum 2', 'n2.jpg', '2016-01-27 12:21:13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', '');
 
 -- --------------------------------------------------------
 
@@ -394,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `jpp_wallpaper` (
   `image4` varchar(255) NOT NULL,
   `image5` varchar(255) NOT NULL,
   `image6` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jpp_wallpaper`
@@ -402,7 +403,9 @@ CREATE TABLE IF NOT EXISTS `jpp_wallpaper` (
 
 INSERT INTO `jpp_wallpaper` (`id`, `wallpapercategory`, `name`, `image1`, `image2`, `image3`, `image4`, `image5`, `image6`) VALUES
 (1, 1, 'demo', 'g3.jpg', '', '', '', '', ''),
-(3, 1, 'demo', 'g81.jpg', 'logo1.png', 'plt_social_batch_sw_18_3_1x1.jpg', 'SFA_Schoolprofile.png', 'SFA_Studentprofile.png', 'images.jpg');
+(3, 1, 'demo', 'g81.jpg', 'logo1.png', 'plt_social_batch_sw_18_3_1x1.jpg', 'SFA_Schoolprofile.png', 'SFA_Studentprofile.png', 'images.jpg'),
+(5, 2, 'demo', 'fixtures.jpg', '', '', '', '', ''),
+(6, 2, 'demo1', 'gallery.jpg', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -934,7 +937,7 @@ ALTER TABLE `jpp_videos`
 -- AUTO_INCREMENT for table `jpp_wallpaper`
 --
 ALTER TABLE `jpp_wallpaper`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `jpp_wallpapercategory`
 --
