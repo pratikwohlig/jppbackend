@@ -1678,8 +1678,9 @@ $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $content=$this->input->get_post("content");
+$link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->news_model->create($type,$name,$image,$timestamp,$content)==0)
+if($this->news_model->create($type,$name,$image,$timestamp,$content,$link)==0)
 $data["alerterror"]="New news could not be created.";
 else
 $data["alertsuccess"]="news created Successfully.";
@@ -1722,8 +1723,9 @@ $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $timestamp=$this->input->get_post("timestamp");
 $content=$this->input->get_post("content");
+$link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content)==0)
+if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link)==0)
 $data["alerterror"]="New news could not be Updated.";
 else
 $data["alertsuccess"]="news Updated Successfully.";
@@ -3374,8 +3376,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $status=$this->input->get_post("status");
+$link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->slider_model->create($order,$name,$image,$status)==0)
+if($this->slider_model->create($order,$name,$image,$status,$link)==0)
 $data["alerterror"]="New slider could not be created.";
 else
 $data["alertsuccess"]="slider created Successfully.";
@@ -3419,8 +3422,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $status=$this->input->get_post("status");
+$link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->slider_model->edit($id,$order,$name,$image,$status)==0)
+if($this->slider_model->edit($id,$order,$name,$image,$status,$link)==0)
 $data["alerterror"]="New slider could not be Updated.";
 else
 $data["alertsuccess"]="slider Updated Successfully.";

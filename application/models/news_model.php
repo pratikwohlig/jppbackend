@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class news_model extends CI_Model
 {
-public function create($type,$name,$image,$timestamp,$content)
+public function create($type,$name,$image,$timestamp,$content,$link)
 {
-$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content);
+$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link);
 $query=$this->db->insert( "jpp_news", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_news")->row();
 return $query;
 }
-public function edit($id,$type,$name,$image,$timestamp,$content)
+public function edit($id,$type,$name,$image,$timestamp,$content,$link)
 {
 if($image=="")
 {
 $image=$this->news_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content);
+$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_news", $data );
 return 1;

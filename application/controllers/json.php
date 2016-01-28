@@ -301,15 +301,13 @@ $this->load->view("json",$data);
 }
 public function getGallerySlide()
 {
-$data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['galleryid'];
+$id=$this->input->get_post("galleryid");
         $data['message'] = $this->restapi_model->getGallerySlide($id);
         $this->load->view('json', $data);
 }
  public function getVideos()
 {
-$data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['videogalleryid'];
+     $id=$this->input->get_post("videogalleryid");
         $data['message'] = $this->restapi_model->getVideos($id);
         $this->load->view('json', $data);
 }
