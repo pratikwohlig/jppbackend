@@ -3,34 +3,22 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class restapi_model extends CI_Model
 {
-    public function getGallerySlide()
+    public function getGallerySlide($id)
     {   
         //GALLERY
         
-        $query['photos']=$this->db->query("SELECT * FROM `jpp_gallery` ORDER BY `order` ASC")->result();
-        foreach($query['photos'] as $row)
-        {
-             $row->galleryslides=$this->db->query("SELECT `id`, `order`, `gallery`, `name`, `image` FROM `jpp_galleryslide` WHERE           `gallery`='$row->id' ORDER BY `order` ASC")->result();
-        }
+            $query=$this->db->query("SELECT `id`, `order`, `gallery`, `name`, `image` FROM `jpp_galleryslide` WHERE           `gallery`='$id' ORDER BY `order` ASC")->result();
         
-        //VIDEOS
-        
-        $query['videos']=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` ASC")->result();
-        foreach($query['videos'] as $row1)
-        {
-             $row1->videogallery=$this->db->query("SELECT `id`, `videogallery`, `order`, `name`, `url`, `image` FROM `jpp_videos` WHERE `videogallery`='$row1->id' ORDER BY `order` ASC")->result();
-        }
+      
         return $query;
     }   
-    public function getVideos()
+    public function getVideos($id)
     {   
         //VIDEOS
         
-        $query['videos']=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` ASC")->result();
-        foreach($query['videos'] as $row1)
-        {
-             $row1->videogallery=$this->db->query("SELECT `id`, `videogallery`, `order`, `name`, `url`, `image` FROM `jpp_videos` WHERE `videogallery`='$row1->id' ORDER BY `order` ASC")->result();
-        }
+        
+             $query=$this->db->query("SELECT `id`, `videogallery`, `order`, `name`, `url`, `image` FROM `jpp_videos` WHERE `videogallery`='$id' ORDER BY `order` ASC")->result();
+        
         return $query;
     }
     public function getAllPoints()

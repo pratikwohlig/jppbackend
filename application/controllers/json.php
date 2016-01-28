@@ -288,7 +288,7 @@ function getAllGallery()
 $data["message"]=$this->restapi_model->getAllGallery();
 $this->load->view("json",$data);
 }
- function getVideoGallery()
+ function getAllVideoGallery()
 {
 $data["message"]=$this->restapi_model->getAllVideoGallery();
 $this->load->view("json",$data);
@@ -756,52 +756,52 @@ $id=$this->input->get_post("id");
 $data["message"]=$this->sponsor_model->getsinglesponsor($id);
 $this->load->view("json",$data);
 }
-function getallvideogallery()
-{
-$elements=array();
-$elements[0]=new stdClass();
-$elements[0]->field="`jpp_videogallery`.`id`";
-$elements[0]->sort="1";
-$elements[0]->header="ID";
-$elements[0]->alias="id";
-
-$elements=array();
-$elements[1]=new stdClass();
-$elements[1]->field="`jpp_videogallery`.`order`";
-$elements[1]->sort="1";
-$elements[1]->header="Order";
-$elements[1]->alias="order";
-
-$elements=array();
-$elements[2]=new stdClass();
-$elements[2]->field="`jpp_videogallery`.`name`";
-$elements[2]->sort="1";
-$elements[2]->header="Name";
-$elements[2]->alias="name";
-
-$elements=array();
-$elements[3]=new stdClass();
-$elements[3]->field="`jpp_videogallery`.`image`";
-$elements[3]->sort="1";
-$elements[3]->header="Image";
-$elements[3]->alias="image";
-
-$search=$this->input->get_post("search");
-$pageno=$this->input->get_post("pageno");
-$orderby=$this->input->get_post("orderby");
-$orderorder=$this->input->get_post("orderorder");
-$maxrow=$this->input->get_post("maxrow");
-if($maxrow=="")
-{
-}
-if($orderby=="")
-{
-$orderby="id";
-$orderorder="ASC";
-}
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_videogallery`");
-$this->load->view("json",$data);
-}
+//function getallvideogallery()
+//{
+//$elements=array();
+//$elements[0]=new stdClass();
+//$elements[0]->field="`jpp_videogallery`.`id`";
+//$elements[0]->sort="1";
+//$elements[0]->header="ID";
+//$elements[0]->alias="id";
+//
+//$elements=array();
+//$elements[1]=new stdClass();
+//$elements[1]->field="`jpp_videogallery`.`order`";
+//$elements[1]->sort="1";
+//$elements[1]->header="Order";
+//$elements[1]->alias="order";
+//
+//$elements=array();
+//$elements[2]=new stdClass();
+//$elements[2]->field="`jpp_videogallery`.`name`";
+//$elements[2]->sort="1";
+//$elements[2]->header="Name";
+//$elements[2]->alias="name";
+//
+//$elements=array();
+//$elements[3]=new stdClass();
+//$elements[3]->field="`jpp_videogallery`.`image`";
+//$elements[3]->sort="1";
+//$elements[3]->header="Image";
+//$elements[3]->alias="image";
+//
+//$search=$this->input->get_post("search");
+//$pageno=$this->input->get_post("pageno");
+//$orderby=$this->input->get_post("orderby");
+//$orderorder=$this->input->get_post("orderorder");
+//$maxrow=$this->input->get_post("maxrow");
+//if($maxrow=="")
+//{
+//}
+//if($orderby=="")
+//{
+//$orderby="id";
+//$orderorder="ASC";
+//}
+//$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_videogallery`");
+//$this->load->view("json",$data);
+//}
 public function getsinglevideogallery()
 {
 $id=$this->input->get_post("id");
