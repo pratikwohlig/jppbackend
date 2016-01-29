@@ -38,7 +38,7 @@ class restapi_model extends CI_Model
     } 
     public function getAllSliders()
     {
-         $query=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status` FROM `jpp_slider` WHERE `status`=1 ORDER BY `order` ASC")->result();
+         $query=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status`,`link` FROM `jpp_slider` WHERE `status`=1 ORDER BY `order` ASC")->result();
         return $query;
     } 
     public function getWallpaper($type)
@@ -56,6 +56,20 @@ class restapi_model extends CI_Model
             //for iOS
             $query=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1` as `image` FROM `jpp_wallpaper` WHERE `wallpapercategory`='3'")->result();
         }
+        if($query){
+            return $query;
+        }
+         else{
+             return false;
+         }
+        
+    } 
+    public function getWallpaperCategoryForDesktop()
+    {
+        $query=$this->db->query("SELECT * FROM `jpp_wallpapercategory` WHERE 1")->result();
+       foreach($query as $row){
+            $row->wallpapercount=$this->db->query("SELECT COUNT(*) as `wallpapercount` FROM `jpp_wallpaper` WHERE `wallpapercategory`='$row->id'")->result();
+       }
         if($query){
             return $query;
         }

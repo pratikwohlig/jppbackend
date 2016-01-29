@@ -1,6 +1,7 @@
 <?php if ( ! defined("BASEPATH")) exit("No direct script access allowed");
 class Json extends CI_Controller 
-{function getallstadium()
+{
+    function getallstadium()
 {
 $elements=array();
 $elements[0]=new stdClass();
@@ -294,6 +295,11 @@ $type=$this->input->get_post('type');
 $data["message"]=$this->restapi_model->getWallpaper($type);
 $this->load->view("json",$data);
 }
+    function getWallpaperCategoryForDesktop()
+{
+$data["message"]=$this->restapi_model->getWallpaperCategoryForDesktop();
+$this->load->view("json",$data);
+}
  function getAllVideoGallery()
 {
 $data["message"]=$this->restapi_model->getAllVideoGallery();
@@ -481,21 +487,18 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`jpp_wallpapercategory`.`order`";
 $elements[1]->sort="1";
 $elements[1]->header="Order";
 $elements[1]->alias="order";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`jpp_wallpapercategory`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Name";
 $elements[2]->alias="name";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`jpp_wallpapercategory`.`image`";
 $elements[3]->sort="1";
@@ -516,7 +519,13 @@ $orderby="id";
 $orderorder="ASC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpapercategory`");
-$this->load->view("json",$data);
+$queryresult=$data["message"]->queryresult;
+    foreach($queryresult as $row)
+    {
+          $data['message']->wallpapers=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1`, `image2`, `image3`, `image4`, `image5`, `image6` FROM `jpp_wallpaper` WHERE `wallpapercategory`='$row->id'")->result();
+    }
+    print_r($queryresult);
+//$this->load->view("json",$data);
 }
 public function getsinglewallpapercategory()
 {
@@ -526,6 +535,7 @@ $this->load->view("json",$data);
 }
 function getallwallpaper()
 {
+$id=$this->input->get_post('wallpapercategory');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`jpp_wallpaper`.`id`";
@@ -533,61 +543,25 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 
-$elements=array();
 $elements[1]=new stdClass();
 $elements[1]->field="`jpp_wallpaper`.`wallpapercategory`";
 $elements[1]->sort="1";
 $elements[1]->header="Wallpaper Category";
 $elements[1]->alias="wallpapercategory";
 
-$elements=array();
 $elements[2]=new stdClass();
 $elements[2]->field="`jpp_wallpaper`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Name";
 $elements[2]->alias="name";
 
-$elements=array();
 $elements[3]=new stdClass();
 $elements[3]->field="`jpp_wallpaper`.`image1`";
 $elements[3]->sort="1";
 $elements[3]->header="Image1";
-$elements[3]->alias="image1";
+$elements[3]->alias="image";
 
-$elements=array();
-$elements[4]=new stdClass();
-$elements[4]->field="`jpp_wallpaper`.`image2`";
-$elements[4]->sort="1";
-$elements[4]->header="Image2";
-$elements[4]->alias="image2";
 
-$elements=array();
-$elements[5]=new stdClass();
-$elements[5]->field="`jpp_wallpaper`.`image3`";
-$elements[5]->sort="1";
-$elements[5]->header="Image3";
-$elements[5]->alias="image3";
-
-$elements=array();
-$elements[6]=new stdClass();
-$elements[6]->field="`jpp_wallpaper`.`image4`";
-$elements[6]->sort="1";
-$elements[6]->header="Image4";
-$elements[6]->alias="image4";
-
-$elements=array();
-$elements[7]=new stdClass();
-$elements[7]->field="`jpp_wallpaper`.`image5`";
-$elements[7]->sort="1";
-$elements[7]->header="Image5";
-$elements[7]->alias="image5";
-
-$elements=array();
-$elements[8]=new stdClass();
-$elements[8]->field="`jpp_wallpaper`.`image6`";
-$elements[8]->sort="1";
-$elements[8]->header="Image6";
-$elements[8]->alias="image6";
 
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
@@ -602,7 +576,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpaper`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpaper`","WHERE `jpp_wallpaper`.`wallpapercategory`='$id'");
 $this->load->view("json",$data);
 }
 public function getsinglewallpaper()
