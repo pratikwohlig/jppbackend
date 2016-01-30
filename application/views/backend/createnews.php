@@ -47,7 +47,7 @@
 <input type="text" id="link" name="link" value='<?php echo set_value('link');?>'>
 </div>
 </div>
-<div class="row">
+<div class="row" style="display:none;">
 <div class="input-field col s12">
 <textarea name="content" class="materialize-textarea" length="400"><?php echo set_value( 'content');?></textarea>
 <label>Content</label>
