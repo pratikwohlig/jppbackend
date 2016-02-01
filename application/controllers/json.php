@@ -9,7 +9,7 @@ class Json extends CI_Controller
     {
         // Call the Model constructor
     parent::__construct();
-        $this->db->query("SET time_zone='+0:30'");
+        $this->db->query("SET time_zone='+5:30'");
     }
 
     public function getallstadium()
