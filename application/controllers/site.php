@@ -3047,7 +3047,7 @@ $elements[1]->sort="1";
 $elements[1]->header="Email";
 $elements[1]->alias="email";
 $elements[2]=new stdClass();
-$elements[2]->field="`jpp_contactus`.`name`";
+$elements[2]->field="`jpp_contactus`.`firstname`";
 $elements[2]->sort="1";
 $elements[2]->header="Name";
 $elements[2]->alias="name";
@@ -3112,10 +3112,11 @@ else
 {
 $id=$this->input->get_post("id");
 $email=$this->input->get_post("email");
-$name=$this->input->get_post("name");
+$firstname=$this->input->get_post("firstname");
 $phone=$this->input->get_post("phone");
 $comment=$this->input->get_post("comment");
-if($this->contactus_model->create($email,$name,$phone,$timestamp,$comment)==0)
+$lastname=$this->input->get_post("lastname");
+if($this->contactus_model->create($email,$firstname,$phone,$timestamp,$comment,$lastname)==0)
 $data["alerterror"]="New contactus could not be created.";
 else
 $data["alertsuccess"]="contactus created Successfully.";
@@ -3154,11 +3155,12 @@ else
 {
 $id=$this->input->get_post("id");
 $email=$this->input->get_post("email");
-$name=$this->input->get_post("name");
+$firstname=$this->input->get_post("firstname");
 $phone=$this->input->get_post("phone");
 $timestamp=$this->input->get_post("timestamp");
 $comment=$this->input->get_post("comment");
-if($this->contactus_model->edit($id,$email,$name,$phone,$timestamp,$comment)==0)
+$lastname=$this->input->get_post("lastname");
+if($this->contactus_model->edit($id,$email,$firstname,$phone,$timestamp,$comment,$lastname)==0)
 $data["alerterror"]="New contactus could not be Updated.";
 else
 $data["alertsuccess"]="contactus Updated Successfully.";

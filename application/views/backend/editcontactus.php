@@ -1,6 +1,6 @@
 <div class="row">
 <div class="col s12">
-<h4 class="pad-left-15 capitalize">Edit contactus</h4>
+<h4 class="pad-left-15 capitalize">Edit Contactus</h4>
 </div>
 </div>
 <div class="row">
@@ -14,8 +14,14 @@
 </div>
 <div class="row">
 <div class="input-field col s6">
-<label for="Name">Name</label>
-<input type="text" id="Name" name="name" value='<?php echo set_value('name',$before->name);?>'>
+<label for="firstname">firstname</label>
+<input type="text" id="firstname" name="firstname" value='<?php echo set_value('firstname',$before->firstname);?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
+<label for="lastname">lastname</label>
+<input type="text" id="lastname" name="lastname" value='<?php echo set_value('lastname',$before->lastname);?>'>
 </div>
 </div>
 <div class="row">
@@ -30,7 +36,7 @@
 <input type="text" id="Timestamp" name="timestamp" value='<?php echo set_value('timestamp',$before->timestamp);?>'>
 </div>
 </div>
-<div class="row">
+<div class="row" style="display:none;">
 <div class="col s12 m6">
 <label>Comment</label>
 <textarea name="comment" placeholder="Enter text ..."><?php echo set_value( 'comment',$before->comment);?></textarea>
@@ -38,7 +44,6 @@
 </div>
 <div class="row">
 <div class="col s6">
-<button type="submit" class="btn btn-primary waves-effect waves-light  blue darken-4">Save</button>
 <a href='<?php echo site_url("site/viewcontactus"); ?>' class='btn btn-secondary waves-effect waves-light red'>Cancel</a>
 </div>
 </div>

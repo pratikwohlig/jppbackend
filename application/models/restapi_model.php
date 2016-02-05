@@ -112,5 +112,15 @@ WHERE `jpp_schedule`.`score1`='' AND `jpp_schedule`.`score2`='' AND CONCAT(`jpp_
 ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->result();
         return $query;
     }
+    function contactus($firstname,$lastname,$email,$phone)
+    {
+    	$query=$this->db->query("INSERT INTO `jpp_contactus`(`firstname`, `lastname`, `email`,`phone`) VALUE('$firstname','$lastname','$email','$phone')");
+            $user=$this->db->insert_id();
+    if($query)
+        return true;
+        else
+            return false;
+
+    }
 }
 ?>

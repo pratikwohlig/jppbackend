@@ -1,6 +1,6 @@
 <div class="row">
 <div class="col s12">
-<h4 class="pad-left-15 capitalize">Create contactus</h4>
+<h4 class="pad-left-15 capitalize">Create Contactus</h4>
 </div>
 <form class='col s12' method='post' action='<?php echo site_url("site/createcontactussubmit");?>' enctype= 'multipart/form-data'>
 <div class="row">
@@ -11,8 +11,14 @@
 </div>
 <div class="row">
 <div class="input-field col s6">
-<label for="Name">Name</label>
-<input type="text" id="Name" name="name" value='<?php echo set_value('name');?>'>
+<label for="firstname">firstname</label>
+<input type="text" id="firstname" name="firstname" value='<?php echo set_value('firstname');?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
+<label for="lastname">lastname</label>
+<input type="text" id="lastname" name="lastname" value='<?php echo set_value('lastname');?>'>
 </div>
 </div>
 <div class="row">
@@ -21,7 +27,7 @@
 <input type="text" id="Phone" name="phone" value='<?php echo set_value('phone');?>'>
 </div>
 </div>
-<div class="row">
+<div class="row" style="display:none;">
 <div class="input-field col s12">
 <textarea name="comment" class="materialize-textarea" length="400"><?php echo set_value( 'comment');?></textarea>
 <label>Comment</label>

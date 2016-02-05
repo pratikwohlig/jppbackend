@@ -959,4 +959,13 @@ public function getsinglevideogallery()
     {
         $data = $this->gallery_model->getdropdown();
     }
+      public function contactus() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $firstname=$data['firstname'];
+        $lastname=$data['lastname'];
+        $email=$data['email'];
+        $phone=$data['mobile'];
+        $data["message"] = $this->restapi_model->contactus($firstname, $lastname, $email, $phone);
+        $this->load->view("json", $data);
+    }
 }
