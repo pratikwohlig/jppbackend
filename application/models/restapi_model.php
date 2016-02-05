@@ -116,10 +116,16 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->result();
     {
     	$query=$this->db->query("INSERT INTO `jpp_contactus`(`firstname`, `lastname`, `email`,`phone`) VALUE('$firstname','$lastname','$email','$phone')");
             $user=$this->db->insert_id();
-    if($query)
-        return true;
-        else
-            return false;
+    if($query){
+        $object = new stdClass();
+        $object->value = true;
+        return $object;
+    }
+        else{
+         $object = new stdClass();
+        $object->value = false;
+        return $object;
+        }
 
     }
 }
