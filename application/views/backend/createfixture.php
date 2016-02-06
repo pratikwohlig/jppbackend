@@ -4,7 +4,7 @@
     </div>
     <form class='col s12' method='post' action='<?php echo site_url("site/createfixturesubmit");?>' enctype='multipart/form-data'>
 
-        <input type="text" name="schedule" value="<?php echo $this->input->get('id'); ?>">
+        <input type="hidden" name="schedule" value="<?php echo $this->input->get('id'); ?>">
         <div class="row ">
             <div class="input-field col s6">
                 <select class="browser-default" id="homeval" name="ishome">
