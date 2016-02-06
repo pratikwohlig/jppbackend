@@ -3636,7 +3636,8 @@ $alloutpointteam2=$this->input->get_post("alloutpointteam2");
 $extrapointsteam1=$this->input->get_post("extrapointsteam1");
 $extrapointsteam2=$this->input->get_post("extrapointsteam2");
 $ishome=$this->input->get_post("ishome");
-if($this->fixture_model->create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome)==0)
+$link=$this->input->get_post("link");
+if($this->fixture_model->create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link)==0)
 $data["alerterror"]="New fixture could not be created.";
 else
 $data["alertsuccess"]="fixture created Successfully.";
@@ -3707,7 +3708,8 @@ $alloutpointteam2=$this->input->get_post("alloutpointteam2");
 $extrapointsteam1=$this->input->get_post("extrapointsteam1");
 $extrapointsteam2=$this->input->get_post("extrapointsteam2");
 $ishome=$this->input->get_post("ishome");
-if($this->fixture_model->edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome)==0)
+$link=$this->input->get_post("link");
+if($this->fixture_model->edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link)==0)
 $data["alerterror"]="New fixture could not be Updated.";
 else
 $data["alertsuccess"]="fixture Updated Successfully.";

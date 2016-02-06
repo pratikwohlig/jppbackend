@@ -13,9 +13,18 @@
 </div>
 </div>
 <div class="row">
-<div class=" input-field col s12 m6">
-<?php echo form_dropdown("ishome",$ishome,set_value('ishome',$before->ishome));?>
-<label for="ishome">Is Home</label>
+    <div class="input-field col s6">
+        <select class="browser-default">
+          <option value="">Select Is Home</option>
+          <option value="1">Yes</option>
+          <option value="2">No</option>
+        </select>
+  </div>
+</div>
+  <div class="row">
+<div class="input-field col s6">
+<label for="link">link</label>
+<input type="text" id="link" name="link" value='<?php echo set_value('link',$before->link);?>'>
 </div>
 </div>
 <div class="row">

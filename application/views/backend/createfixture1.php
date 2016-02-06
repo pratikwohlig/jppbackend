@@ -1,3 +1,4 @@
+<!--
 <div class="row">
     <div class="col s12">
         <h4 class="pad-left-15 capitalize">Create fixture</h4>
@@ -9,20 +10,20 @@
                     <label>Schedule</label>
             </div>
         </div>
-
-        <div class="row selecthome">
-            <div class="input-field col s6">
-                <select class="browser-default" id="homeval">
-                    <option value="">Select Is Home</option>
-                    <option value="1">Yes</option>
-                    <option value="2">No</option>
-                </select>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <?php echo form_dropdown("ishome",$ishome,set_value('ishome'));?>
+                    <label for="ishome">Is Home</label>
             </div>
         </div>
-        <div class="row chupado">
+        <div class="row">
             <div class="input-field col s6">
-                <label for="link">link</label>
-                <input type="text" id="link" name="link" value='<?php echo set_value(' link ');?>'>
+                <select>
+                    <option value="">Select Option</option>
+                    <option value="2">Yes</option>
+                    <option value="3">No</option>
+                </select>
+                <label>Is Home</label>
             </div>
         </div>
         <div class="row">
@@ -121,7 +122,6 @@
                 <input type="text" id="Extra points team2" name="extrapointsteam2" value='<?php echo set_value(' extrapointsteam2 ');?>'>
             </div>
         </div>
-
         <div class="row">
             <div class="col s12 m6">
                 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>
@@ -129,20 +129,40 @@
             </div>
         </div>
     </form>
+</div>-->
+
+
+
+
+<div class="row">
+<div class="col s12">
+<h4 class="pad-left-15 capitalize">Create galleryslide</h4>
 </div>
-<script>
-    $(document).ready(function () {
-        $(".chupado").hide();
-        $("#homeval").change(function () {
-            var type = $("#typeid").val();
-            if ($('#homeval').val() == 1) {
-                $(".chupado").show();
-            } else {
-                $(".chupado").hide();
-            }
+<form class='col s12' method='post' action='<?php echo site_url("site/creategalleryslidesubmit");?>' enctype= 'multipart/form-data'>
+<div class="row">
+<div class="input-field col s6">
+<label for="Order">Order</label>
+<input type="text" id="Order" name="order" value='<?php echo set_value('order');?>'>
+</div>
+</div>
+<div class=" row">
+<div class=" input-field col s6">
+<?php echo form_dropdown("inhome",$inhome,set_value('inhome'));?>
+<label>In Home</label>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
+<label for="Name">Name</label>
+<input type="text" id="Name" name="name" value='<?php echo set_value('name');?>'>
+</div>
+</div>
 
-        });
-
-    });
-    
-</script>
+<div class="row">
+<div class="col s12 m6">
+<button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>
+<a href="<?php echo site_url("site/viewgalleryslide?id=").$this->input->get('id'); ?>" class="btn btn-secondary waves-effect waves-light red">Cancel</a>
+</div>
+</div>
+</form>
+</div>

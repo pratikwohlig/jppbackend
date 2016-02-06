@@ -952,7 +952,7 @@ public function getsinglevideogallery()
     }
     public function getSchedule()
     {
-        $data['message'] = $this->restapi_model->getSchedule();
+        $data['message'] = $this->restapi_model->getSchedulenew();
         $this->load->view('json', $data);
     }
     public function test()
