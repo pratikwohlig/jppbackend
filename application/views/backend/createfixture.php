@@ -3,16 +3,11 @@
         <h4 class="pad-left-15 capitalize">Create fixture</h4>
     </div>
     <form class='col s12' method='post' action='<?php echo site_url("site/createfixturesubmit");?>' enctype='multipart/form-data'>
-        <div class="row" style="display:none;">
-            <div class=" input-field col s6">
-                <?php echo form_dropdown("schedule",$schedule,set_value('schedule',$this->input->get('id')));?>
-                    <label>Schedule</label>
-            </div>
-        </div>
 
-        <div class="row selecthome">
+        <input type="text" name="schedule" value="<?php echo $this->input->get('id'); ?>">
+        <div class="row ">
             <div class="input-field col s6">
-                <select class="browser-default" id="homeval">
+                <select class="browser-default" id="homeval" name="ishome">
                     <option value="">Select Is Home</option>
                     <option value="1">Yes</option>
                     <option value="2">No</option>
@@ -130,11 +125,10 @@
         </div>
     </form>
 </div>
+
 <script>
-    $(document).ready(function () {
-        $(".chupado").hide();
+    $(".chupado").hide();
         $("#homeval").change(function () {
-            var type = $("#typeid").val();
             if ($('#homeval').val() == 1) {
                 $(".chupado").show();
             } else {
@@ -142,7 +136,4 @@
             }
 
         });
-
-    });
-    
 </script>

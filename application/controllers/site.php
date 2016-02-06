@@ -3654,6 +3654,12 @@ $data["page2"]="block/scheduleblock";
 $data["ishome"]=$this->fixture_model->getdropdown();
 $data["title"]="Edit fixture";
 $data["before"]=$this->fixture_model->beforeedit($this->input->get("id"));
+ if($data["before"]->ishome==1) {
+     $data["showyes"]="Yes";
+ }  
+    else if($data["before"]->ishome==2){
+         $data["showyes"]="No";
+    }
 $this->load->view("templatewith2",$data);
 }
 public function editfixturesubmit()
