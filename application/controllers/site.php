@@ -895,6 +895,7 @@ public function createschedule()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createschedule";
+
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
@@ -944,13 +945,16 @@ public function editschedule()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editschedule";
+$data["page2"]="block/scheduleblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
     $data['exp'] = explode(':', $data['before']->starttime);
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editschedulesubmit()
 {
@@ -3447,6 +3451,280 @@ $this->slider_model->delete($this->input->get("id"));
 $data["redirect"]="site/viewslider";
 $this->load->view("redirect",$data);
 }
+    
+    // FIXTURE
+    
+    public function viewfixture()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewfixture";
+$data["page2"]="block/scheduleblock";
+$data["base_url"]=site_url("site/viewfixturejson?id=".$this->input->get('id'));
+$data["title"]="View fixture";
+$this->load->view("templatewith2",$data);
+}
+function viewfixturejson()
+{
+$id=$this->input->get('id');
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`jpp_fixture`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`jpp_fixture`.`schedule`";
+$elements[1]->sort="1";
+$elements[1]->header="Schedule";
+$elements[1]->alias="schedule";
+$elements[2]=new stdClass();
+$elements[2]->field="`jpp_fixture`.`team1player1name`";
+$elements[2]->sort="1";
+$elements[2]->header="Team1 Player1 Name";
+$elements[2]->alias="team1player1name";
+$elements[3]=new stdClass();
+$elements[3]->field="`jpp_fixture`.`team1player2name`";
+$elements[3]->sort="1";
+$elements[3]->header="Team1 Player2 Name";
+$elements[3]->alias="team1player2name";
+$elements[4]=new stdClass();
+$elements[4]->field="`jpp_fixture`.`team1player1score`";
+$elements[4]->sort="1";
+$elements[4]->header="Team1 Player1 score";
+$elements[4]->alias="team1player1score";
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_fixture`.`team1player2score`";
+$elements[5]->sort="1";
+$elements[5]->header="Team1 Player2 Score";
+$elements[5]->alias="team1player2score";
+$elements[6]=new stdClass();
+$elements[6]->field="`jpp_fixture`.`team2player1name`";
+$elements[6]->sort="1";
+$elements[6]->header="Team2 Player1 Name";
+$elements[6]->alias="team2player1name";
+$elements[7]=new stdClass();
+$elements[7]->field="`jpp_fixture`.`team2player2name`";
+$elements[7]->sort="1";
+$elements[7]->header="Team2 Player2 Name";
+$elements[7]->alias="team2player2name";
+$elements[8]=new stdClass();
+$elements[8]->field="`jpp_fixture`.`team2player1score`";
+$elements[8]->sort="1";
+$elements[8]->header="Team2 Player1 score";
+$elements[8]->alias="team2player1score";
+$elements[9]=new stdClass();
+$elements[9]->field="`jpp_fixture`.`team2player2score`";
+$elements[9]->sort="1";
+$elements[9]->header="Team2 Player2 Score";
+$elements[9]->alias="team2player2score";
+$elements[10]=new stdClass();
+$elements[10]->field="`jpp_fixture`.`raidpointsteam1`";
+$elements[10]->sort="1";
+$elements[10]->header="Raid points team1";
+$elements[10]->alias="raidpointsteam1";
+$elements[11]=new stdClass();
+$elements[11]->field="`jpp_fixture`.`raidpointsteam2`";
+$elements[11]->sort="1";
+$elements[11]->header="Raid points team2";
+$elements[11]->alias="raidpointsteam2";
+$elements[12]=new stdClass();
+$elements[12]->field="`jpp_fixture`.`tacklepointsteam1`";
+$elements[12]->sort="1";
+$elements[12]->header="Tackle points team1";
+$elements[12]->alias="tacklepointsteam1";
+$elements[13]=new stdClass();
+$elements[13]->field="`jpp_fixture`.`tacklepointsteam2`";
+$elements[13]->sort="1";
+$elements[13]->header="Tackle points team2";
+$elements[13]->alias="tacklepointsteam2";
+$elements[14]=new stdClass();
+$elements[14]->field="`jpp_fixture`.`alloutpointteam1`";
+$elements[14]->sort="1";
+$elements[14]->header="All out point team1";
+$elements[14]->alias="alloutpointteam1";
+$elements[15]=new stdClass();
+$elements[15]->field="`jpp_fixture`.`alloutpointteam2`";
+$elements[15]->sort="1";
+$elements[15]->header="All out point team2";
+$elements[15]->alias="alloutpointteam2";
+$elements[16]=new stdClass();
+$elements[16]->field="`jpp_fixture`.`extrapointsteam1`";
+$elements[16]->sort="1";
+$elements[16]->header="Extra points team1";
+$elements[16]->alias="extrapointsteam1";
+$elements[17]=new stdClass();
+$elements[17]->field="`jpp_fixture`.`extrapointsteam2`";
+$elements[17]->sort="1";
+$elements[17]->header="Extra points team2";
+$elements[17]->alias="extrapointsteam2";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_fixture`","WHERE `jpp_fixture`.`schedule`='$id'");
+$this->load->view("json",$data);
+}
+
+public function createfixture()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createfixture";
+$data["page2"]="block/scheduleblock";
+$data["ishome"]=$this->fixture_model->getdropdown();
+$data["title"]="Create fixture";
+$this->load->view("templatewith2",$data);
+}
+public function createfixturesubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("schedule","Schedule","trim");
+$this->form_validation->set_rules("team1player1name","Team1 Player1 Name","trim");
+$this->form_validation->set_rules("team1player2name","Team1 Player2 Name","trim");
+$this->form_validation->set_rules("team1player1score","Team1 Player1 score","trim");
+$this->form_validation->set_rules("team1player2score","Team1 Player2 Score","trim");
+$this->form_validation->set_rules("team2player1name","Team2 Player1 Name","trim");
+$this->form_validation->set_rules("team2player2name","Team2 Player2 Name","trim");
+$this->form_validation->set_rules("team2player1score","Team2 Player1 score","trim");
+$this->form_validation->set_rules("team2player2score","Team2 Player2 Score","trim");
+$this->form_validation->set_rules("raidpointsteam1","Raid points team1","trim");
+$this->form_validation->set_rules("raidpointsteam2","Raid points team2","trim");
+$this->form_validation->set_rules("tacklepointsteam1","Tackle points team1","trim");
+$this->form_validation->set_rules("tacklepointsteam2","Tackle points team2","trim");
+$this->form_validation->set_rules("alloutpointteam1","All out point team1","trim");
+$this->form_validation->set_rules("alloutpointteam2","All out point team2","trim");
+$this->form_validation->set_rules("extrapointsteam1","Extra points team1","trim");
+$this->form_validation->set_rules("extrapointsteam2","Extra points team2","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createfixture";
+$data["ishome"]=$this->fixture_model->getdropdown();
+$data["title"]="Create fixture";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$schedule=$this->input->get_post("schedule");
+$team1player1name=$this->input->get_post("team1player1name");
+$team1player2name=$this->input->get_post("team1player2name");
+$team1player1score=$this->input->get_post("team1player1score");
+$team1player2score=$this->input->get_post("team1player2score");
+$team2player1name=$this->input->get_post("team2player1name");
+$team2player2name=$this->input->get_post("team2player2name");
+$team2player1score=$this->input->get_post("team2player1score");
+$team2player2score=$this->input->get_post("team2player2score");
+$raidpointsteam1=$this->input->get_post("raidpointsteam1");
+$raidpointsteam2=$this->input->get_post("raidpointsteam2");
+$tacklepointsteam1=$this->input->get_post("tacklepointsteam1");
+$tacklepointsteam2=$this->input->get_post("tacklepointsteam2");
+$alloutpointteam1=$this->input->get_post("alloutpointteam1");
+$alloutpointteam2=$this->input->get_post("alloutpointteam2");
+$extrapointsteam1=$this->input->get_post("extrapointsteam1");
+$extrapointsteam2=$this->input->get_post("extrapointsteam2");
+$ishome=$this->input->get_post("ishome");
+if($this->fixture_model->create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome)==0)
+$data["alerterror"]="New fixture could not be created.";
+else
+$data["alertsuccess"]="fixture created Successfully.";
+$data["redirect"]="site/viewfixture?id=".$schedule;
+$this->load->view("redirect2",$data);
+}
+}
+public function editfixture()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editfixture";
+$data["page2"]="block/scheduleblock";
+$data["ishome"]=$this->fixture_model->getdropdown();
+$data["title"]="Edit fixture";
+$data["before"]=$this->fixture_model->beforeedit($this->input->get("id"));
+$this->load->view("templatewith2",$data);
+}
+public function editfixturesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("schedule","Schedule","trim");
+$this->form_validation->set_rules("team1player1name","Team1 Player1 Name","trim");
+$this->form_validation->set_rules("team1player2name","Team1 Player2 Name","trim");
+$this->form_validation->set_rules("team1player1score","Team1 Player1 score","trim");
+$this->form_validation->set_rules("team1player2score","Team1 Player2 Score","trim");
+$this->form_validation->set_rules("team2player1name","Team2 Player1 Name","trim");
+$this->form_validation->set_rules("team2player2name","Team2 Player2 Name","trim");
+$this->form_validation->set_rules("team2player1score","Team2 Player1 score","trim");
+$this->form_validation->set_rules("team2player2score","Team2 Player2 Score","trim");
+$this->form_validation->set_rules("raidpointsteam1","Raid points team1","trim");
+$this->form_validation->set_rules("raidpointsteam2","Raid points team2","trim");
+$this->form_validation->set_rules("tacklepointsteam1","Tackle points team1","trim");
+$this->form_validation->set_rules("tacklepointsteam2","Tackle points team2","trim");
+$this->form_validation->set_rules("alloutpointteam1","All out point team1","trim");
+$this->form_validation->set_rules("alloutpointteam2","All out point team2","trim");
+$this->form_validation->set_rules("extrapointsteam1","Extra points team1","trim");
+$this->form_validation->set_rules("extrapointsteam2","Extra points team2","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editfixture";
+$data["title"]="Edit fixture";
+$data["ishome"]=$this->fixture_model->getdropdown();
+$data["before"]=$this->fixture_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$schedule=$this->input->get_post("schedule");
+$team1player1name=$this->input->get_post("team1player1name");
+$team1player2name=$this->input->get_post("team1player2name");
+$team1player1score=$this->input->get_post("team1player1score");
+$team1player2score=$this->input->get_post("team1player2score");
+$team2player1name=$this->input->get_post("team2player1name");
+$team2player2name=$this->input->get_post("team2player2name");
+$team2player1score=$this->input->get_post("team2player1score");
+$team2player2score=$this->input->get_post("team2player2score");
+$raidpointsteam1=$this->input->get_post("raidpointsteam1");
+$raidpointsteam2=$this->input->get_post("raidpointsteam2");
+$tacklepointsteam1=$this->input->get_post("tacklepointsteam1");
+$tacklepointsteam2=$this->input->get_post("tacklepointsteam2");
+$alloutpointteam1=$this->input->get_post("alloutpointteam1");
+$alloutpointteam2=$this->input->get_post("alloutpointteam2");
+$extrapointsteam1=$this->input->get_post("extrapointsteam1");
+$extrapointsteam2=$this->input->get_post("extrapointsteam2");
+$ishome=$this->input->get_post("ishome");
+if($this->fixture_model->edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome)==0)
+$data["alerterror"]="New fixture could not be Updated.";
+else
+$data["alertsuccess"]="fixture Updated Successfully.";
+$data["redirect"]="site/viewfixture?id=".$schedule;
+$this->load->view("redirect2",$data);
+}
+}
+public function deletefixture()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->fixture_model->delete($this->input->get("id"));
+$schedule=$this->input->get("scheduleid");
+$data["redirect"]="site/viewfixture?id=".$schedule;
+$this->load->view("redirect2",$data);
+}
+
 
 }
 ?>
