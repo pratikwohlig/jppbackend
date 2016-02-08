@@ -42,10 +42,8 @@
 				</div>
 <!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
 			</div>
-<!--
-<span style=" display: block;
-    ">1600px X 500px</span>
--->
+<span style=" display: block;">Big : 1472px X 327px</span> 
+    <span style=" display: block;">Small : 736px X 327px</span>
 		</div>
 <!--
     <div class="row small">

@@ -866,7 +866,8 @@ public function getsinglevideogallery()
     }
     public function test()
     {
-        $data = $this->gallery_model->getdropdown();
+        $data['message'] = $this->restapi_model->getSchedule();
+        $this->load->view('json', $data);
     }
       public function contactus() {
         $data = json_decode(file_get_contents('php://input'), true);

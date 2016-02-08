@@ -1491,7 +1491,7 @@ $type=$this->input->get_post("type");
             
             if($image1=="")
             {
-            $image1=$this->gallery_model->getimagebyid($id);
+            $image1=$this->gallery_model->getimage1byid($id);
                // print_r($image);
                 $image1=$image1->image1;
             }
