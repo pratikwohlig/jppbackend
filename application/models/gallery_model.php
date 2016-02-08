@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class gallery_model extends CI_Model
 {
-public function create($order,$name,$image)
+public function create($order,$name,$image1,$image2)
 {
-$data=array("order" => $order,"name" => $name,"image" => $image);
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2);
 $query=$this->db->insert( "jpp_gallery", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,19 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_gallery")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image)
+public function edit($id,$order,$name,$image1,$image2)
 {
-if($image=="")
+if($image1=="")
 {
-$image=$this->gallery_model->getimagebyid($id);
-$image=$image->image;
+$image1=$this->gallery_model->getimage1byid($id);
+$image1=$image1->image1;
 }
-$data=array("order" => $order,"name" => $name,"image" => $image);
+    if($image2=="")
+{
+$image2=$this->gallery_model->getimage2byid($id);
+$image2=$image2->image2;
+}
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_gallery", $data );
 return 1;
@@ -42,9 +47,14 @@ $query=$this->db->query("DELETE FROM `jpp_gallery` WHERE `id`='$id'");
 $query1=$this->db->query("DELETE FROM `jpp_galleryslide` WHERE `gallery`='$id'");
 return $query;
 }
-public function getimagebyid($id)
+public function getimage1byid($id)
 {
-$query=$this->db->query("SELECT `image` FROM `jpp_gallery` WHERE `id`='$id'")->row();
+$query=$this->db->query("SELECT `image1` FROM `jpp_gallery` WHERE `id`='$id'")->row();
+return $query;
+}
+    public function getimage2byid($id)
+{
+$query=$this->db->query("SELECT `image2` FROM `jpp_gallery` WHERE `id`='$id'")->row();
 return $query;
 }
 public function getdropdown()
@@ -59,5 +69,16 @@ public function getdropdown()
     }
     return $return;
 }
+     public function gettypedropdown()
+	{
+		$return=array(
+		"" => "Choose Image Size",
+		"1" => "Big",
+		"2" => "Small"
+		);
+
+
+		return $return;
+	}
 }
 ?>

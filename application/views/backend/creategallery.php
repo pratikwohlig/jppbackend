@@ -15,19 +15,42 @@
 <input type="text" id="Name" name="name" value='<?php echo set_value('name');?>'>
 </div>
 </div>
-<div class="row">
-			<div class="file-field input-field col m6 s12">
-				<div class="btn blue darken-4">
-					<span>Image</span>
-					<input name="image" type="file" multiple>
-				</div>
-				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image');?>">
-				</div>
-			</div>
-			   <span style=" display: block;
-    padding-top: 30px;">736px X 327px</span>
-		</div>
+   <div class="row">
+            <div class="input-field col s12 m8">
+                <?php echo form_dropdown('type', $type, set_value('type')," id='typeid'"); ?>
+                 <label>Type</label>
+            </div>
+        </div>
+<div class="row big">
+<div class="file-field input-field col s12 m6">
+<div class="btn blue darken-4">
+<span>Image</span>
+<input type="file" name="image1" multiple>
+</div>
+<div class="file-path-wrapper">
+<input class="file-path validate" type="text" placeholder="Upload big image" value='<?php echo set_value('image1');?>'>
+</div>
+</div>
+<!--
+ <span style=" display: block;
+    padding-top: 30px;">1600px X 500px</span>
+-->
+</div>
+<!--
+<div class="row small">
+<div class="file-field input-field col s12 m6">
+<div class="btn blue darken-4">
+<span>Image2</span>
+<input type="file" name="image2" multiple>
+</div>
+<div class="file-path-wrapper">
+<input class="file-path validate" type="text" placeholder="Upload small image" value='<?php echo set_value('image2');?>'>
+</div>
+</div>
+ <span style=" display: block;
+    padding-top: 30px;">700px X 500px</span>
+</div>
+-->
 <div class="row">
 <div class="col s12 m6">
 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>

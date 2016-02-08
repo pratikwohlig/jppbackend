@@ -1322,10 +1322,10 @@ $elements[2]->sort="1";
 $elements[2]->header="Name";
 $elements[2]->alias="name";
 $elements[3]=new stdClass();
-$elements[3]->field="`jpp_gallery`.`image`";
+$elements[3]->field="`jpp_gallery`.`image1`";
 $elements[3]->sort="1";
-$elements[3]->header="Image";
-$elements[3]->alias="image";
+$elements[3]->header="Image1";
+$elements[3]->alias="image1";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1349,6 +1349,7 @@ public function creategallery()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="creategallery";
+$data['type']=$this->gallery_model->gettypedropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1363,6 +1364,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="creategallery";
+$data['type']=$this->gallery_model->gettypedropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1372,8 +1374,10 @@ $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
-$image=$this->menu_model->createImage();
-if($this->gallery_model->create($order,$name,$image)==0)
+$type=$this->input->get_post("type");
+$image1=$this->menu_model->createImage();
+$image2=$this->menu_model->createImage();
+if($this->gallery_model->create($order,$name,$image1,$image2,$type)==0)
 $data["alerterror"]="New gallery could not be created.";
 else
 $data["alertsuccess"]="gallery created Successfully.";
@@ -1387,6 +1391,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editgallery";
 $data["page2"]="block/galleryblock";
+$data['type']=$this->gallery_model->gettypedropdown();
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit gallery";
@@ -1404,6 +1409,7 @@ $this->form_validation->set_rules("image","Image","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data['type']=$this->gallery_model->gettypedropdown();
 $data["page"]="editgallery";
 $data["title"]="Edit gallery";
 $data["before"]=$this->gallery_model->beforeedit($this->input->get("id"));
@@ -1415,8 +1421,10 @@ $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
-$image=$this->menu_model->createImage();
-if($this->gallery_model->edit($id,$order,$name,$image)==0)
+$type=$this->input->get_post("type");
+$image1=$this->menu_model->createImage();
+$image2=$this->menu_model->createImage();
+if($this->gallery_model->edit($id,$order,$name,$image1,$image2,$type)==0)
 $data["alerterror"]="New gallery could not be Updated.";
 else
 $data["alertsuccess"]="gallery Updated Successfully.";
