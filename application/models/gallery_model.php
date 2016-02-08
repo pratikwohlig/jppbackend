@@ -26,16 +26,16 @@ return $query;
 }
 public function edit($id,$order,$name,$image1,$type)
 {
-if($image1=="")
-{
-$image1=$this->gallery_model->getimage1byid($id);
-$image1=$image1->image1;
-}
-    if($image2=="")
-{
-$image2=$this->gallery_model->getimage2byid($id);
-$image2=$image2->image2;
-}
+//if($image1=="")
+//{
+//$image1=$this->gallery_model->getimage1byid($id);
+//$image1=$image1->image1;
+//}
+//    if($image2=="")
+//{
+//$image2=$this->gallery_model->getimage2byid($id);
+//$image2=$image2->image2;
+//}
 $data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_gallery", $data );

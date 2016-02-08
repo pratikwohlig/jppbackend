@@ -1373,9 +1373,42 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
-$image1=$this->menu_model->createImage();
+  $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image1";
+			$image1="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image1=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image1=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
 if($this->gallery_model->create($order,$name,$image1,$type)==0)
 $data["alerterror"]="New gallery could not be created.";
 else
@@ -1395,7 +1428,6 @@ $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit gallery";
 $data["before"]=$this->gallery_model->beforeedit($this->input->get("id"));
-    print_r($data["before"]);
 $this->load->view("templatewith2",$data);
 }
 public function editgallerysubmit()
@@ -1420,9 +1452,49 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
-$image1=$this->menu_model->createImage();
+  $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image1";
+			$image1="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image1=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image1=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($image1=="")
+            {
+            $image1=$this->gallery_model->getimagebyid($id);
+               // print_r($image);
+                $image1=$image1->image1;
+            }
 if($this->gallery_model->edit($id,$order,$name,$image1,$type)==0)
 $data["alerterror"]="New gallery could not be Updated.";
 else
