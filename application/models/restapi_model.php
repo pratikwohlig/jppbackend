@@ -130,7 +130,6 @@ FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
-WHERE CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) >= NOW()
 ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->result();
 //        print_r($query);
         foreach($query as $row){
