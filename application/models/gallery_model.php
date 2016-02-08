@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class gallery_model extends CI_Model
 {
-public function create($order,$name,$image1,$image2)
+public function create($order,$name,$image1,$type)
 {
-$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2);
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type);
 $query=$this->db->insert( "jpp_gallery", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,7 +24,7 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_gallery")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image1,$image2)
+public function edit($id,$order,$name,$image1,$type)
 {
 if($image1=="")
 {
@@ -36,7 +36,7 @@ $image1=$image1->image1;
 $image2=$this->gallery_model->getimage2byid($id);
 $image2=$image2->image2;
 }
-$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2);
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_gallery", $data );
 return 1;

@@ -1376,8 +1376,7 @@ $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
 $image1=$this->menu_model->createImage();
-$image2=$this->menu_model->createImage();
-if($this->gallery_model->create($order,$name,$image1,$image2,$type)==0)
+if($this->gallery_model->create($order,$name,$image1,$type)==0)
 $data["alerterror"]="New gallery could not be created.";
 else
 $data["alertsuccess"]="gallery created Successfully.";
@@ -1396,6 +1395,7 @@ $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit gallery";
 $data["before"]=$this->gallery_model->beforeedit($this->input->get("id"));
+    print_r($data["before"]);
 $this->load->view("templatewith2",$data);
 }
 public function editgallerysubmit()
@@ -1423,8 +1423,7 @@ $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
 $image1=$this->menu_model->createImage();
-$image2=$this->menu_model->createImage();
-if($this->gallery_model->edit($id,$order,$name,$image1,$image2,$type)==0)
+if($this->gallery_model->edit($id,$order,$name,$image1,$type)==0)
 $data["alerterror"]="New gallery could not be Updated.";
 else
 $data["alertsuccess"]="gallery Updated Successfully.";
