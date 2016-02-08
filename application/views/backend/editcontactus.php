@@ -1,6 +1,6 @@
 <div class="row">
 <div class="col s12">
-<h4 class="pad-left-15 capitalize">Edit Contactus</h4>
+<h4 class="pad-left-15 capitalize">Fan Corner Detail</h4>
 </div>
 </div>
 <div class="row">
