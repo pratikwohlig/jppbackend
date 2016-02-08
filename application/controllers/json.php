@@ -50,56 +50,7 @@ class Json extends CI_Controller
     }
     public function getallpoint()
     {
-        //$elements=array();
-//$elements[0]=new stdClass();
-//$elements[0]->field="`jpp_point`.`id`";
-//$elements[0]->sort="1";
-//$elements[0]->header="ID";
-//$elements[0]->alias="id";
-//
-//$elements[1]=new stdClass();
-//$elements[1]->field="`jpp_point`.`played`";
-//$elements[1]->sort="1";
-//$elements[1]->header="played";
-//$elements[1]->alias="played";
-//
-//$elements[2]=new stdClass();
-//$elements[2]->field="`jpp_point`.`wins`";
-//$elements[2]->sort="1";
-//$elements[2]->header="Wins";
-//$elements[2]->alias="wins";
-//
-//$elements[3]=new stdClass();
-//$elements[3]->field="`jpp_point`.`lost`";
-//$elements[3]->sort="1";
-//$elements[3]->header="Lost";
-//$elements[3]->alias="lost";
-//
-//$elements[4]=new stdClass();
-//$elements[4]->field="`jpp_point`.`point`";
-//$elements[4]->sort="1";
-//$elements[4]->header="Point";
-//$elements[4]->alias="point";
-//
-//$elements[5]=new stdClass();
-//$elements[5]->field="`jpp_team`.`name`";
-//$elements[5]->sort="1";
-//$elements[5]->header="name";
-//$elements[5]->alias="name";
-//
-//$search=$this->input->get_post("search");
-//$pageno=$this->input->get_post("pageno");
-//$orderby=$this->input->get_post("orderby");
-//$orderorder=$this->input->get_post("orderorder");
-//$maxrow=$this->input->get_post("maxrow");
-//if($maxrow=="")
-//{
-//}
-//if($orderby=="")
-//{
-//$orderby="point";
-//$orderorder="DESC";
-//}
+      
 $data['message'] = $this->restapi_model->getAllPoints();
         $this->load->view('json', $data);
     }
@@ -477,54 +428,12 @@ $data['message'] = $this->restapi_model->getAllPoints();
         $data['message'] = $this->players_model->getsingleplayers($id);
         $this->load->view('json', $data);
     }
-//function getallwallpapercategory()
-//{
-//$elements=array();
-//$elements[0]=new stdClass();
-//$elements[0]->field="`jpp_wallpapercategory`.`id`";
-//$elements[0]->sort="1";
-//$elements[0]->header="ID";
-//$elements[0]->alias="id";
-//
-//$elements[1]=new stdClass();
-//$elements[1]->field="`jpp_wallpapercategory`.`order`";
-//$elements[1]->sort="1";
-//$elements[1]->header="Order";
-//$elements[1]->alias="order";
-//
-//$elements[2]=new stdClass();
-//$elements[2]->field="`jpp_wallpapercategory`.`name`";
-//$elements[2]->sort="1";
-//$elements[2]->header="Name";
-//$elements[2]->alias="name";
-//
-//$elements[3]=new stdClass();
-//$elements[3]->field="`jpp_wallpapercategory`.`image`";
-//$elements[3]->sort="1";
-//$elements[3]->header="Image";
-//$elements[3]->alias="image";
-//
-//$search=$this->input->get_post("search");
-//$pageno=$this->input->get_post("pageno");
-//$orderby=$this->input->get_post("orderby");
-//$orderorder=$this->input->get_post("orderorder");
-//$maxrow=$this->input->get_post("maxrow");
-//if($maxrow=="")
-//{
-//}
-//if($orderby=="")
-//{
-//$orderby="id";
-//$orderorder="ASC";
-//}
-//$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_wallpapercategory`");
-//$queryresult=$data["message"]->queryresult;
-//    foreach($queryresult as $row)
-//    {
-//          $data['message']->wallpapers=$this->db->query("SELECT `id`, `wallpapercategory`, `name`, `image1`, `image2`, `image3`, `image4`, `image5`, `image6` FROM `jpp_wallpaper` WHERE `wallpapercategory`='$row->id'")->result();
-//    }
-//$this->load->view("json",$data);
-//}
+    public function getLatestMatch()
+    {
+        $data['message'] = $this->restapi_model->getLatestMatch();
+        $this->load->view('json', $data);
+    }
+
 public function getsinglewallpapercategory()
 {
     $id = $this->input->get_post('id');
