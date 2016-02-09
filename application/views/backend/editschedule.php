@@ -66,7 +66,7 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <?php echo form_dropdown("ishome",$ishome,set_value('ishome',$before->ishome),"id='ishome'");?>
+                      <?php echo form_dropdown("ishome",$ishome,set_value('ishome',$before->ishome),'id="homeval2"');?>
                     <label>Home Game</label>
             </div>
         </div>
@@ -100,7 +100,7 @@
 //        $(".combodate select.minute1").change(changestarttime);
 //        changestarttime();
 
-        console.log($('select[name="ishome"]').val());
+        console.log($("#homeval2").val());
         if ($('select[name="ishome"]').val() == 1) {
             $(".chupado").show();
 

@@ -68,7 +68,7 @@ return $query;
     	public function getdropdown()
 	{
 		$gender=array(
-			""=>"Home Game",
+			""=>"Please Select",
 			"1"=>"Yes",
 			"2"=>"No" 
 		);
