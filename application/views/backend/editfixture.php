@@ -15,7 +15,7 @@
 </div>
 </div>
 -->
-        <div class="row selecthome">
+        <div class="row selecthome" style="display:none">
             <div class="input-field col s6">
                 <select class="browser-default" name="ishome" id="homeval2">
                     <option value="<?php echo $before->ishome; ?>">
@@ -26,7 +26,7 @@
                 </select>
             </div>
         </div>
-        <div class="row chupado">
+        <div class="row chupado" style="display:none">
             <div class="input-field col s6">
                 <label for="link">link</label>
                 <input type="text" id="link" name="link" value='<?php echo set_value(' link ',$before->link);?>'>

@@ -5,7 +5,7 @@
     <form class='col s12' method='post' action='<?php echo site_url("site/createfixturesubmit");?>' enctype='multipart/form-data'>
 
         <input type="hidden" name="schedule" value="<?php echo $this->input->get('id'); ?>">
-        <div class="row ">
+        <div class="row " style="display:none">
             <div class="input-field col s6">
                 <select class="browser-default" id="homeval" name="ishome">
                     <option value="">Home Game</option>
@@ -14,7 +14,7 @@
                 </select>
             </div>
         </div>
-        <div class="row chupado">
+        <div class="row chupado" style="display:none">
             <div class="input-field col s6">
                 <label for="link">link</label>
                 <input type="text" id="link" name="link" value='<?php echo set_value(' link ');?>'>
