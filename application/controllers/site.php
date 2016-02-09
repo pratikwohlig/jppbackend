@@ -932,7 +932,8 @@ $starttime=$this->input->get_post("starttime");
 $score1=$this->input->get_post("score1");
 $score2=$this->input->get_post("score2");
 $startdate=$this->input->get_post("startdate");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate)==0)
+    $ishome=$this->input->get_post("ishome");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -953,6 +954,12 @@ $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
+    if($data["before"]->ishome==1) {
+     $data["showyes"]="Yes";
+ }  
+    else if($data["before"]->ishome==2){
+         $data["showyes"]="No";
+    }
     $data['exp'] = explode(':', $data['before']->starttime);
 $this->load->view("templatewith2",$data);
 }
@@ -989,7 +996,8 @@ $starttime=$this->input->get_post("starttime");
 $score1=$this->input->get_post("score1");
 $score2=$this->input->get_post("score2");
     $startdate=$this->input->get_post("startdate");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate)==0)
+    $ishome=$this->input->get_post("ishome");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";
@@ -3540,6 +3548,8 @@ $this->checkaccess($access);
 $data["page"]="viewfixture";
 $data["page2"]="block/scheduleblock";
 $data["base_url"]=site_url("site/viewfixturejson?id=".$this->input->get('id'));
+$id=$this->input->get('id');
+$data['checkrow']=$this->fixture_model->checkrow($id);
 $data["title"]="View fixture";
 $this->load->view("templatewith2",$data);
 }

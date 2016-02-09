@@ -60,7 +60,18 @@
 <input type="text" id="score2" name="score2" value='<?php echo set_value('score2',$before->score2);?>'>
 </div>
 </div>
-<div class="row">
+ <div class="row selecthome">
+            <div class="input-field col s6">
+                <select class="browser-default" name="ishome" id="homeval2">
+                    <option value="<?php echo $before->ishome; ?>">
+                        <?php echo $showyes; ?>
+                    </option>
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                </select>
+            </div>
+        </div>
+<div class="row chupado">
 <div class="input-field col s6">
 <label for="Book Ticket">Book Ticket</label>
 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value('bookticket',$before->bookticket);?>'>
@@ -89,5 +100,28 @@
         $(".combodate select.hour1").change(changestarttime);
         $(".combodate select.minute1").change(changestarttime);
         changestarttime();
+        
+           console.log($('select[name="ishome"]').val());
+            if($('select[name="ishome"]').val()==1)
+    {
+        $(".chupado").show();
+        
+    }else if ($('select[name="ishome"]').val()==2){
+       $(".chupado").hide();
+    }
+        else{
+          $(".chupado").hide();
+        }
+   $( "#homeval2" ).change(function() {
+    var type=$( "#homeval2" ).val();
+    if($( "#homeval2" ).val()==1)
+    {
+          $(".chupado").show();
+        
+    }else{
+        $(".chupado").hide();
+    }
+    
+});
     });
 </script>

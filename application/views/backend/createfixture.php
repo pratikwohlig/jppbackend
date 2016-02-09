@@ -8,7 +8,7 @@
         <div class="row ">
             <div class="input-field col s6">
                 <select class="browser-default" id="homeval" name="ishome">
-                    <option value="">Select Is Home</option>
+                    <option value="">Home Game</option>
                     <option value="1">Yes</option>
                     <option value="2">No</option>
                 </select>

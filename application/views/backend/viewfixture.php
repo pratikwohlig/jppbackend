@@ -34,7 +34,10 @@
 </div>
 </div>
 <?php $this->chintantable->createpagination();?>
+<?php if($checkrow==0){?>
 <div class="createbuttonplacement"><a class="btn-floating btn-large waves-effect waves-light blue darken-4 tooltipped" href="<?php echo site_url("site/createfixture?id=").$this->input->get('id'); ?>"data-position="top" data-delay="50" data-tooltip="Create"><i class="material-icons">add</i></a></div>
+<?php }?>
+
 </div>
 </div>
 <script>

@@ -60,7 +60,16 @@
 <input type="text" id="score2" name="score2" value='<?php echo set_value('score2');?>'>
 </div>
 </div>
-<div class="row">
+ <div class="row ">
+            <div class="input-field col s6">
+                <select class="browser-default" id="homeval" name="ishome">
+                    <option value="">Home Game</option>
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                </select>
+            </div>
+        </div>
+<div class="row chupado">
 <div class="input-field col s6">
 <label for="Book Ticket">Book Ticket</label>
 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value('bookticket');?>'>
@@ -84,7 +93,19 @@
         $(".combodate select.hour1").change(changestarttime);
         $(".combodate select.minute1").change(changestarttime);
         changestarttime();
+        
+          $(".chupado").hide();
+        $("#homeval").change(function () {
+            if ($('#homeval').val() == 1) {
+                $(".chupado").show();
+            } else {
+                $(".chupado").hide();
+            }
 
+        });
     });
 
+  
+</script>
+    
 </script>
