@@ -865,6 +865,11 @@ public function getsinglevideogallery()
         $data['message'] = $this->restapi_model->getSchedulenew();
         $this->load->view('json', $data);
     }
+    public function getScheduleAndroid()
+    {
+        $data['message'] = $this->restapi_model->getSchedule();
+        $this->load->view('json', $data);
+    }
     public function test1()
     {
         $data['message'] = $this->restapi_model->getSchedule();
