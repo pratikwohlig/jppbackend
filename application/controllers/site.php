@@ -895,8 +895,10 @@ public function createschedule()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createschedule";
-
+$data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
+$data["hour"]=$this->schedule_model->gethourdropdown();
+$data["minute"]=$this->schedule_model->getminutedropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Create schedule";
@@ -914,6 +916,9 @@ $this->form_validation->set_rules("timestamp","Timestamp","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["hour"]=$this->schedule_model->gethourdropdown();
+$data["minute"]=$this->schedule_model->getminutedropdown();
+$data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
@@ -933,7 +938,9 @@ $score1=$this->input->get_post("score1");
 $score2=$this->input->get_post("score2");
 $startdate=$this->input->get_post("startdate");
     $ishome=$this->input->get_post("ishome");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome)==0)
+    $hour=$this->input->get_post("hour");
+    $minute=$this->input->get_post("minute");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -949,8 +956,11 @@ $data["page"]="editschedule";
 $data["page2"]="block/scheduleblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
+$data["hour"]=$this->schedule_model->gethourdropdown();
+$data["minute"]=$this->schedule_model->getminutedropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
+$data["ishome"]=$this->fixture_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
@@ -976,7 +986,10 @@ $this->form_validation->set_rules("timestamp","Timestamp","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["hour"]=$this->schedule_model->gethourdropdown();
+$data["minute"]=$this->schedule_model->getminutedropdown();
 $data["page"]="editschedule";
+$data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
@@ -997,7 +1010,9 @@ $score1=$this->input->get_post("score1");
 $score2=$this->input->get_post("score2");
     $startdate=$this->input->get_post("startdate");
     $ishome=$this->input->get_post("ishome");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome)==0)
+       $hour=$this->input->get_post("hour");
+    $minute=$this->input->get_post("minute");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";
@@ -1771,8 +1786,78 @@ $image=$this->input->get_post("image");
 $logo=$this->input->get_post("logo");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
-$image=$this->menu_model->createImage();
-$logo=$this->menu_model->createImage();
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			} 
+//    LOGO
+    
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="logo";
+			$logo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$logo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $logo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+//$image=$this->menu_model->createImage();
+//$logo=$this->menu_model->createImage();
 if($this->news_model->create($type,$name,$image,$timestamp,$content,$link,$logo)==0)
 $data["alerterror"]="New news could not be created.";
 else
@@ -1818,8 +1903,90 @@ $logo=$this->input->get_post("logo");
 $timestamp=$this->input->get_post("timestamp");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
-$image=$this->menu_model->createImage();
-$logo=$this->menu_model->createImage();
+     $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($image=="")
+            {
+            $image=$this->news_model->getimagebyid($id);
+               // print_r($image);
+                $image=$image->image;
+            }
+//$image=$this->menu_model->createImage();
+//$logo=$this->menu_model->createImage();
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="logo";
+			$logo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$logo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $logo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($logo=="")
+            {
+            $logo=$this->news_model->getlogobyid($id);
+               // print_r($logo);
+                $logo=$logo->logo;
+            }
 if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link,$logo)==0)
 $data["alerterror"]="New news could not be Updated.";
 else

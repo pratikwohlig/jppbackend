@@ -865,7 +865,7 @@ public function getsinglevideogallery()
         $data['message'] = $this->restapi_model->getSchedulenew();
         $this->load->view('json', $data);
     }
-    public function test()
+    public function test1()
     {
         $data['message'] = $this->restapi_model->getSchedule();
         $this->load->view('json', $data);
@@ -878,5 +878,15 @@ public function getsinglevideogallery()
         $phone=$data['mobile'];
         $data["message"] = $this->restapi_model->contactus($firstname, $lastname, $email, $phone);
         $this->load->view("json", $data);
+    }
+     public function test()
+    {
+//         echo "<font color=\"red\">";
+         
+         
+       for($i=0;$i<=59;$i++){
+          echo "\"".$i."\""."=>"."\"".$i."\"".",";
+           echo "\n";
+       }
     }
 }
