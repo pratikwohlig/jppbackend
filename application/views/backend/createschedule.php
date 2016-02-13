@@ -74,6 +74,12 @@
                 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value(' bookticket ');?>'>
             </div>
         </div>
+         <div class="row">
+            <div class="input-field col s6">
+                <label for="matchtime">Match Time</label>
+                <input type="text" id="matchtime" name="matchtime" value='<?php echo set_value('matchtime');?>'>
+            </div>eg : 00:00
+        </div>
         <div class="row">
             <div class="col s12 m6">
                 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>

@@ -76,6 +76,12 @@
                 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value(' bookticket ',$before->bookticket);?>'>
             </div>
         </div>
+         <div class="row">
+            <div class="input-field col s6">
+                <label for="matchtime">Match Time</label>
+                <input type="text" id="matchtime" name="matchtime" value='<?php echo set_value('matchtime',$before->matchtime);?>'>
+            </div>eg : 00:00
+        </div>
         <div class="row">
             <div class="input-field col s6">
                 <label for="Timestamp">Timestamp</label>
