@@ -718,6 +718,12 @@ $elements[5]->field="`jpp_team`.`name`";
 $elements[5]->sort="1";
 $elements[5]->header="Team Name";
 $elements[5]->alias="teamname";
+    
+$elements[6]=new stdClass();
+$elements[6]->field="`jpp_point`.`sd`";
+$elements[6]->sort="1";
+$elements[6]->header="SD";
+$elements[6]->alias="sd";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
