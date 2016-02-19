@@ -35,6 +35,12 @@
                 <label for="Point">Point</label>
                 <input type="text" id="Point" name="point" value='<?php echo set_value(' point ',$before->point);?>'>
             </div>
+        </div> 
+           <div class="row">
+            <div class="input-field col s6">
+                <label for="sd">sd</label>
+                <input type="text" id="sd" name="sd" value='<?php echo set_value(' sd ',$before->sd);?>'>
+            </div>
         </div>
         <div class="row">
             <div class="col s6">

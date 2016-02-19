@@ -769,7 +769,8 @@ $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
 $point=$this->input->get_post("point");
 $team=$this->input->get_post("team");
-if($this->point_model->create($played,$wins,$lost,$point,$team)==0)
+$sd=$this->input->get_post("sd");
+if($this->point_model->create($played,$wins,$lost,$point,$team,$sd)==0)
 $data["alerterror"]="New point could not be created.";
 else
 $data["alertsuccess"]="point created Successfully.";
@@ -813,7 +814,8 @@ $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
 $point=$this->input->get_post("point");
 $team=$this->input->get_post("team");
-if($this->point_model->edit($id,$played,$wins,$lost,$point,$team)==0)
+    $sd=$this->input->get_post("sd");
+if($this->point_model->edit($id,$played,$wins,$lost,$point,$team,$sd)==0)
 $data["alerterror"]="New point could not be Updated.";
 else
 $data["alertsuccess"]="point Updated Successfully.";
