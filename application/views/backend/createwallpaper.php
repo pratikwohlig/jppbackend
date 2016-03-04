@@ -26,7 +26,9 @@
 				</div>
 			</div>
 				   <span style=" display: block;
-    padding-top: 30px;">1920px X 1080px</span>
+    padding-top: 30px;">Desktop: 1920px X 1080px</span>
+    <span style=" display: block;
+    padding-top: 30px;">Mobile :1080px X 1920px</span>
 		</div>
 <!--
 <div class="row">

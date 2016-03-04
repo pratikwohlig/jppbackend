@@ -33,8 +33,10 @@
 					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image1',$before->image1);?>">
 				</div>
 			</div>
-			  <span style=" display: block;
-">1920px X 1080px</span>
+			   <span style=" display: block;
+    padding-top: 30px;">Desktop: 1920px X 1080px</span>
+    <span style=" display: block;
+    padding-top: 30px;">Mobile :1080px X 1920px</span>
 		</div>
 <!--
 <div class="row">
