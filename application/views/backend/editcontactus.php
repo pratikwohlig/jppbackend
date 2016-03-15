@@ -36,12 +36,24 @@
 <input type="text" id="Timestamp" name="timestamp" value='<?php echo set_value('timestamp',$before->timestamp);?>'>
 </div>
 </div>
-<div class="row" style="display:none;">
+<!--
+<div class="row">
 <div class="col s12 m6">
-<label>Comment</label>
+<label>Favourite Players</label>
 <textarea name="comment" placeholder="Enter text ..."><?php echo set_value( 'comment',$before->comment);?></textarea>
 </div>
 </div>
+-->
+ <div class="row">
+    <form class="col s6">
+      <div class="row">
+        <div class="input-field col s6">
+          <textarea id="comment" class="materialize-textarea"><?php echo set_value( 'comment',$before->comment);?></textarea>
+          <label for="comment">Favourite Players</label>
+        </div>
+      </div>
+    </form>
+  </div>
 <div class="row">
 <div class="col s6">
 <a href='<?php echo site_url("site/viewcontactus"); ?>' class='btn btn-secondary waves-effect waves-light red'>Cancel</a>
