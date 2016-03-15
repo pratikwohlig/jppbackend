@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class contactus_model extends CI_Model
 {
-public function create($email,$firstname,$phone,$timestamp,$comment,$lastname)
+public function create($email,$firstname,$phone,$timestamp,$comment,$lastname,$city)
 {
-$data=array("email" => $email,"firstname" => $firstname,"phone" => $phone,"timestamp" => $timestamp,"comment" => $comment,"lastname" => $lastname);
+$data=array("email" => $email,"firstname" => $firstname,"phone" => $phone,"timestamp" => $timestamp,"comment" => $comment,"lastname" => $lastname,"city" => $city);
 $query=$this->db->insert( "jpp_contactus", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,9 +24,9 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_contactus")->row();
 return $query;
 }
-public function edit($id,$email,$firstname,$phone,$timestamp,$comment,$lastname)
+public function edit($id,$email,$firstname,$phone,$timestamp,$comment,$lastname,$city)
 {
-$data=array("email" => $email,"firstname" => $firstname,"phone" => $phone,"timestamp" => $timestamp,"comment" => $comment,"lastname" => $lastname);
+$data=array("email" => $email,"firstname" => $firstname,"phone" => $phone,"timestamp" => $timestamp,"comment" => $comment,"lastname" => $lastname,"city" => $city);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_contactus", $data );
 return 1;

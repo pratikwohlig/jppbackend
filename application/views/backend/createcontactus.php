@@ -27,6 +27,12 @@
 <input type="text" id="Phone" name="phone" value='<?php echo set_value('phone');?>'>
 </div>
 </div>
+<div class="row">
+<div class="input-field col s6">
+<label for="city">city</label>
+<input type="text" id="city" name="city" value='<?php echo set_value('city');?>'>
+</div>
+</div>
 <div class="row" style="display:none;">
 <div class="input-field col s12">
 <textarea name="comment" class="materialize-textarea" length="400"><?php echo set_value( 'comment');?></textarea>

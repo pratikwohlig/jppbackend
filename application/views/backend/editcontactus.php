@@ -32,6 +32,12 @@
 </div>
 <div class="row">
 <div class="input-field col s6">
+<label for="city">city</label>
+<input type="text" id="city" name="city" value='<?php echo set_value('city',$before->city);?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
 <label for="Timestamp">Timestamp</label>
 <input type="text" id="Timestamp" name="timestamp" value='<?php echo set_value('timestamp',$before->timestamp);?>'>
 </div>

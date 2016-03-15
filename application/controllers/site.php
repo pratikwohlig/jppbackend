@@ -3384,7 +3384,8 @@ $firstname=$this->input->get_post("firstname");
 $phone=$this->input->get_post("phone");
 $comment=$this->input->get_post("comment");
 $lastname=$this->input->get_post("lastname");
-if($this->contactus_model->create($email,$firstname,$phone,$timestamp,$comment,$lastname)==0)
+$city=$this->input->get_post("city");
+if($this->contactus_model->create($email,$firstname,$phone,$timestamp,$comment,$lastname,$city)==0)
 $data["alerterror"]="New contactus could not be created.";
 else
 $data["alertsuccess"]="contactus created Successfully.";
@@ -3428,7 +3429,8 @@ $phone=$this->input->get_post("phone");
 $timestamp=$this->input->get_post("timestamp");
 $comment=$this->input->get_post("comment");
 $lastname=$this->input->get_post("lastname");
-if($this->contactus_model->edit($id,$email,$firstname,$phone,$timestamp,$comment,$lastname)==0)
+$city=$this->input->get_post("city");
+if($this->contactus_model->edit($id,$email,$firstname,$phone,$timestamp,$comment,$lastname,$city)==0)
 $data["alerterror"]="New contactus could not be Updated.";
 else
 $data["alertsuccess"]="contactus Updated Successfully.";
