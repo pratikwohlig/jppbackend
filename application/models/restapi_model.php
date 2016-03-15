@@ -141,9 +141,9 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
         }
         return $query;
     }
-    function contactus($firstname,$lastname,$email,$phone)
+    function contactus($firstname,$lastname,$email,$phone,$city,$favouriteplayer)
     {
-    	$query=$this->db->query("INSERT INTO `jpp_contactus`(`firstname`, `lastname`, `email`,`phone`) VALUE('$firstname','$lastname','$email','$phone')");
+    	$query=$this->db->query("INSERT INTO `jpp_contactus`(`firstname`, `lastname`, `email`,`phone`,`city`,`comment`) VALUE('$firstname','$lastname','$email','$phone','$city','$favouriteplayer')");
             $user=$this->db->insert_id();
     if($query){
         $object = new stdClass();

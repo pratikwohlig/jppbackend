@@ -881,7 +881,9 @@ public function getsinglevideogallery()
         $lastname=$data['lastname'];
         $email=$data['email'];
         $phone=$data['mobile'];
-        $data["message"] = $this->restapi_model->contactus($firstname, $lastname, $email, $phone);
+        $city=$data['city'];
+        $favouriteplayer=$data['favouriteplayer'];
+        $data["message"] = $this->restapi_model->contactus($firstname, $lastname, $email, $phone,$city,$favouriteplayer);
         $this->load->view("json", $data);
     }
      public function test()
