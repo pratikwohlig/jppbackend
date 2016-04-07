@@ -909,6 +909,7 @@ $data["hour"]=$this->schedule_model->gethourdropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
 }
@@ -930,6 +931,7 @@ $data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["page"]="createschedule";
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
@@ -949,7 +951,8 @@ $startdate=$this->input->get_post("startdate");
     $hour=$this->input->get_post("hour");
     $minute=$this->input->get_post("minute");
     $matchtime=$this->input->get_post("matchtime");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime)==0)
+    $season=$this->input->get_post("season");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -966,6 +969,7 @@ $data["page2"]="block/scheduleblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["hour"]=$this->schedule_model->gethourdropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
@@ -996,6 +1000,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["hour"]=$this->schedule_model->gethourdropdown();
+    $data["season"]=$this->schedule_model->getseasondropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["page"]="editschedule";
 $data["ishome"]=$this->fixture_model->getdropdown();
@@ -1022,7 +1027,8 @@ $score2=$this->input->get_post("score2");
        $hour=$this->input->get_post("hour");
     $minute=$this->input->get_post("minute");
     $matchtime=$this->input->get_post("matchtime");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime)==0)
+    $season=$this->input->get_post("season");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";

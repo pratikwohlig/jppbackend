@@ -3,12 +3,12 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class schedule_model extends CI_Model
 {
-public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime)
+public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)
 {
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
         $startdate = $startdate->format('Y-m-d');
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime);
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season);
 $query=$this->db->insert( "jpp_schedule", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -27,12 +27,12 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_schedule")->row();
 return $query;
 }
-public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime)
+public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)
 {
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
         $startdate = $startdate->format('Y-m-d');
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime);
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_schedule", $data );
 return 1;
@@ -60,6 +60,16 @@ $return[$row->id]=$row->id;
 }
 return $return;
 }
+        public function getseasondropdown()
+    {
+    $return=array(
+    "" => "Select Season",
+    "1" => "Season 3",
+    "2" => "Season 4"
+    );
+            
+    return $return;
+    }
     
     public function gethourdropdown()
 {

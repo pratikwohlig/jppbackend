@@ -3,6 +3,12 @@
         <h4 class="pad-left-15 capitalize">Create schedule</h4>
     </div>
     <form class='col s12' method='post' action='<?php echo site_url("site/createschedulesubmit");?>' enctype='multipart/form-data'>
+         <div class=" row">
+            <div class=" input-field col s6">
+                <?php echo form_dropdown("season",$season,set_value('season'));?>
+                    <label>Season</label>
+            </div>
+        </div>
         <div class=" row">
             <div class=" input-field col s6">
                 <?php echo form_dropdown("stadium",$stadium,set_value('stadium'));?>
