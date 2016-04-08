@@ -55,9 +55,9 @@ $ip = substr($myserver,0,7);
 if($myserver != "localhost"  && $ip != "192.168" )
 {
     $db['default']['hostname'] = 'localhost';
-    $db['default']['username'] = 'wohligco_jpp';
+    $db['default']['username'] = 'jpp_admin';
     $db['default']['password'] = 'chintan123';
-    $db['default']['database'] = 'wohligco_jpp';
+    $db['default']['database'] = 'jpp_admin';
     $db['default']['dbdriver'] = 'mysql';
     $db['default']['dbprefix'] = '';
     $db['default']['pconnect'] = TRUE;
