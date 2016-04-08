@@ -879,6 +879,12 @@ $elements[5]->field="`jpp_schedule`.`timestamp`";
 $elements[5]->sort="1";
 $elements[5]->header="Timestamp";
 $elements[5]->alias="timestamp";
+    
+    $elements[6]=new stdClass();
+$elements[6]->field="`jpp_schedule`.`season`";
+$elements[6]->sort="1";
+$elements[6]->header="Season";
+$elements[6]->alias="season";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
