@@ -864,6 +864,16 @@ public function getsinglevideogallery()
     {
         $data['message'] = $this->restapi_model->getSchedulenew();
         $this->load->view('json', $data);
+    }  
+    public function getScheduleSeason4()
+    {
+        $data['message'] = $this->restapi_model->getScheduleSeason4();
+        $this->load->view('json', $data);
+    }
+    public function getHomeGameSeason4()
+    {
+        $data['message'] = $this->restapi_model->getHomeGameSeason4();
+        $this->load->view('json', $data);
     }
     public function getScheduleAndroid()
     {
