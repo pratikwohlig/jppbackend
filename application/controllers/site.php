@@ -884,7 +884,13 @@ $elements[5]->alias="timestamp";
 $elements[6]->field="`jpp_schedule`.`season`";
 $elements[6]->sort="1";
 $elements[6]->header="Season";
-$elements[6]->alias="season";
+$elements[6]->alias="season"; 
+    
+    $elements[7]=new stdClass();
+$elements[7]->field="`jpp_schedule`.`seasonname`";
+$elements[7]->sort="1";
+$elements[7]->header="Seasonname";
+$elements[7]->alias="seasonname";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1371,6 +1377,18 @@ $elements[3]->field="`jpp_gallery`.`image1`";
 $elements[3]->sort="1";
 $elements[3]->header="Image1";
 $elements[3]->alias="image1";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`jpp_gallery`.`season`";
+$elements[4]->sort="1";
+$elements[4]->header="Season";
+$elements[4]->alias="season";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_gallery`.`seasonname`";
+$elements[5]->sort="1";
+$elements[5]->header="Seasonname";
+$elements[5]->alias="seasonname";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1395,6 +1413,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="creategallery";
 $data['type']=$this->gallery_model->gettypedropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1410,6 +1429,7 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="creategallery";
 $data['type']=$this->gallery_model->gettypedropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1420,6 +1440,7 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 //$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
+$season=$this->input->get_post("season");
   $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
@@ -1454,7 +1475,7 @@ $type=$this->input->get_post("type");
                 }
                 
 			}
-if($this->gallery_model->create($order,$name,$image1,$type)==0)
+if($this->gallery_model->create($order,$name,$image1,$type,$season)==0)
 $data["alerterror"]="New gallery could not be created.";
 else
 $data["alertsuccess"]="gallery created Successfully.";
@@ -1469,6 +1490,7 @@ $this->checkaccess($access);
 $data["page"]="editgallery";
 $data["page2"]="block/galleryblock";
 $data['type']=$this->gallery_model->gettypedropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit gallery";
@@ -1487,6 +1509,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data['type']=$this->gallery_model->gettypedropdown();
+$data["season"]=$this->schedule_model->getseasondropdown();
 $data["page"]="editgallery";
 $data["title"]="Edit gallery";
 $data["before"]=$this->gallery_model->beforeedit($this->input->get("id"));
@@ -1499,6 +1522,7 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 //$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
+$season=$this->input->get_post("season");
   $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
@@ -1540,7 +1564,7 @@ $type=$this->input->get_post("type");
                // print_r($image);
                 $image1=$image1->image1;
             }
-if($this->gallery_model->edit($id,$order,$name,$image1,$type)==0)
+if($this->gallery_model->edit($id,$order,$name,$image1,$type,$season)==0)
 $data["alerterror"]="New gallery could not be Updated.";
 else
 $data["alertsuccess"]="gallery Updated Successfully.";
