@@ -20,7 +20,11 @@
 </div>
 </div>
 <?php $this->chintantable->createpagination();?>
-
+<div class="row">
+<div class="col s12">
+     <a class="waves-effect waves-light btn blue darken-4 margall" href="<?php echo site_url('site/exportcontactcsv'); ?>"><i class="icon-trash"></i>Export CSV</a> &nbsp;
+    </div>
+</div>
 </div>
 </div>
 <script>

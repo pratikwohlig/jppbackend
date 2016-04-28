@@ -41,9 +41,31 @@ public function getimagebyid($id)
 $query=$this->db->query("SELECT `image` FROM `jpp_contactus` WHERE `id`='$id'")->row();
 return $query;
 }
+
+public function exportcontactcsv()
+{
+  $this->load->dbutil();
+  $query=$this->db->query("SELECT * FROM `jpp_contactus` WHERE 1");
+
+     $content= $this->dbutil->csv_from_result($query);
+      //$data = 'Some file data';
+$timestamp=new DateTime();
+      $timestamp=$timestamp->format('Y-m-d_H.i.s');
+//        file_put_contents("gs://magicmirroruploads/products_$timestamp.csv", $content);
+//		redirect("http://magicmirror.in/servepublic?name=products_$timestamp.csv", 'refresh');
+      if ( ! write_file("./uploads/suggestion_$companyname.csv", $content))
+      {
+           echo 'Unable to write the file';
+      }
+      else
+      {
+          redirect(base_url("uploads/fancorner_$timestamp.csv"), 'refresh');
+           echo 'File written!';
+      }
+}
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_contactus` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `jpp_contactus` ORDER BY `id`
                     ASC")->row();
 $return=array(
 "" => "Select Option"
