@@ -40,6 +40,12 @@
 					<label>Status</label>
 			</div>
 		</div>
+		<div class="row">
+			<div class="input-field col m6 s12">
+				<?php echo form_dropdown( 'type',$type,set_value( 'type')); ?>
+					<label>Type</label>
+			</div>
+		</div>
 <div class="row">
 <div class="col s12 m6">
 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>

@@ -3664,6 +3664,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createslider";
 $data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data[ 'type' ] =$this->slider_model->gettypedropdown();
 $data["title"]="Create slider";
 $this->load->view("template",$data);
 }
@@ -3678,6 +3679,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data[ 'type' ] =$this->slider_model->gettypedropdown();
 $data["page"]="createslider";
 $data["title"]="Create slider";
 $this->load->view("template",$data);
@@ -3690,8 +3692,9 @@ $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $status=$this->input->get_post("status");
 $link=$this->input->get_post("link");
+$type=$this->input->get_post("type");
 $image=$this->menu_model->createImage();
-if($this->slider_model->create($order,$name,$image,$status,$link)==0)
+if($this->slider_model->create($order,$name,$image,$status,$link,$type)==0)
 $data["alerterror"]="New slider could not be created.";
 else
 $data["alertsuccess"]="slider created Successfully.";
@@ -3706,6 +3709,7 @@ $this->checkaccess($access);
 $data["page"]="editslider";
 $data["before1"]=$this->input->get('id');
 $data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data[ 'type' ] =$this->slider_model->gettypedropdown();
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit slider";
 $data["before"]=$this->slider_model->beforeedit($this->input->get("id"));
@@ -3724,6 +3728,7 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="editslider";
 $data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data[ 'type' ] =$this->slider_model->gettypedropdown();
 $data["title"]="Edit slider";
 $data["before"]=$this->slider_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -3737,7 +3742,8 @@ $image=$this->input->get_post("image");
 $status=$this->input->get_post("status");
 $link=$this->input->get_post("link");
 $image=$this->menu_model->createImage();
-if($this->slider_model->edit($id,$order,$name,$image,$status,$link)==0)
+$type=$this->input->get_post("type");
+if($this->slider_model->edit($id,$order,$name,$image,$status,$link,$type)==0)
 $data["alerterror"]="New slider could not be Updated.";
 else
 $data["alertsuccess"]="slider Updated Successfully.";

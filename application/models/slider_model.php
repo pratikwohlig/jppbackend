@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class slider_model extends CI_Model
 {
-public function create($order,$name,$image,$status,$link)
+public function create($order,$name,$image,$status,$link,$type)
 {
-$data=array("order" => $order,"name" => $name,"image" => $image,"status" => $status,"link" => $link);
+$data=array("order" => $order,"name" => $name,"image" => $image,"status" => $status,"link" => $link,"type" => $type);
 $query=$this->db->insert( "jpp_slider", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_slider")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image,$status,$link)
+public function edit($id,$order,$name,$image,$status,$link,$type)
 {
 if($image=="")
 {
 $image=$this->slider_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("order" => $order,"name" => $name,"image" => $image,"status" => $status,"link" => $link);
+$data=array("order" => $order,"name" => $name,"image" => $image,"status" => $status,"link" => $link,"type" => $type);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_slider", $data );
 return 1;
@@ -56,6 +56,16 @@ public function getdropdown()
     {
     $return[$row->id]=$row->name;
     }
+    return $return;
+}
+public function gettypedropdown()
+{
+    $return=array(
+    "" => "Select Option",
+    "1"=>"English",
+    "2"=>"Hindi"
+    );
+
     return $return;
 }
 }
