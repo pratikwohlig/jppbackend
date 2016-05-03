@@ -53,7 +53,7 @@ $timestamp=new DateTime();
       $timestamp=$timestamp->format('Y-m-d_H.i.s');
 //        file_put_contents("gs://magicmirroruploads/products_$timestamp.csv", $content);
 //		redirect("http://magicmirror.in/servepublic?name=products_$timestamp.csv", 'refresh');
-      if ( ! write_file("./uploads/suggestion_$companyname.csv", $content))
+      if ( ! write_file("./uploads/fancorner_$timestamp.csv", $content))
       {
            echo 'Unable to write the file';
       }
@@ -65,8 +65,7 @@ $timestamp=new DateTime();
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_contactus` ORDER BY `id`
-                    ASC")->row();
+$query=$this->db->query("SELECT * FROM `jpp_contactus` ORDER BY `id` ASC")->row();
 $return=array(
 "" => "Select Option"
 );
