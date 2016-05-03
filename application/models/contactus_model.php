@@ -45,7 +45,7 @@ return $query;
 public function exportcontactcsv()
 {
   $this->load->dbutil();
-  $query=$this->db->query("SELECT * FROM `jpp_contactus` WHERE 1");
+  $query=$this->db->query("SELECT * FROM `jpp_contactus` ORDER BY `id` DESC");
 
      $content= $this->dbutil->csv_from_result($query);
       //$data = 'Some file data';
