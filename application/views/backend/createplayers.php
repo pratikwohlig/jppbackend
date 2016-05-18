@@ -23,8 +23,20 @@
 </div>
 <div class="row">
 <div class="input-field col s6">
+<label for="Name">Name in Hindi</label>
+<input type="text" id="Name" name="hname" value='<?php echo set_value('hname');?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
 <label for="Nationality">Nationality</label>
 <input type="text" id="Nationality" name="nationality" value='<?php echo set_value('nationality');?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
+<label for="Nationality">Nationality in Hindi</label>
+<input type="text" id="Nationality" name="hnationality" value='<?php echo set_value('hnationality');?>'>
 </div>
 </div>
 <div class="row">
@@ -37,6 +49,12 @@
 <div class="input-field col s12">
 <textarea name="about" class="materialize-textarea" length="400"><?php echo set_value( 'about');?></textarea>
 <label>About</label>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s12">
+<textarea name="habout" class="materialize-textarea" length="400"><?php echo set_value( 'habout');?></textarea>
+<label>About in Hindi</label>
 </div>
 </div>
 <div class="row">

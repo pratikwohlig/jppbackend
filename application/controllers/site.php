@@ -1832,6 +1832,8 @@ $image=$this->input->get_post("image");
 $logo=$this->input->get_post("logo");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
+$hname=$this->input->get_post("hname");
+$hcontent=$this->input->get_post("hcontent");
     $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
@@ -1904,7 +1906,7 @@ $link=$this->input->get_post("link");
 			}
 //$image=$this->menu_model->createImage();
 //$logo=$this->menu_model->createImage();
-if($this->news_model->create($type,$name,$image,$timestamp,$content,$link,$logo)==0)
+if($this->news_model->create($type,$name,$image,$timestamp,$content,$link,$logo,$hname,$hcontent)==0)
 $data["alerterror"]="New news could not be created.";
 else
 $data["alertsuccess"]="news created Successfully.";
@@ -1949,6 +1951,8 @@ $logo=$this->input->get_post("logo");
 $timestamp=$this->input->get_post("timestamp");
 $content=$this->input->get_post("content");
 $link=$this->input->get_post("link");
+$hname=$this->input->get_post("hname");
+$hcontent=$this->input->get_post("hcontent");
      $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
@@ -2033,7 +2037,7 @@ $link=$this->input->get_post("link");
                // print_r($logo);
                 $logo=$logo->logo;
             }
-if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link,$logo)==0)
+if($this->news_model->edit($id,$type,$name,$image,$timestamp,$content,$link,$logo,$hname,$hcontent)==0)
 $data["alerterror"]="New news could not be Updated.";
 else
 $data["alertsuccess"]="news Updated Successfully.";
@@ -2155,7 +2159,10 @@ $nationality=$this->input->get_post("nationality");
 $jerseyno=$this->input->get_post("jerseyno");
 $about=$this->input->get_post("about");
 $dob=$this->input->get_post("dob");
-if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob)==0)
+$hname=$this->input->get_post("hname");
+$hdob=$this->input->get_post("hdob");
+$hnationality=$this->input->get_post("hnationality");
+if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$hdob,$hnationality)==0)
 $data["alerterror"]="New players could not be created.";
 else
 $data["alertsuccess"]="players created Successfully.";
@@ -2202,7 +2209,10 @@ $nationality=$this->input->get_post("nationality");
 $jerseyno=$this->input->get_post("jerseyno");
 $about=$this->input->get_post("about");
 $dob=$this->input->get_post("dob");
-if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob)==0)
+$hname=$this->input->get_post("hname");
+$hdob=$this->input->get_post("hdob");
+$hnationality=$this->input->get_post("hnationality");
+if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$hdob,$hnationality)==0)
 $data["alerterror"]="New players could not be Updated.";
 else
 $data["alertsuccess"]="players Updated Successfully.";
@@ -2810,6 +2820,8 @@ public function createteam()
 {
 $access=array("1");
 $this->checkaccess($access);
+// $data['language']=$this->user_model->getlanguagedropdown();
+// print_r($data['language']);
 $data["page"]="createteam";
 $data["title"]="Create team";
 $this->load->view("template",$data);
@@ -2832,12 +2844,15 @@ $this->load->view("template",$data);
 else
 {
 $id=$this->input->get_post("id");
+$language=$this->input->get_post("language");
 $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $content=$this->input->get_post("content");
+$hname=$this->input->get_post("hname");
+$hcontent=$this->input->get_post("hcontent");
 $image=$this->menu_model->createImage();
-if($this->team_model->create($type,$name,$image,$content)==0)
+if($this->team_model->create($type,$name,$image,$content,$hname,$hcontent)==0)
 $data["alerterror"]="New team could not be created.";
 else
 $data["alertsuccess"]="team created Successfully.";
@@ -2878,8 +2893,10 @@ $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $content=$this->input->get_post("content");
+$hname=$this->input->get_post("hname");
+$hcontent=$this->input->get_post("hcontent");
 $image=$this->menu_model->createImage();
-if($this->team_model->edit($id,$type,$name,$image,$content)==0)
+if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent)==0)
 $data["alerterror"]="New team could not be Updated.";
 else
 $data["alertsuccess"]="team Updated Successfully.";

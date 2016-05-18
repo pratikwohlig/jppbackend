@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class news_model extends CI_Model
 {
-public function create($type,$name,$image,$timestamp,$content,$link,$logo)
+public function create($type,$name,$image,$timestamp,$content,$link,$logo,$hname,$hcontent)
 {
-$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link,"logo" => $logo);
+$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link,"logo" => $logo,"hname" => $hname,"hcontent" => $hcontent);
 $query=$this->db->insert( "jpp_news", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,7 +24,7 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_news")->row();
 return $query;
 }
-public function edit($id,$type,$name,$image,$timestamp,$content,$link,$logo)
+public function edit($id,$type,$name,$image,$timestamp,$content,$link,$logo,$hname,$hcontent)
 {
 if($image=="")
 {
@@ -36,7 +36,7 @@ $image=$image->image;
 $logo=$this->news_model->getlogobyid($id);
 $logo=$logo->logo;
 }
-$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link,"logo" => $logo);
+$data=array("type" => $type,"name" => $name,"image" => $image,"timestamp" => $timestamp,"content" => $content,"link" => $link,"logo" => $logo,"hname" => $hname,"hcontent" => $hcontent);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_news", $data );
 return 1;
@@ -58,7 +58,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `jpp_news` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `jpp_news` ORDER BY `id`
                     ASC")->row();
 $return=array(
 "" => "Select Option"

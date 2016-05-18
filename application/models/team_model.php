@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class team_model extends CI_Model
 {
-public function create($type,$name,$image,$content)
+public function create($type,$name,$image,$content,$hname,$hcontent)
 {
-$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content);
+$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent);
 $query=$this->db->insert( "jpp_team", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_team")->row();
 return $query;
 }
-public function edit($id,$type,$name,$image,$content)
+public function edit($id,$type,$name,$image,$content,$hname,$hcontent)
 {
 if($image=="")
 {
 $image=$this->team_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content);
+$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_team", $data );
 return 1;

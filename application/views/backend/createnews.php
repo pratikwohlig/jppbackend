@@ -16,6 +16,12 @@
 </div>
 </div>
 <div class="row">
+<div class="input-field col s6">
+<label for="Name">Name in Hindi</label>
+<input type="text" id="Name" name="hname" value='<?php echo set_value('hname');?>'>
+</div>
+</div>
+<div class="row">
 			<div class="file-field input-field col m6 s12">
 				<div class="btn blue darken-4">
 					<span>Image</span>
@@ -51,6 +57,12 @@
 <div class="input-field col s12">
 <textarea name="content" class="materialize-textarea" length="400"><?php echo set_value( 'content');?></textarea>
 <label>Content</label>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s12">
+<textarea name="hcontent" class="materialize-textarea" length="400"><?php echo set_value( 'hcontent');?></textarea>
+<label>Content in Hindi</label>
 </div>
 </div>
 <div class="row">
