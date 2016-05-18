@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class fixture_model extends CI_Model
 {
-public function create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link)
+public function create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link,$team1player1nameh,$team1player2nameh,$team2player1nameh,$team2player2nameh)
 {
-$data=array("schedule" => $schedule,"team1player1name" => $team1player1name,"team1player2name" => $team1player2name,"team1player1score" => $team1player1score,"team1player2score" => $team1player2score,"team2player1name" => $team2player1name,"team2player2name" => $team2player2name,"team2player1score" => $team2player1score,"team2player2score" => $team2player2score,"raidpointsteam1" => $raidpointsteam1,"raidpointsteam2" => $raidpointsteam2,"tacklepointsteam1" => $tacklepointsteam1,"tacklepointsteam2" => $tacklepointsteam2,"alloutpointteam1" => $alloutpointteam1,"alloutpointteam2" => $alloutpointteam2,"extrapointsteam1" => $extrapointsteam1,"extrapointsteam2" => $extrapointsteam2,"ishome" => $ishome,"link" => $link);
+$data=array("schedule" => $schedule,"team1player1name" => $team1player1name,"team1player2name" => $team1player2name,"team1player1score" => $team1player1score,"team1player2score" => $team1player2score,"team2player1name" => $team2player1name,"team2player2name" => $team2player2name,"team2player1score" => $team2player1score,"team2player2score" => $team2player2score,"raidpointsteam1" => $raidpointsteam1,"raidpointsteam2" => $raidpointsteam2,"tacklepointsteam1" => $tacklepointsteam1,"tacklepointsteam2" => $tacklepointsteam2,"alloutpointteam1" => $alloutpointteam1,"alloutpointteam2" => $alloutpointteam2,"extrapointsteam1" => $extrapointsteam1,"extrapointsteam2" => $extrapointsteam2,"ishome" => $ishome,"link" => $link,"team1player1nameh" => $team1player1nameh,"team1player2nameh" => $team1player2nameh,"team2player1nameh" => $team2player1nameh,"team2player2nameh" => $team2player2nameh);
 $query=$this->db->insert( "jpp_fixture", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -39,9 +39,9 @@ else
 }
 
 }
-public function edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome)
+public function edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link,$team1player1nameh,$team1player2nameh,$team2player1nameh,$team2player2nameh)
 {
-$data=array("schedule" => $schedule,"team1player1name" => $team1player1name,"team1player2name" => $team1player2name,"team1player1score" => $team1player1score,"team1player2score" => $team1player2score,"team2player1name" => $team2player1name,"team2player2name" => $team2player2name,"team2player1score" => $team2player1score,"team2player2score" => $team2player2score,"raidpointsteam1" => $raidpointsteam1,"raidpointsteam2" => $raidpointsteam2,"tacklepointsteam1" => $tacklepointsteam1,"tacklepointsteam2" => $tacklepointsteam2,"alloutpointteam1" => $alloutpointteam1,"alloutpointteam2" => $alloutpointteam2,"extrapointsteam1" => $extrapointsteam1,"extrapointsteam2" => $extrapointsteam2,"ishome" => $ishome,"link" => $link);
+$data=array("schedule" => $schedule,"team1player1name" => $team1player1name,"team1player2name" => $team1player2name,"team1player1score" => $team1player1score,"team1player2score" => $team1player2score,"team2player1name" => $team2player1name,"team2player2name" => $team2player2name,"team2player1score" => $team2player1score,"team2player2score" => $team2player2score,"raidpointsteam1" => $raidpointsteam1,"raidpointsteam2" => $raidpointsteam2,"tacklepointsteam1" => $tacklepointsteam1,"tacklepointsteam2" => $tacklepointsteam2,"alloutpointteam1" => $alloutpointteam1,"alloutpointteam2" => $alloutpointteam2,"extrapointsteam1" => $extrapointsteam1,"extrapointsteam2" => $extrapointsteam2,"ishome" => $ishome,"link" => $link,"team1player1nameh" => $team1player1nameh,"team1player2nameh" => $team1player2nameh,"team2player1nameh" => $team2player1nameh,"team2player2nameh" => $team2player2nameh);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_fixture", $data );
 return 1;
@@ -70,11 +70,11 @@ return $query;
 		$gender=array(
 			""=>"Please Select",
 			"1"=>"Yes",
-			"2"=>"No" 
+			"2"=>"No"
 		);
 
-		
+
 		return $gender;
-	} 
+	}
 }
 ?>

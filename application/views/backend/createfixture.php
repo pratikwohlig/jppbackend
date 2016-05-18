@@ -28,8 +28,20 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <label for="Team1 Player1 Name">Team1 Player1 Name in Hindi</label>
+                <input type="text" id="Team1 Player1 Name" name="team1player1nameh" value='<?php echo set_value(' team1player1nameh ');?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label for="Team1 Player2 Name">Team1 Player2 Name</label>
                 <input type="text" id="Team1 Player2 Name" name="team1player2name" value='<?php echo set_value(' team1player2name ');?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Team1 Player2 Name">Team1 Player2 Name in Hindi</label>
+                <input type="text" id="Team1 Player2 Name" name="team1player2nameh" value='<?php echo set_value(' team1player2nameh ');?>'>
             </div>
         </div>
         <div class="row">
@@ -52,8 +64,20 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <label for="Team2 Player1 Name">Team2 Player1 Name in Hindi</label>
+                <input type="text" id="Team2 Player1 Name" name="team2player1nameh" value='<?php echo set_value(' team2player1nameh ');?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label for="Team2 Player2 Name">Team2 Player2 Name</label>
                 <input type="text" id="Team2 Player2 Name" name="team2player2name" value='<?php echo set_value(' team2player2name ');?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Team2 Player2 Name">Team2 Player2 Name in Hindi</label>
+                <input type="text" id="Team2 Player2 Name" name="team2player2nameh" value='<?php echo set_value(' team2player2nameh ');?>'>
             </div>
         </div>
         <div class="row">

@@ -3953,11 +3953,15 @@ else
 $id=$this->input->get_post("id");
 $schedule=$this->input->get_post("schedule");
 $team1player1name=$this->input->get_post("team1player1name");
+$team1player1nameh=$this->input->get_post("team1player1nameh");
 $team1player2name=$this->input->get_post("team1player2name");
+$team1player2nameh=$this->input->get_post("team1player2nameh");
 $team1player1score=$this->input->get_post("team1player1score");
 $team1player2score=$this->input->get_post("team1player2score");
 $team2player1name=$this->input->get_post("team2player1name");
+$team2player1nameh=$this->input->get_post("team2player1nameh");
 $team2player2name=$this->input->get_post("team2player2name");
+$team2player2nameh=$this->input->get_post("team2player2nameh");
 $team2player1score=$this->input->get_post("team2player1score");
 $team2player2score=$this->input->get_post("team2player2score");
 $raidpointsteam1=$this->input->get_post("raidpointsteam1");
@@ -3970,7 +3974,7 @@ $extrapointsteam1=$this->input->get_post("extrapointsteam1");
 $extrapointsteam2=$this->input->get_post("extrapointsteam2");
 $ishome=$this->input->get_post("ishome");
 $link=$this->input->get_post("link");
-if($this->fixture_model->create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link)==0)
+if($this->fixture_model->create($schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link,$team1player1nameh,$team1player2nameh,$team2player1nameh,$team2player2nameh)==0)
 $data["alerterror"]="New fixture could not be created.";
 else
 $data["alertsuccess"]="fixture created Successfully.";
@@ -4031,11 +4035,15 @@ else
 $id=$this->input->get_post("id");
 $schedule=$this->input->get_post("schedule");
 $team1player1name=$this->input->get_post("team1player1name");
+$team1player1nameh=$this->input->get_post("team1player1nameh");
 $team1player2name=$this->input->get_post("team1player2name");
+$team1player2nameh=$this->input->get_post("team1player2nameh");
 $team1player1score=$this->input->get_post("team1player1score");
 $team1player2score=$this->input->get_post("team1player2score");
 $team2player1name=$this->input->get_post("team2player1name");
+$team2player1nameh=$this->input->get_post("team2player1nameh");
 $team2player2name=$this->input->get_post("team2player2name");
+$team2player2nameh=$this->input->get_post("team2player2nameh");
 $team2player1score=$this->input->get_post("team2player1score");
 $team2player2score=$this->input->get_post("team2player2score");
 $raidpointsteam1=$this->input->get_post("raidpointsteam1");
@@ -4048,7 +4056,7 @@ $extrapointsteam1=$this->input->get_post("extrapointsteam1");
 $extrapointsteam2=$this->input->get_post("extrapointsteam2");
 $ishome=$this->input->get_post("ishome");
 $link=$this->input->get_post("link");
-if($this->fixture_model->edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link)==0)
+if($this->fixture_model->edit($id,$schedule,$team1player1name,$team1player2name,$team1player1score,$team1player2score,$team2player1name,$team2player2name,$team2player1score,$team2player2score,$raidpointsteam1,$raidpointsteam2,$tacklepointsteam1,$tacklepointsteam2,$alloutpointteam1,$alloutpointteam2,$extrapointsteam1,$extrapointsteam2,$ishome,$link,$team1player1nameh,$team1player2nameh,$team2player1nameh,$team2player2nameh)==0)
 $data["alerterror"]="New fixture could not be Updated.";
 else
 $data["alertsuccess"]="fixture Updated Successfully.";
