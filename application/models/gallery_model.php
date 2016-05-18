@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class gallery_model extends CI_Model
 {
-public function create($order,$name,$image1,$type,$season)
+public function create($order,$name,$image1,$type,$season,$hname)
 {
       if($season==1){
         $seasonname="Season 3";
@@ -11,7 +11,7 @@ public function create($order,$name,$image1,$type,$season)
     else if($season==2){
         $seasonname="Season 4";
     }
-$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type,"season" => $season,"seasonname" => $seasonname);
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type,"season" => $season,"seasonname" => $seasonname,"hname" => $hname);
 $query=$this->db->insert( "jpp_gallery", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -30,7 +30,7 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_gallery")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image1,$type,$season)
+public function edit($id,$order,$name,$image1,$type,$season,$hname)
 {
       if($season==1){
         $seasonname="Season 3";
@@ -48,7 +48,7 @@ public function edit($id,$order,$name,$image1,$type,$season)
 //$image2=$this->gallery_model->getimage2byid($id);
 //$image2=$image2->image2;
 //}
-$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type,"season" => $season,"seasonname" => $seasonname);
+$data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type,"season" => $season,"seasonname" => $seasonname,"hname" => $hname);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_gallery", $data );
 return 1;

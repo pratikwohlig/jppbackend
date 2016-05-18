@@ -624,7 +624,8 @@ else
 {
 $id=$this->input->get_post("id");
 $name=$this->input->get_post("name");
-if($this->stadium_model->create($name)==0)
+$hname=$this->input->get_post("hname");
+if($this->stadium_model->create($name,$hname)==0)
 $data["alerterror"]="New stadium could not be created.";
 else
 $data["alertsuccess"]="stadium created Successfully.";
@@ -659,7 +660,8 @@ else
 {
 $id=$this->input->get_post("id");
 $name=$this->input->get_post("name");
-if($this->stadium_model->edit($id,$name)==0)
+$hname=$this->input->get_post("hname");
+if($this->stadium_model->edit($id,$name,$hname)==0)
 $data["alerterror"]="New stadium could not be Updated.";
 else
 $data["alertsuccess"]="stadium Updated Successfully.";
@@ -1438,6 +1440,7 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
+$hname=$this->input->get_post("hname");
 //$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
 $season=$this->input->get_post("season");
@@ -1475,7 +1478,7 @@ $season=$this->input->get_post("season");
                 }
 
 			}
-if($this->gallery_model->create($order,$name,$image1,$type,$season)==0)
+if($this->gallery_model->create($order,$name,$image1,$type,$season,$hname)==0)
 $data["alerterror"]="New gallery could not be created.";
 else
 $data["alertsuccess"]="gallery created Successfully.";
@@ -1520,6 +1523,7 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
+$hname=$this->input->get_post("hname");
 //$image=$this->input->get_post("image");
 $type=$this->input->get_post("type");
 $season=$this->input->get_post("season");
@@ -1564,7 +1568,7 @@ $season=$this->input->get_post("season");
                // print_r($image);
                 $image1=$image1->image1;
             }
-if($this->gallery_model->edit($id,$order,$name,$image1,$type,$season)==0)
+if($this->gallery_model->edit($id,$order,$name,$image1,$type,$season,$hname)==0)
 $data["alerterror"]="New gallery could not be Updated.";
 else
 $data["alertsuccess"]="gallery Updated Successfully.";
@@ -2160,9 +2164,9 @@ $jerseyno=$this->input->get_post("jerseyno");
 $about=$this->input->get_post("about");
 $dob=$this->input->get_post("dob");
 $hname=$this->input->get_post("hname");
-$hdob=$this->input->get_post("hdob");
+$habout=$this->input->get_post("habout");
 $hnationality=$this->input->get_post("hnationality");
-if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$hdob,$hnationality)==0)
+if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality)==0)
 $data["alerterror"]="New players could not be created.";
 else
 $data["alertsuccess"]="players created Successfully.";
@@ -2210,9 +2214,9 @@ $jerseyno=$this->input->get_post("jerseyno");
 $about=$this->input->get_post("about");
 $dob=$this->input->get_post("dob");
 $hname=$this->input->get_post("hname");
-$hdob=$this->input->get_post("hdob");
+$habout=$this->input->get_post("habout");
 $hnationality=$this->input->get_post("hnationality");
-if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$hdob,$hnationality)==0)
+if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality)==0)
 $data["alerterror"]="New players could not be Updated.";
 else
 $data["alertsuccess"]="players Updated Successfully.";
@@ -2305,9 +2309,10 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
+$hname=$this->input->get_post("hname");
 $image=$this->input->get_post("image");
 $image=$this->menu_model->createImage();
-if($this->wallpapercategory_model->create($order,$name,$image)==0)
+if($this->wallpapercategory_model->create($order,$name,$image,$hname)==0)
 $data["alerterror"]="New wallpapercategory could not be created.";
 else
 $data["alertsuccess"]="wallpapercategory created Successfully.";
@@ -2348,9 +2353,10 @@ else
 $id=$this->input->get_post("id");
 $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
+$hname=$this->input->get_post("hname");
 $image=$this->input->get_post("image");
 $image=$this->menu_model->createImage();
-if($this->wallpapercategory_model->edit($id,$order,$name,$image)==0)
+if($this->wallpapercategory_model->edit($id,$order,$name,$image,$hname)==0)
 $data["alerterror"]="New wallpapercategory could not be Updated.";
 else
 $data["alertsuccess"]="wallpapercategory Updated Successfully.";

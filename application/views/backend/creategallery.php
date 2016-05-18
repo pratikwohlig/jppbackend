@@ -21,13 +21,19 @@
 <input type="text" id="Name" name="name" value='<?php echo set_value('name');?>'>
 </div>
 </div>
+<div class="row">
+<div class="input-field col s6">
+<label for="Name">Name in Hindi</label>
+<input type="text" id="Name" name="hname" value='<?php echo set_value('hname');?>'>
+</div>
+</div>
    <div class="row">
             <div class="input-field col s12 m8">
                 <?php echo form_dropdown('type', $type, set_value('type')," id='typeid'"); ?>
                  <label>Type</label>
             </div>
         </div>
-        
+
 <div class="row big">
 <div class="file-field input-field col s12 m6">
 <div class="btn blue darken-4">
@@ -38,7 +44,7 @@
 <input class="file-path validate" type="text" placeholder="Upload big image" value='<?php echo set_value('image1');?>'>
 </div>
 </div>
- <span style=" display: block;">Big : 1472px X 327px</span> 
+ <span style=" display: block;">Big : 1472px X 327px</span>
     <span style=" display: block;">Small : 736px X 327px</span>
 </div>
 <!--

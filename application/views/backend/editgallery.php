@@ -24,6 +24,12 @@
 <input type="text" id="Name" name="name" value='<?php echo set_value('name',$before->name);?>'>
 </div>
 </div>
+<div class="row">
+<div class="input-field col s6">
+<label for="Name">Name in Hindi</label>
+<input type="text" id="Name" name="hname" value='<?php echo set_value('hname',$before->hname);?>'>
+</div>
+</div>
  <div class="row">
             <div class="input-field col s12 m8">
                 <?php echo form_dropdown('type', $type, set_value('type',$before->type)," id='typeid'"); ?>
@@ -48,7 +54,7 @@
 				</div>
 <!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
 			</div>
-<span style=" display: block;">Big : 1472px X 327px</span> 
+<span style=" display: block;">Big : 1472px X 327px</span>
     <span style=" display: block;">Small : 736px X 327px</span>
 		</div>
 <!--
@@ -82,5 +88,3 @@
 </div>
 </form>
 </div>
-
-

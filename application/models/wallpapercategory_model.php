@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class wallpapercategory_model extends CI_Model
 {
-public function create($order,$name,$image)
+public function create($order,$name,$image,$hname)
 {
-$data=array("order" => $order,"name" => $name,"image" => $image);
+$data=array("order" => $order,"name" => $name,"image" => $image,"hname" => $hname);
 $query=$this->db->insert( "jpp_wallpapercategory", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_wallpapercategory")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image)
+public function edit($id,$order,$name,$image,$hname)
 {
 if($image=="")
 {
 $image=$this->wallpapercategory_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("order" => $order,"name" => $name,"image" => $image);
+$data=array("order" => $order,"name" => $name,"image" => $image,"hname" => $hname);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_wallpapercategory", $data );
 return 1;

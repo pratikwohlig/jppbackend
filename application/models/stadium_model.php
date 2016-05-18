@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class stadium_model extends CI_Model
 {
-public function create($name)
+public function create($name,$hname)
 {
-$data=array("name" => $name);
+$data=array("name" => $name,"hname" => $hname);
 $query=$this->db->insert( "jpp_stadium", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,9 +24,9 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_stadium")->row();
 return $query;
 }
-public function edit($id,$name)
+public function edit($id,$name,$hname)
 {
-$data=array("name" => $name);
+$data=array("name" => $name,"hname" => $hname);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_stadium", $data );
 return 1;

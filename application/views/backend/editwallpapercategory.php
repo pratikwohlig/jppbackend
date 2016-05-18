@@ -19,6 +19,12 @@
 </div>
 </div>
 <div class="row">
+	<div class="input-field col s6">
+	<label for="Name">Name in Hindi</label>
+	<input type="text" id="Name" name="hname" value='<?php echo set_value('hname',$before->hname);?>'>
+	</div>
+</div>
+<div class="row">
 			<div class="file-field input-field col m6 s12">
 				<span class="img-center big">
 								                    	<?php if($before->image == "") { } else {
