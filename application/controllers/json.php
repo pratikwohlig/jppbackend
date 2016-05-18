@@ -50,7 +50,7 @@ class Json extends CI_Controller
     }
     public function getallpoint()
     {
-      
+
 $data['message'] = $this->restapi_model->getAllPoints();
         $this->load->view('json', $data);
     }
@@ -864,7 +864,7 @@ public function getsinglevideogallery()
     {
         $data['message'] = $this->restapi_model->getSchedulenew();
         $this->load->view('json', $data);
-    }  
+    }
     public function getScheduleSeason4()
     {
         $data['message'] = $this->restapi_model->getScheduleSeason4();
@@ -899,8 +899,8 @@ public function getsinglevideogallery()
      public function test()
     {
 //         echo "<font color=\"red\">";
-         
-         
+
+
        for($i=0;$i<=59;$i++){
           echo "\"".$i."\""."=>"."\"".$i."\"".",";
            echo "\n";
