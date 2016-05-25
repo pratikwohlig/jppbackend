@@ -22,6 +22,8 @@
 
 
     <!--Let browser know website is optimized for mobile-->
+		<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 

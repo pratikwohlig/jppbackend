@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class videogallery_model extends CI_Model
 {
-public function create($order,$name,$image,$url)
+public function create($order,$name,$image,$url,$hname)
 {
-$data=array("order" => $order,"name" => $name,"image" => $image,"url" => $url);
+$data=array("order" => $order,"name" => $name,"image" => $image,"url" => $url,"hname" => $hname);
 $query=$this->db->insert( "jpp_videogallery", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_videogallery")->row();
 return $query;
 }
-public function edit($id,$order,$name,$image,$url)
+public function edit($id,$order,$name,$image,$url,$hname)
 {
 if($image=="")
 {
 $image=$this->videogallery_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("order" => $order,"name" => $name,"image" => $image,"url" => $url);
+$data=array("order" => $order,"name" => $name,"image" => $image,"url" => $url,"hname" => $hname);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_videogallery", $data );
 return 1;

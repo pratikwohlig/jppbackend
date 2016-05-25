@@ -20,6 +20,12 @@
 </div>
 <div class="row">
 <div class="input-field col s6">
+<label for="Name">Name in Hindi</label>
+<input type="text" id="Name" name="hname" value='<?php echo set_value('hname',$before->hname);?>'>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
 <label for="url">url</label>
 <input type="text" id="url" name="url" value='<?php echo set_value('url',$before->url);?>'>
 </div>

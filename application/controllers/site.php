@@ -3123,8 +3123,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $url=$this->input->get_post("url");
+$hname=$this->input->get_post("hname");
 $image=$this->menu_model->createImage();
-if($this->videogallery_model->create($order,$name,$image,$url)==0)
+if($this->videogallery_model->create($order,$name,$image,$url,$hname)==0)
 $data["alerterror"]="New videogallery could not be created.";
 else
 $data["alertsuccess"]="videogallery created Successfully.";
@@ -3166,8 +3167,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $url=$this->input->get_post("url");
+$hname=$this->input->get_post("hname");
 $image=$this->menu_model->createImage();
-if($this->videogallery_model->edit($id,$order,$name,$image,$url)==0)
+if($this->videogallery_model->edit($id,$order,$name,$image,$url,$hname)==0)
 $data["alerterror"]="New videogallery could not be Updated.";
 else
 $data["alertsuccess"]="videogallery Updated Successfully.";
