@@ -86,7 +86,7 @@ class restapi_model extends CI_Model
     }
     public function getallnews()
     {
-         $query=$this->db->query("SELECT `jpp_news`.`id` AS `id` , `jpp_news`.`name` AS `name` , `jpp_news`.`image` AS `image` ,`jpp_news`.`logo` AS `logo`, DATE_FORMAT(`jpp_news`.`timestamp`, '%d %b %Y') as `timestamp` , `jpp_news`.`link` AS `content` FROM `jpp_news` ORDER BY `id` DESC")->result();
+         $query=$this->db->query("SELECT `jpp_news`.`id` AS `id` , `jpp_news`.`name` AS `name` , `jpp_news`.`image` AS `image` ,`jpp_news`.`logo` AS `logo`, DATE_FORMAT(`jpp_news`.`timestamp`, '%d %b %Y') as `timestamp` , `jpp_news`.`link` AS `content`, `hname`, `hcontent` FROM `jpp_news` ORDER BY `id` DESC")->result();
         return $query;
     }
     public function getHomeContent()
