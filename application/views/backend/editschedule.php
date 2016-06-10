@@ -76,7 +76,7 @@
                     <label>Home Game</label>
             </div>
         </div>
-        <div class="row chupado">
+        <div class="row">
             <div class="input-field col s6">
                 <label for="Book Ticket">Book Ticket</label>
                 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value(' bookticket ',$before->bookticket);?>'>
@@ -197,7 +197,7 @@
 <label for="score1">Score1</label>
 <input type="text" id="score1" name="score1" value='<?php echo set_value('score1',$before->score1);?>'>
 </div>
-</div> 
+</div>
   <div class="row">
 <div class="input-field col s6">
 <label for="score2">Score2</label>
@@ -239,12 +239,12 @@
         $(".combodate select.hour1").change(changestarttime);
         $(".combodate select.minute1").change(changestarttime);
         changestarttime();
-        
+
            console.log($('select[name="ishome"]').val());
             if($('select[name="ishome"]').val()==1)
     {
         $(".chupado").show();
-        
+
     }else if ($('select[name="ishome"]').val()==2){
        $(".chupado").hide();
     }
@@ -256,11 +256,11 @@
     if($( "#homeval2" ).val()==1)
     {
           $(".chupado").show();
-        
+
     }else{
         $(".chupado").hide();
     }
-    
+
 });
     });
 </script>

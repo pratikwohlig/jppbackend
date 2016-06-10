@@ -74,7 +74,7 @@
                     <label>Home Game</label>
             </div>
         </div>
-        <div class="row chupado">
+        <div class="row">
             <div class="input-field col s6">
                 <label for="Book Ticket">Book Ticket</label>
                 <input type="text" id="Book Ticket" name="bookticket" value='<?php echo set_value(' bookticket ');?>'>
