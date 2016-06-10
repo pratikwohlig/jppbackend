@@ -44,7 +44,8 @@ class restapi_model extends CI_Model
     }
     public function getAllSliders()
     {
-         $query=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status`,`link`,`type` FROM `jpp_slider` WHERE `status`=1 ORDER BY `order` ASC")->result();
+         $query['english']=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status`,`link`,`type` FROM `jpp_slider` WHERE `status`=1 AND `type`=1 ORDER BY `order` ASC")->result();
+          $query['hindi']=$this->db->query("SELECT `id`, `name`, `image`, `order`, `status`,`link`,`type` FROM `jpp_slider` WHERE `status`=1 AND `type`=2 ORDER BY `order` ASC")->result();
         return $query;
     }
     public function getWallpaper($type)
