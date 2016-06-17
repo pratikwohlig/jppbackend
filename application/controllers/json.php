@@ -896,6 +896,15 @@ public function getsinglevideogallery()
         $data["message"] = $this->restapi_model->contactus($firstname, $lastname, $email, $phone,$city,$favouriteplayer);
         $this->load->view("json", $data);
     }
+      public function submitClan() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $name=$data['name'];
+        $email=$data['email'];
+        $json=$data['json'];
+        $json=json_encode($json);
+        $data["message"] = $this->restapi_model->submitClan($name, $email,$json);
+        $this->load->view("json", $data);
+    }
      public function test()
     {
 //         echo "<font color=\"red\">";

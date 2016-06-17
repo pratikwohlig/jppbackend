@@ -4084,5 +4084,152 @@ public function exportcontactcsv(){
 }
 
 
+// clan
+
+
+
+public function viewclan()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewclan";
+$data["base_url"]=site_url("site/viewclanjson");
+$data["title"]="View clan";
+$this->load->view("template",$data);
+}
+function viewclanjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`jpp_clan`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`jpp_clan`.`email`";
+$elements[1]->sort="1";
+$elements[1]->header="Email";
+$elements[1]->alias="email";
+$elements[2]=new stdClass();
+$elements[2]->field="`jpp_clan`.`timestamp`";
+$elements[2]->sort="1";
+$elements[2]->header="Timestamp";
+$elements[2]->alias="timestamp";
+$elements[3]=new stdClass();
+$elements[3]->field="`jpp_clan`.`comment`";
+$elements[3]->sort="1";
+$elements[3]->header="Comment";
+$elements[3]->alias="comment";
+$elements[4]=new stdClass();
+$elements[4]->field="`jpp_clan`.`name`";
+$elements[4]->sort="1";
+$elements[4]->header="Name";
+$elements[4]->alias="name";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="DESC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_clan`");
+$this->load->view("json",$data);
+}
+
+public function createclan()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createclan";
+$data["title"]="Create clan";
+$this->load->view("template",$data);
+}
+public function createclansubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("email","Email","trim");
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("timestamp","Timestamp","trim");
+$this->form_validation->set_rules("comment","Comment","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createclan";
+$data["title"]="Create clan";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$email=$this->input->get_post("email");
+$name=$this->input->get_post("name");
+$comment=$this->input->get_post("comment");
+if($this->clan_model->create($email,$name,$comment)==0)
+$data["alerterror"]="New clan could not be created.";
+else
+$data["alertsuccess"]="clan created Successfully.";
+$data["redirect"]="site/viewclan";
+$this->load->view("redirect",$data);
+}
+}
+public function editclan()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editclan";
+$data["title"]="Edit clan";
+$data["before"]=$this->clan_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editclansubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("email","Email","trim");
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("timestamp","Timestamp","trim");
+$this->form_validation->set_rules("comment","Comment","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editclan";
+$data["title"]="Edit clan";
+$data["before"]=$this->clan_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$email=$this->input->get_post("email");
+$name=$this->input->get_post("name");
+$timestamp=$this->input->get_post("timestamp");
+$comment=$this->input->get_post("comment");
+if($this->clan_model->edit($id,$email,$name,$comment)==0)
+$data["alerterror"]="New clan could not be Updated.";
+else
+$data["alertsuccess"]="clan Updated Successfully.";
+$data["redirect"]="site/viewclan";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteclan()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->clan_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewclan";
+$this->load->view("redirect",$data);
+}
+
+
 }
 ?>

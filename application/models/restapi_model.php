@@ -179,6 +179,51 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                 $user=$this->db->insert_id();
                 if($query)
                 {
+                  $data['name']=$firstname." ".$lastname;
+                  $data['email']=$email;
+                  $htmltext = $this->load->view('emailer/fancorner', $data, true);
+                  $this->menu_model->emailer($htmltext,'Fan Corner',$email,"Sir/Madam");
+                    $object = new stdClass();
+                    $object->value = true;
+                    return $object;
+                }
+                else{
+                 $object = new stdClass();
+                $object->value = false;
+                return $object;
+                }
+
+        }
+        else{
+                $object = new stdClass();
+                $object->value = false;
+                return $object;
+
+        }
+
+
+    }
+    function submitClan($name, $email,$json)
+    {
+        if($email)
+        {
+                  $query=$this->db->query("INSERT INTO `jpp_clan`(`name`, `email`,`comment`) VALUE('$name','$email','$json')");
+                  $clan=$this->db->insert_id();
+                      $data['mainname']=$name;
+                if($query)
+                {
+                    $arr=json_decode($json);
+                    print_r($arr);
+
+                    foreach($arr as $key => $value){
+                        echo $value;
+                        $data['name']=$key;
+                        $data['email']=$value;
+                        $email=$value;
+                        $htmltext = $this->load->view('emailer/pantherclan', $data, true);
+                        $this->menu_model->emailer($htmltext,'Panther Clan',$email,"Sir/Madam");
+                    }
+
                     $object = new stdClass();
                     $object->value = true;
                     return $object;
