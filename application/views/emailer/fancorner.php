@@ -27,7 +27,7 @@
                             <tbody>
                                 <tr>
                                     <td  colspan="2">
-                                        <img src="http://jaipurpinkpanthers.com/emailers/fanc/1.jpg">
+                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/1.jpg">
                                     </td>
                                 </tr>
                                 <tr>
@@ -39,28 +39,28 @@
                                 </tr>
                                 <tr>
                                     <td  colspan="2">
-                                        <img src="http://jaipurpinkpanthers.com/emailers/fanc/2.jpg">
+                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/2.jpg">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td >
-                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042335" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/3.jpg"></a>
+                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042335" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/3.jpg"></a>
                                     </td>
                                     <td >
-                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042336" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/4.jpg"></a>
+                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042336" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/4.jpg"></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td >
-                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042338" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/5.jpg"></a>
+                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042338" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/5.jpg"></a>
                                     </td>
                                     <td >
-                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042337" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/6.jpg"></a>
+                                        <a href="https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/seat-layout/ET00042337" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/6.jpg"></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td  colspan="2">
-                                        <a href="http://jaipurpinkpanthers.com/jpp-tv" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/7.jpg"></a>
+                                        <a href="http://jaipurpinkpanthers.com/jpp-tv" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/7.jpg"></a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,10 +70,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td >
-                                                        <a href="https://play.google.com/store/apps/details?id=com.jaipurpinkpanthers.android" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/8.jpg"></a>
+                                                        <a href="https://play.google.com/store/apps/details?id=com.jaipurpinkpanthers.android" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/8.jpg"></a>
                                                     </td>
                                                     <td >
-                                                        <a href="https://itunes.apple.com/in/app/id1084678272?mt=8" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/9.jpg"></a>
+                                                        <a href="https://itunes.apple.com/in/app/id1084678272?mt=8" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/9.jpg"></a>
                                                     </td>
 
                                                 </tr>
@@ -85,7 +85,7 @@
                                 </tr>
                                 <tr>
                                     <td  colspan="2">
-                                        <a href="http://jaipurpinkpanthers.com/invite-friends" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/10.jpg"></a>
+                                        <a href="http://jaipurpinkpanthers.com/invite-friends" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/10.jpg"></a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,16 +94,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="http://jaipurpinkpanthers.com/emailers/fanc/14.jpg">
+                                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/14.jpg">
                                                     </td>
                                                     <td>
-                                                        <a href="https://www.facebook.com/JaipurPinkPanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/11.jpg"></a>
+                                                        <a href="https://www.facebook.com/JaipurPinkPanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/11.jpg"></a>
                                                     </td>
                                                     <td>
-                                                        <a href="https://twitter.com/JaipurPanthers" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/12.jpg"></a>
+                                                        <a href="https://twitter.com/JaipurPanthers" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/12.jpg"></a>
                                                     </td>
                                                     <td>
-                                                        <a href="https://www.instagram.com/jaipur_pinkpanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fanc/13.jpg"></a>
+                                                        <a href="https://www.instagram.com/jaipur_pinkpanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/13.jpg"></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
