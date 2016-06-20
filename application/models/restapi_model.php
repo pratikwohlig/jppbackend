@@ -205,6 +205,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
     }
     function submitClan($name, $email,$json)
     {
+      $json=json_encode($json);
         if($email)
         {
                   $query=$this->db->query("INSERT INTO `jpp_clan`(`name`, `email`,`comment`) VALUE('$name','$email','$json')");
@@ -213,10 +214,8 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                 if($query)
                 {
                     $arr=json_decode($json);
-                    print_r($arr);
 
                     foreach($arr as $key => $value){
-                        echo $value;
                         $data['name']=$key;
                         $data['email']=$value;
                         $email=$value;

@@ -898,11 +898,16 @@ public function getsinglevideogallery()
     }
       public function submitClan() {
         $data = json_decode(file_get_contents('php://input'), true);
-        $name=$data['name'];
-        $email=$data['email'];
-        $json=$data['json'];
-        $json=json_encode($json);
-        $data["message"] = $this->restapi_model->submitClan($name, $email,$json);
+        if(empty($data)){
+              $data["message"] = 0;
+        }
+        else{
+          $name=$data['name'];
+          $email=$data['email'];
+          $json=$data['json'];
+          $data["message"] = $this->restapi_model->submitClan($name, $email,$json);
+        }
+
         $this->load->view("json", $data);
     }
      public function test()
