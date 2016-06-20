@@ -205,7 +205,6 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
     }
     function submitClan($name, $email,$json)
     {
-      $json=json_encode($json);
         if($email)
         {
                   $query=$this->db->query("INSERT INTO `jpp_clan`(`name`, `email`,`comment`) VALUE('$name','$email','$json')");
@@ -213,15 +212,16 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                       $data['mainname']=$name;
                 if($query)
                 {
-                    $arr=json_decode($json);
-
-                    foreach($arr as $key => $value){
-                        $data['name']=$key;
-                        $data['email']=$value;
-                        $email=$value;
-                        $htmltext = $this->load->view('emailer/pantherclan', $data, true);
-                        $this->menu_model->emailer($htmltext,'Panther Clan',$email,"Sir/Madam");
+                    for($i=0;$i<sizeof($json);$i++)
+                    {
+                    $data['name']=$json[$i]["name"];
+                    $name=$json[$i]["name"];
+                    $data['email']=$json[$i]["email"];
+                    $email=$json[$i]["email"];
+                    $htmltext = $this->load->view('emailer/pantherclan', $data, true);
+                    $this->menu_model->emailer($htmltext,'Panther Clan',$email,"Sir/Madam");
                     }
+
 
                     $object = new stdClass();
                     $object->value = true;
