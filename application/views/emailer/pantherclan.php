@@ -26,7 +26,7 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                               </tr>
                               <tr>
                                   <td align="center">
-                                      <p style="color: #fff;font-family: 'Oswald', sans-serif;font-size: 18px; padding: 0 30px;">
+                                      <p style="color: #fff;font-family: 'Oswald', sans-serif;font-size: 18px; padding: 0 70px;">
                                           <b>Hey <?php echo $name;?>,</b>
                                           <br>
                                           <br>
