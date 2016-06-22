@@ -55,6 +55,34 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                                 </tr>
                                 <tr>
                                     <td  colspan="2">
+                                        <table style="border-collapse:collapse" border="0" cellpadding="0" cellspacing="0" bgcolor="#093647">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/s1.jpg">
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=facebook&utm_medium=referral&utm_campaign=fb_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/s2.jpg"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://twitter.com/intent/tweet?url=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=twitter&utm_medium=referral&utm_campaign=tw_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/s3.jpg"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="mailto:https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=twitter&utm_medium=referral&utm_campaign=tw_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/s4.jpg"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="sms:?&body=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=facebook&utm_medium=referral&utm_campaign=fb_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/s5.jpg"></a>
+                                                    </td>
+                                                    <td>
+                                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/s6.jpg">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  colspan="2">
                                         <a href="http://jaipurpinkpanthers.com/jpp-tv" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/7.jpg"></a>
                                     </td>
                                 </tr>
