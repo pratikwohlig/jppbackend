@@ -182,7 +182,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                   $data['name']=$firstname." ".$lastname;
                   $data['email']=$email;
                   $htmltext = $this->load->view('emailer/fancorner', $data, true);
-                  $this->menu_model->emailer($htmltext,'Fan Corner',$email,"Sir/Madam");
+                  $this->menu_model->emailer($htmltext,'Welcome to the JPP Family!',$email,"Sir/Madam");
                     $object = new stdClass();
                     $object->value = true;
                     return $object;
@@ -219,7 +219,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                     $data['email']=$json[$i]["email"];
                     $email=$json[$i]["email"];
                     $htmltext = $this->load->view('emailer/pantherclan', $data, true);
-                    $this->menu_model->emailer($htmltext,'Panther Clan',$email,"Sir/Madam");
+                    $this->menu_model->emailer($htmltext,'Panther Family',$email,"Sir/Madam");
                     }
 
 
