@@ -20,7 +20,7 @@ class Menu_model extends CI_Model
 						'html'      => $htmltext,
 						'text'      => 'Jaipur Pink Panthers',
 						'from'      => 'no-reply@jaipurpinkpanthers.com',
-						'fromname'      => 'Panther Clan'
+						'fromname'      => 'Jasvir Singh'
 					);
 
 				$request =  $url.'api/mail.send.json';
