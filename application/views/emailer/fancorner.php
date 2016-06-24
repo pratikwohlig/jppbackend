@@ -68,7 +68,7 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                                                         <a href="https://twitter.com/intent/tweet?url=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=twitter&utm_medium=referral&utm_campaign=tw_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/sh3.jpg"></a>
                                                     </td>
                                                     <td>
-                                                        <a href="mailto:https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=twitter&utm_medium=referral&utm_campaign=tw_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/sh4.jpg"></a>
+                                                        <a href="mailto:?body=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=twitter&utm_medium=referral&utm_campaign=tw_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/sh4.jpg"></a>
                                                     </td>
                                                     <td>
                                                         <a href="sms:?&body=https://in.bookmyshow.com/sports/pro-kabaddi/jaipur-pink-panthers/?utm_source=facebook&utm_medium=referral&utm_campaign=fb_pro-kabaddi_jaipur_pinkpanther_290116&rel=T2ZmZXJSZWRpcmVjdA%3D%3D" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/sh5.jpg"></a>
