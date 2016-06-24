@@ -179,7 +179,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
                 $user=$this->db->insert_id();
                 if($query)
                 {
-                  $data['name']=$firstname." ".$lastname;
+                  $data['name']=$firstname;
                   $data['email']=$email;
                   $htmltext = $this->load->view('emailer/fancorner', $data, true);
                   $this->menu_model->emailer($htmltext,'Welcome to the JPP Family!',$email,"Sir/Madam");
