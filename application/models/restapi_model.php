@@ -34,7 +34,7 @@ class restapi_model extends CI_Model
     }
     public function getAllGallery()
     {
-         $query=$this->db->query("SELECT `jpp_gallery`.`id` AS `id` , `jpp_gallery`.`order` AS `order` , `jpp_gallery`.`name` AS `name`,`jpp_gallery`.`hname` AS `hindiname` , `jpp_gallery`.`image1` AS `image`,if(`jpp_gallery`.`type`=1,'big','small') as `type` FROM `jpp_gallery` ORDER BY `order` ASC")->result();
+         $query=$this->db->query("SELECT `jpp_gallery`.`id` AS `id` , `jpp_gallery`.`order` AS `order` , `jpp_gallery`.`name` AS `name`,`jpp_gallery`.`hname` AS `hindiname` , `jpp_gallery`.`image1` AS `image`,if(`jpp_gallery`.`type`=1,'big','small') as `type`,`season`, `seasonname`, `hname` FROM `jpp_gallery` ORDER BY `order` ASC")->result();
         return $query;
     }
     public function getAllVideoGallery()
