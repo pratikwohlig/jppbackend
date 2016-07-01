@@ -69,35 +69,30 @@ $data['message'] = $this->restapi_model->getAllPoints();
         $elements[0]->header = 'ID';
         $elements[0]->alias = 'id';
 
-        $elements = array();
         $elements[1] = new stdClass();
         $elements[1]->field = '`jpp_schedule`.`stadium`';
         $elements[1]->sort = '1';
         $elements[1]->header = 'stadium';
         $elements[1]->alias = 'stadium';
 
-        $elements = array();
         $elements[2] = new stdClass();
         $elements[2]->field = '`jpp_schedule`.`team1`';
         $elements[2]->sort = '1';
         $elements[2]->header = 'Team1';
         $elements[2]->alias = 'team1';
 
-        $elements = array();
         $elements[3] = new stdClass();
         $elements[3]->field = '`jpp_schedule`.`team2`';
         $elements[3]->sort = '1';
         $elements[3]->header = 'Team2';
         $elements[3]->alias = 'team2';
 
-        $elements = array();
         $elements[4] = new stdClass();
         $elements[4]->field = '`jpp_schedule`.`bookticket`';
         $elements[4]->sort = '1';
         $elements[4]->header = 'Book Ticket';
         $elements[4]->alias = 'bookticket';
 
-        $elements = array();
         $elements[5] = new stdClass();
         $elements[5]->field = '`jpp_schedule`.`timestamp`';
         $elements[5]->sort = '1';
@@ -863,6 +858,11 @@ public function getsinglevideogallery()
     public function getSchedule()
     {
         $data['message'] = $this->restapi_model->getSchedulenew();
+        $this->load->view('json', $data);
+    }
+    public function getScheduleForIosAndroidSeason4()
+    {
+        $data['message'] = $this->restapi_model->getScheduleForIosAndroidSeason4();
         $this->load->view('json', $data);
     }
     public function getScheduleSeason4()
