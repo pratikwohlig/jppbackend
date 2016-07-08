@@ -473,7 +473,7 @@ public function getsinglewallpapercategory()
         }
         if ($orderby == '') {
             $orderby = 'id';
-            $orderorder = 'ASC';
+            $orderorder = 'DESC';
         }
         $data['message'] = $this->chintantable->query($pageno, $maxrow, $orderby, $orderorder, $search, $elements, 'FROM `jpp_wallpaper`', "WHERE `jpp_wallpaper`.`wallpapercategory`='$id'");
         $this->load->view('json', $data);
