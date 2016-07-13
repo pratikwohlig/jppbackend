@@ -32,10 +32,16 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <label for="Lost">Draw</label>
+                <input type="text" id="Lost" name="draw" value='<?php echo set_value(' draw ',$before->draw);?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label for="Point">Point</label>
                 <input type="text" id="Point" name="point" value='<?php echo set_value(' point ',$before->point);?>'>
             </div>
-        </div> 
+        </div>
            <div class="row">
             <div class="input-field col s6">
                 <label for="sd">sd</label>

@@ -726,6 +726,11 @@ $elements[6]->field="`jpp_point`.`sd`";
 $elements[6]->sort="1";
 $elements[6]->header="SD";
 $elements[6]->alias="sd";
+$elements[7]=new stdClass();
+$elements[7]->field="`jpp_point`.`draw`";
+$elements[7]->sort="1";
+$elements[7]->header="Draw";
+$elements[7]->alias="draw";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -775,10 +780,11 @@ $id=$this->input->get_post("id");
 $played=$this->input->get_post("played");
 $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
+$draw=$this->input->get_post("draw");
 $point=$this->input->get_post("point");
 $team=$this->input->get_post("team");
 $sd=$this->input->get_post("sd");
-if($this->point_model->create($played,$wins,$lost,$point,$team,$sd)==0)
+if($this->point_model->create($played,$wins,$lost,$draw,$point,$team,$sd)==0)
 $data["alerterror"]="New point could not be created.";
 else
 $data["alertsuccess"]="point created Successfully.";
@@ -820,10 +826,11 @@ $id=$this->input->get_post("id");
 $played=$this->input->get_post("played");
 $wins=$this->input->get_post("wins");
 $lost=$this->input->get_post("lost");
+$draw=$this->input->get_post("draw");
 $point=$this->input->get_post("point");
 $team=$this->input->get_post("team");
     $sd=$this->input->get_post("sd");
-if($this->point_model->edit($id,$played,$wins,$lost,$point,$team,$sd)==0)
+if($this->point_model->edit($id,$played,$wins,$lost,$draw,$point,$team,$sd)==0)
 $data["alerterror"]="New point could not be Updated.";
 else
 $data["alertsuccess"]="point Updated Successfully.";
