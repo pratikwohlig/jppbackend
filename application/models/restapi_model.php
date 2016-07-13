@@ -117,7 +117,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
         $query['news']=$this->db->query("SELECT `id`, `name`,`hname` AS 'hindiname', `image`, DATE_FORMAT(`timestamp`,'%d %b %Y, %h:%i') as `timestamp`, `content`,`hcontent` AS 'hindicontent' FROM `jpp_news` ORDER BY `id` DESC")->row();
 
 
-        $query['points']=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost` , `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC")->result();
+        $query['points']=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost`,`jpp_point`.`draw` AS `draw`  , `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC")->result();
             for($i=0;$i<count($query['points']);$i++)
             {
                 $query['points'][$i]->id = $i+1;
