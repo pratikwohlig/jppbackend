@@ -90,6 +90,12 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <label for="level">Level Of Match</label>
+                <input type="text" id="level" name="level" value='<?php echo set_value(' level ',$before->level);?>'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label for="Timestamp">Timestamp</label>
                 <input type="text" id="Timestamp" name="timestamp" value='<?php echo set_value(' timestamp ',$before->timestamp);?>'>
             </div>

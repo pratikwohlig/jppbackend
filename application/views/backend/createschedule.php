@@ -87,6 +87,12 @@
             </div>eg : 00:00
         </div>
         <div class="row">
+            <div class="input-field col s6">
+                <label for="level">Level Of Match</label>
+                <input type="text" id="level" name="level" value='<?php echo set_value(' level ');?>'>
+            </div>
+        </div>
+        <div class="row">
             <div class="col s12 m6">
                 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>
                 <a href="<?php echo site_url("site/viewschedule"); ?>" class="btn btn-secondary waves-effect waves-light red">Cancel</a>

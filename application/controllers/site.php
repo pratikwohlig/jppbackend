@@ -973,7 +973,8 @@ $startdate=$this->input->get_post("startdate");
     $minute=$this->input->get_post("minute");
     $matchtime=$this->input->get_post("matchtime");
     $season=$this->input->get_post("season");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)==0)
+    $level=$this->input->get_post("level");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -1049,7 +1050,8 @@ $score2=$this->input->get_post("score2");
     $minute=$this->input->get_post("minute");
     $matchtime=$this->input->get_post("matchtime");
     $season=$this->input->get_post("season");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season)==0)
+		  $level=$this->input->get_post("level");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";
