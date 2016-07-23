@@ -201,8 +201,9 @@ LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
 WHERE `jpp_schedule`.`season`=2 AND (`jpp_schedule`.`startdate`!=CURDATE() AND `jpp_schedule`.`startdate`< CURDATE())
+GROUP BY `jpp_schedule`.`id`
 ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
-//        print_r($query);
+
         foreach($query as $row){
              $row->fixture=$this->db->query("SELECT `id`, `schedule`, `team1player1name`,`team1player1nameh`, `team1player2name`,`team1player2nameh`, `team1player1score`, `team1player2score`, `team2player1name`,`team2player1nameh`, `team2player2name`,`team2player2nameh`, `team2player1score`, `team2player2score`, `raidpointsteam1`, `raidpointsteam2`, `tacklepointsteam1`, `tacklepointsteam2`, `alloutpointteam1`, `alloutpointteam2`, `extrapointsteam1`, `extrapointsteam2` FROM `jpp_fixture` WHERE `schedule`='$row->id'")->row();
 
