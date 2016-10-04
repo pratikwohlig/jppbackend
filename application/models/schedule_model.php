@@ -77,7 +77,8 @@ return $return;
     $return=array(
     "" => "Select Season",
     "1" => "Season 3",
-    "2" => "Season 4"
+    "2" => "Season 4",
+    "3" => "Kabaddi World Cup 2016"
     );
 
     return $return;
