@@ -18,6 +18,12 @@
                     <label for="stadium">stadium</label>
             </div>
         </div>
+       <div class="row">
+            <div class="input-field col s6">
+                <label for="matchtitle">Match Title</label>
+                <input type="text" id="matchtitle" name="matchtitle" value='<?php echo set_value(' matchtitle ',$before->matchtitle);?>'>
+            </div>
+        </div>
         <div class=" row">
             <div class=" input-field col s6">
                 <?php echo form_dropdown("team1",$team1,set_value('team1',$before->team1));?>

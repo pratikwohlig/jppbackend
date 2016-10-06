@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class schedule_model extends CI_Model
 {
-public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level)
+public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)
 {
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
@@ -14,7 +14,7 @@ public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,
     else if($season==2){
         $seasonname="Season 4";
     }
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level);
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle);
 $query=$this->db->insert( "jpp_schedule", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -33,7 +33,7 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_schedule")->row();
 return $query;
 }
-public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level)
+public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)
 {
      if($season==1){
         $seasonname="Season 3";
@@ -44,7 +44,7 @@ public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttim
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
         $startdate = $startdate->format('Y-m-d');
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level);
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_schedule", $data );
 return 1;
