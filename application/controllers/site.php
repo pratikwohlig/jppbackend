@@ -4241,6 +4241,154 @@ $data["redirect"]="site/viewclan";
 $this->load->view("redirect",$data);
 }
 
+    // Avinash Functions
+    
+    public function viewguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="viewguesswho";
+        $data["base_url"]=site_url("site/viewguesswhojson");
+        $data["title"]="View guesswho";
+        $this->load->view("template",$data);
+    }
+    function viewguesswhojson()
+    {
+        $elements=array();
+        
+        $elements[0]=new stdClass();
+        $elements[0]->field="`jpp_guesswho`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`jpp_guesswho`.`image`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Image";
+        $elements[1]->alias="image";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`jpp_guesswho`.`link`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Link";
+        $elements[2]->alias="link";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`jpp_guesswho`.`status`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Status";
+        $elements[3]->alias="status";
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_guesswho`");
+        $this->load->view("json",$data);
+    }
+
+    public function createguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="createguesswho";
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["title"]="Create guesswho";
+        $this->load->view("template",$data);
+    }
+    public function createguesswhosubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data[ 'type' ] =$this->guesswho_model->gettypedropdown();
+            $data["page"]="createguesswho";
+            $data["title"]="Create guesswho";
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            if($this->guesswho_model->create($image,$link,$status)==0)
+                $data["alerterror"]="New guesswho could not be created.";
+            else
+                $data["alertsuccess"]="guesswho created Successfully.";
+            $data["redirect"]="site/viewguesswho";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function editguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="editguesswho";
+        $data["before1"]=$this->input->get('id');
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["before2"]=$this->input->get('id');
+        $data["title"]="Edit guesswho";
+        $data["before"]=$this->guesswho_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    public function editguesswhosubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("id","ID","trim");
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data["page"]="editguesswho";
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data["title"]="Edit guesswho";
+            $data["before"]=$this->guesswho_model->beforeedit($this->input->get("id"));
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $id=$this->input->get_post("id");
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            $type=$this->input->get_post("type");
+            if($this->guesswho_model->edit($id,$image,$link,$status)==0)
+                $data["alerterror"]="New guesswho could not be Updated.";
+            else
+                $data["alertsuccess"]="guesswho Updated Successfully.";
+            $data["redirect"]="site/viewguesswho";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function deleteguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->guesswho_model->delete($this->input->get("id"));
+        $data["redirect"]="site/viewguesswho";
+        $this->load->view("redirect",$data);
+    }
+
 
 }
 ?>

@@ -925,4 +925,5 @@ public function getsinglevideogallery()
            echo "\n";
        }
     }
+    
 }
