@@ -4390,5 +4390,299 @@ $this->load->view("redirect",$data);
     }
 
 
+    public function viewjourney()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="viewjourney";
+        $data["base_url"]=site_url("site/viewjourneyjson");
+        $data["title"]="View journey";
+        $this->load->view("template",$data);
+    }
+    function viewjourneyjson()
+    {
+        $elements=array();
+        
+        $elements[0]=new stdClass();
+        $elements[0]->field="`jpp_journey`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`jpp_journey`.`image`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Image";
+        $elements[1]->alias="image";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`jpp_journey`.`link`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Link";
+        $elements[2]->alias="link";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`jpp_journey`.`status`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Status";
+        $elements[3]->alias="status";
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_journey`");
+        $this->load->view("json",$data);
+    }
+
+    public function createjourney()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="createjourney";
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["title"]="Create journey";
+        $this->load->view("template",$data);
+    }
+    public function createjourneysubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data[ 'type' ] =$this->journey_model->gettypedropdown();
+            $data["page"]="createjourney";
+            $data["title"]="Create journey";
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            if($this->journey_model->create($image,$link,$status)==0)
+                $data["alerterror"]="New journey could not be created.";
+            else
+                $data["alertsuccess"]="journey created Successfully.";
+            $data["redirect"]="site/viewjourney";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function editjourney()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="editjourney";
+        $data["before1"]=$this->input->get('id');
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["before2"]=$this->input->get('id');
+        $data["title"]="Edit journey";
+        $data["before"]=$this->journey_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    public function editjourneysubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("id","ID","trim");
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data["page"]="editjourney";
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data["title"]="Edit journey";
+            $data["before"]=$this->journey_model->beforeedit($this->input->get("id"));
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $id=$this->input->get_post("id");
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            $type=$this->input->get_post("type");
+            if($this->journey_model->edit($id,$image,$link,$status)==0)
+                $data["alerterror"]="New journey could not be Updated.";
+            else
+                $data["alertsuccess"]="journey Updated Successfully.";
+            $data["redirect"]="site/viewjourney";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function deletejourney()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->journey_model->delete($this->input->get("id"));
+        $data["redirect"]="site/viewjourney";
+        $this->load->view("redirect",$data);
+    }
+
+
+    public function viewcongratulation()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="viewcongratulation";
+        $data["base_url"]=site_url("site/viewcongratulationjson");
+        $data["title"]="View congratulation";
+        $this->load->view("template",$data);
+    }
+    function viewcongratulationjson()
+    {
+        $elements=array();
+        
+        $elements[0]=new stdClass();
+        $elements[0]->field="`jpp_congratulation`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`jpp_congratulation`.`image`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Image";
+        $elements[1]->alias="image";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`jpp_congratulation`.`link`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Link";
+        $elements[2]->alias="link";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`jpp_congratulation`.`status`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Status";
+        $elements[3]->alias="status";
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_congratulation`");
+        $this->load->view("json",$data);
+    }
+
+    public function createcongratulation()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="createcongratulation";
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["title"]="Create congratulation";
+        $this->load->view("template",$data);
+    }
+    public function createcongratulationsubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data[ 'type' ] =$this->congratulation_model->gettypedropdown();
+            $data["page"]="createcongratulation";
+            $data["title"]="Create congratulation";
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            if($this->congratulation_model->create($image,$link,$status)==0)
+                $data["alerterror"]="New congratulation could not be created.";
+            else
+                $data["alertsuccess"]="congratulation created Successfully.";
+            $data["redirect"]="site/viewcongratulation";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function editcongratulation()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="editcongratulation";
+        $data["before1"]=$this->input->get('id');
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["before2"]=$this->input->get('id');
+        $data["title"]="Edit congratulation";
+        $data["before"]=$this->congratulation_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    public function editcongratulationsubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("id","ID","trim");
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data["page"]="editcongratulation";
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data["title"]="Edit congratulation";
+            $data["before"]=$this->congratulation_model->beforeedit($this->input->get("id"));
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $id=$this->input->get_post("id");
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            $type=$this->input->get_post("type");
+            if($this->congratulation_model->edit($id,$image,$link,$status)==0)
+                $data["alerterror"]="New congratulation could not be Updated.";
+            else
+                $data["alertsuccess"]="congratulation Updated Successfully.";
+            $data["redirect"]="site/viewcongratulation";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function deletecongratulation()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->congratulation_model->delete($this->input->get("id"));
+        $data["redirect"]="site/viewcongratulation";
+        $this->load->view("redirect",$data);
+    }
+
+
 }
 ?>
