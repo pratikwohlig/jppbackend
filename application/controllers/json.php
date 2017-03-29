@@ -926,4 +926,24 @@ public function getsinglevideogallery()
        }
     }
     
+    // Avinash Functions
+    
+    public function getguesswho()
+    {
+        $data['message'] = $this->restapi_model->getGuessWho();
+        $this->load->view('json', $data);
+    }
+    
+    public function getjourney()
+    {
+        $data['message'] = $this->restapi_model->getJourney();
+        $this->load->view('json', $data);
+    }
+    
+    public function getcongratulation()
+    {
+        $data['message'] = $this->restapi_model->getCongratulation();
+        $this->load->view('json', $data);
+    }
+    
 }

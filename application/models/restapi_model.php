@@ -299,5 +299,66 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
 
 
     }
+    
+     
+    //Avinash Functions
+    
+    public function getGuessWho()
+    {
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_guesswho` WHERE `status`=1")->row();
+  
+        if($query)
+        {
+            $obj->value = true;
+            $obj->data = $query;
+            return $obj;
+        }
+        else
+        {
+            $obj->value = false;
+            $obj->data = "No data found";
+            return $obj;
+        }
+    }
+      
+    public function getJourney()
+    {
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_journey` WHERE `status`=1")->row();
+  
+        if($query)
+        {
+            $obj->value = true;
+            $obj->data = $query;
+            return $obj;
+        }
+        else
+        {
+            $obj->value = false;
+            $obj->data = "No data found";
+            return $obj;
+        }
+    }
+    
+      
+    public function getCongratulation()
+    {
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_congratulation` WHERE `status`=1")->row();
+  
+        if($query)
+        {
+            $obj->value = true;
+            $obj->data = $query;
+            return $obj;
+        }
+        else
+        {
+            $obj->value = false;
+            $obj->data = "No data found";
+            return $obj;
+        }
+    }
+    
+    
+    
 }
 ?>
