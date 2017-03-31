@@ -315,7 +315,7 @@ class User_model extends CI_Model
 
 
     }
-    function login($email,$password)
+    function loginold($email,$password)
     {
         $password=md5($password);
         $query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email' AND `password`= '$password'");
@@ -341,7 +341,7 @@ class User_model extends CI_Model
 
 
     }
-    function authenticate() {
+    function authenticateold() {
          $is_logged_in = $this->session->userdata( 'logged_in' );
 //        return $is_logged_in;
         if ( $is_logged_in != true) {
@@ -688,5 +688,71 @@ class User_model extends CI_Model
 			);
 		return $language;
 	}
+    
+    //avinash functions
+    
+    
+    function frontendsignup($firstname, $lastname, $phoneno, $email,$password) 
+    {
+         $password=md5($password);   
+        $query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email'");
+        if($query->num_rows == 0)
+        {
+            $this->db->query("INSERT INTO `user`(`firstname`, `lastname`, `password`, `email`, `phone`, `accesslevel`, `status`) VALUES ('$firstname','$lastname','$password','$email','$phoneno','3','1')");
+            $user=$this->db->insert_id();
+            $newdata = array(
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email'     => $email,
+                'accesslevel' => 3,
+                'logged_in' => true,
+                'id'=> $user
+            );
+            $this->session->set_userdata($newdata);
+            
+           return $newdata;
+        }
+        else
+         return false;
+        
+        
+    }
+    
+    function login($email,$password) 
+    {
+        $password=md5($password);
+        $query=$this->db->query("SELECT `id`,`firstname`,`lastname`,`password`,`email` FROM `user` WHERE `email`='$email' AND `password`= '$password'");
+        
+        if($query->num_rows > 0)
+        {
+            $user=$query->row();
+            $userid=$user->id;
+            $firstname=$user->firstname;
+            $lastname=$user->lastname;
+            $newdata = array(
+                'email'     => $email,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'logged_in' => true,
+                'id'=> $userid
+            );
+            $this->session->set_userdata($newdata);
+            return $this->session->all_userdata();
+        }
+        else
+        return false;
+    }
+    function authenticate() {
+        $is_logged_in = $this->session->userdata('logged_in');
+//        print_r($this->session->userdata);
+        //print_r($is_logged_in);
+        if ( $is_logged_in != 'true' || !isset($is_logged_in) ) {
+            return false;
+        } //$is_logged_in !== 'true' || !isset( $is_logged_in )
+        else {
+            return $this->session->all_userdata();
+        }
+    }
+    
 }
 ?>

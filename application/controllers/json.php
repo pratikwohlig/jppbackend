@@ -946,4 +946,54 @@ public function getsinglevideogallery()
         $this->load->view('json', $data);
     }
     
+     public function login()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if(empty($data))
+        {
+            $data["message"] = 0;
+        }
+        else
+        {
+            $email=$data['email'];
+            $password=$data['password'];
+            $data['message']=$this->user_model->login($email,$password);
+        }
+
+        $this->load->view("json", $data);
+        
+    }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        
+		$this->load->view('json',true);
+    }
+    public function authenticate()
+    {
+        $data['message']=$this->user_model->authenticate();
+		$this->load->view('json',$data);
+    }
+    public function signup()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if(empty($data))
+        {
+            $data["message"] = 0;
+        }
+        else
+        {
+            $firstname=$data['firstname'];
+            $lastname=$data['lastname'];
+            $phoneno=$data['phoneno'];
+            $email=$data['email'];
+            $password=$data['password'];
+            $data['message']=$this->user_model->frontendsignup($firstname, $lastname, $phoneno, $email, $password);
+        }
+        
+        $this->load->view('json',$data);
+        
+    }
+    
 }
