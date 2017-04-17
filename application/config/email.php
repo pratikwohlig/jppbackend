@@ -2,11 +2,14 @@
 /*
  * Configuration file for Email library
  */
+
 $config['protocol'] = 'smtp';
-$config['charset'] = 'utf-8';
-$config['mailtype'] = 'html';
-$config['smtp_timeout'] = 5;
-$config['smtp_host'] = 'smtp.mandrillapp.com';
 $config['smtp_port'] = 587;
-$config['smtp_user'] = 'avinash@wohlig.com';
-$config['smtp_pass'] = 'SfDEXvA0lBII4qx0uRClOA';
+$config['smtp_host'] = 'smtp.sendgrid.net';
+$config['smtp_user'] = 'apikey';
+$config['smtp_pass'] = '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';
+$config['crlf']="\r\n";
+$config['newline']="\r\n";
+$config['charset'] = 'utf-8';
+$config['wordwrap'] = TRUE;
+$config['mailtype'] = 'html';

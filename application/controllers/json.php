@@ -995,5 +995,23 @@ public function getsinglevideogallery()
         $this->load->view('json',$data);
         
     }
+    public function test123()
+    {
+        $this->load->library('email');
+        
+// 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
+        
+        //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
+
+//        $this->email->set_header('MIME-Version: 1.0');
+//        $this->email->set_header('Content-type: text/html; charset=iso-8859-1');
+$this->email->from('avinash.ghare@wohlig.com', 'Your Name');
+$this->email->to('avinashghare572@gmail.com');
+$this->email->subject('Email Test');
+$this->email->message('Testing the email class.');
+$this->email->send();
+
+echo $this->email->print_debugger();
+    }
     
 }

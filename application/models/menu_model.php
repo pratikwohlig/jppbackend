@@ -4,6 +4,20 @@ if ( !defined( 'BASEPATH' ) )
 class Menu_model extends CI_Model
 {
 
+	public function emailernew($htmltext,$subject,$toemail,$toname)
+	{
+				
+        $this->load->library('email');
+        
+        $this->email->from('no-reply@jaipurpinkpanthers.com', 'Jasvir Singh');
+        $this->email->to($toemail);
+        $this->email->subject($subject);
+        $this->email->message($htmltext);
+        
+        $this->email->send();
+        echo $this->email->print_debugger();
+
+	}
 	public function emailer($htmltext,$subject,$toemail,$toname)
 	{
 				$query=$this->db->query("SELECT * FROM `emailer`")->row();
@@ -22,7 +36,6 @@ class Menu_model extends CI_Model
 						'from'      => 'no-reply@jaipurpinkpanthers.com',
 						'fromname'      => 'Jasvir Singh'
 					);
-
 				$request =  $url.'api/mail.send.json';
 				$session = curl_init($request);
 				curl_setopt ($session, CURLOPT_POST, true);
@@ -35,7 +48,7 @@ class Menu_model extends CI_Model
 				$response = curl_exec($session);
 
 				// print everything out
-				////var_dump($response,curl_error($session),curl_getinfo($session));
+//				var_dump($response,curl_error($session),curl_getinfo($session));
 //        print_r($response);
 				curl_close($session);
 
