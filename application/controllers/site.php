@@ -2070,178 +2070,351 @@ $this->load->view("redirect",$data);
 }
 public function viewplayers()
 {
-$access=array("1");
-$this->checkaccess($access);
-$data["page"]="viewplayers";
-$data["base_url"]=site_url("site/viewplayersjson");
-$data["title"]="View players";
-$this->load->view("template",$data);
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewplayers";
+    $data["base_url"]=site_url("site/viewplayersjson");
+    $data["title"]="View players";
+    $this->load->view("template",$data);
 }
 function viewplayersjson()
 {
-$elements=array();
-$elements[0]=new stdClass();
-$elements[0]->field="`jpp_players`.`id`";
-$elements[0]->sort="1";
-$elements[0]->header="ID";
-$elements[0]->alias="id";
-$elements[1]=new stdClass();
-$elements[1]->field="`jpp_players`.`order`";
-$elements[1]->sort="1";
-$elements[1]->header="Order";
-$elements[1]->alias="order";
-$elements[2]=new stdClass();
-$elements[2]->field="`jpp_players`.`type`";
-$elements[2]->sort="1";
-$elements[2]->header="Type";
-$elements[2]->alias="type";
-$elements[3]=new stdClass();
-$elements[3]->field="`jpp_players`.`name`";
-$elements[3]->sort="1";
-$elements[3]->header="Name";
-$elements[3]->alias="name";
-$elements[4]=new stdClass();
-$elements[4]->field="`jpp_players`.`nationality`";
-$elements[4]->sort="1";
-$elements[4]->header="Nationality";
-$elements[4]->alias="nationality";
-$elements[5]=new stdClass();
-$elements[5]->field="`jpp_players`.`jerseyno`";
-$elements[5]->sort="1";
-$elements[5]->header="Jerseyno";
-$elements[5]->alias="jerseyno";
-$elements[6]=new stdClass();
-$elements[6]->field="`jpp_players`.`about`";
-$elements[6]->sort="1";
-$elements[6]->header="About";
-$elements[6]->alias="about";
-$elements[7]=new stdClass();
-$elements[7]->field="`jpp_players`.`dob`";
-$elements[7]->sort="1";
-$elements[7]->header="Dob";
-$elements[7]->alias="dob";
-$search=$this->input->get_post("search");
-$pageno=$this->input->get_post("pageno");
-$orderby=$this->input->get_post("orderby");
-$orderorder=$this->input->get_post("orderorder");
-$maxrow=$this->input->get_post("maxrow");
-if($maxrow=="")
-{
-$maxrow=20;
-}
-if($orderby=="")
-{
-$orderby="id";
-$orderorder="ASC";
-}
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_players`");
-$this->load->view("json",$data);
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`jpp_players`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`jpp_players`.`order`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Order";
+    $elements[1]->alias="order";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`jpp_players`.`type`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Type";
+    $elements[2]->alias="type";
+    
+    $elements[3]=new stdClass();
+    $elements[3]->field="`jpp_players`.`name`";
+    $elements[3]->sort="1";
+    $elements[3]->header="Name";
+    $elements[3]->alias="name";
+    
+    $elements[4]=new stdClass();
+    $elements[4]->field="`jpp_players`.`nationality`";
+    $elements[4]->sort="1";
+    $elements[4]->header="Nationality";
+    $elements[4]->alias="nationality";
+    
+    $elements[5]=new stdClass();
+    $elements[5]->field="`jpp_players`.`jerseyno`";
+    $elements[5]->sort="1";
+    $elements[5]->header="Jerseyno";
+    $elements[5]->alias="jerseyno";
+    
+    $elements[6]=new stdClass();
+    $elements[6]->field="`jpp_players`.`about`";
+    $elements[6]->sort="1";
+    $elements[6]->header="About";
+    $elements[6]->alias="about";
+    
+    $elements[7]=new stdClass();
+    $elements[7]->field="`jpp_players`.`dob`";
+    $elements[7]->sort="1";
+    $elements[7]->header="Dob";
+    $elements[7]->alias="dob";
+    
+    $elements[8]=new stdClass();
+    $elements[8]->field="`jpp_players`.`hname`";
+    $elements[8]->sort="1";
+    $elements[8]->header="Hindi Name";
+    $elements[8]->alias="hname";
+    
+    $elements[9]=new stdClass();
+    $elements[9]->field="`jpp_players`.`hnationality`";
+    $elements[9]->sort="1";
+    $elements[9]->header="hnationality";
+    $elements[9]->alias="hnationality";
+    
+    $elements[10]=new stdClass();
+    $elements[10]->field="`jpp_players`.`habout`";
+    $elements[10]->sort="1";
+    $elements[10]->header="habout";
+    $elements[10]->alias="habout";
+    
+    $elements[11]=new stdClass();
+    $elements[11]->field="`jpp_players`.`smallimage`";
+    $elements[11]->sort="1";
+    $elements[11]->header="smallimage";
+    $elements[11]->alias="smallimage";
+    
+    $elements[12]=new stdClass();
+    $elements[12]->field="`jpp_players`.`bigimage`";
+    $elements[12]->sort="1";
+    $elements[12]->header="bigimage";
+    $elements[12]->alias="bigimage";
+    
+    $elements[13]=new stdClass();
+    $elements[13]->field="`jpp_players`.`fb`";
+    $elements[13]->sort="1";
+    $elements[13]->header="fb";
+    $elements[13]->alias="fb";
+    
+    $elements[14]=new stdClass();
+    $elements[14]->field="`jpp_players`.`twitter`";
+    $elements[14]->sort="1";
+    $elements[14]->header="twitter";
+    $elements[14]->alias="twitter";
+    
+    $elements[15]=new stdClass();
+    $elements[15]->field="`jpp_players`.`instagram`";
+    $elements[15]->sort="1";
+    $elements[15]->header="instagram";
+    $elements[15]->alias="instagram";
+    
+    $elements[16]=new stdClass();
+    $elements[16]->field="`jpp_players`.`country`";
+    $elements[16]->sort="1";
+    $elements[16]->header="country";
+    $elements[16]->alias="country";
+    
+    $elements[17]=new stdClass();
+    $elements[17]->field="`jpp_players`.`nativeplace`";
+    $elements[17]->sort="1";
+    $elements[17]->header="nativeplace";
+    $elements[17]->alias="nativeplace";
+    
+    $elements[18]=new stdClass();
+    $elements[18]->field="`jpp_players`.`weight`";
+    $elements[18]->sort="1";
+    $elements[18]->header="weight";
+    $elements[18]->alias="weight";
+    
+    $elements[19]=new stdClass();
+    $elements[19]->field="`jpp_players`.`height`";
+    $elements[19]->sort="1";
+    $elements[19]->header="height";
+    $elements[19]->alias="height";
+    
+    $elements[20]=new stdClass();
+    $elements[20]->field="`jpp_players`.`status`";
+    $elements[20]->sort="1";
+    $elements[20]->header="status";
+    $elements[20]->alias="status";
+    
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    
+    if($maxrow=="")
+    {
+        $maxrow=20;
+    }
+    if($orderby=="")
+    {
+        $orderby="id";
+        $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_players`");
+    $this->load->view("json",$data);
 }
 
 public function createplayers()
 {
-$access=array("1");
-$this->checkaccess($access);
-$data["page"]="createplayers";
-$data["title"]="Create players";
-$this->load->view("template",$data);
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="createplayers";
+    $data["title"]="Create players";
+    $data["status"]=$this->user_model->getstatusdropdown();
+    $this->load->view("template",$data);
 }
 public function createplayerssubmit()
 {
-$access=array("1");
-$this->checkaccess($access);
-$this->form_validation->set_rules("order","Order","trim");
-$this->form_validation->set_rules("type","Type","trim");
-$this->form_validation->set_rules("name","Name","trim");
-$this->form_validation->set_rules("nationality","Nationality","trim");
-$this->form_validation->set_rules("jerseyno","Jerseyno","trim");
-$this->form_validation->set_rules("about","About","trim");
-$this->form_validation->set_rules("dob","Dob","trim");
-if($this->form_validation->run()==FALSE)
-{
-$data["alerterror"]=validation_errors();
-$data["page"]="createplayers";
-$data["title"]="Create players";
-$this->load->view("template",$data);
-}
-else
-{
-$id=$this->input->get_post("id");
-$order=$this->input->get_post("order");
-$type=$this->input->get_post("type");
-$name=$this->input->get_post("name");
-$nationality=$this->input->get_post("nationality");
-$jerseyno=$this->input->get_post("jerseyno");
-$about=$this->input->get_post("about");
-$dob=$this->input->get_post("dob");
-$hname=$this->input->get_post("hname");
-$habout=$this->input->get_post("habout");
-$hnationality=$this->input->get_post("hnationality");
-if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality)==0)
-$data["alerterror"]="New players could not be created.";
-else
-$data["alertsuccess"]="players created Successfully.";
-$data["redirect"]="site/viewplayers";
-$this->load->view("redirect",$data);
-}
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("order","Order","trim");
+    $this->form_validation->set_rules("type","Type","trim");
+    $this->form_validation->set_rules("name","Name","trim");
+    $this->form_validation->set_rules("nationality","Nationality","trim");
+    $this->form_validation->set_rules("jerseyno","Jerseyno","trim");
+    $this->form_validation->set_rules("about","About","trim");
+    $this->form_validation->set_rules("dob","Dob","trim");
+    $this->form_validation->set_rules("fb","fb","trim");
+    $this->form_validation->set_rules("twitter","twitter","trim");
+    $this->form_validation->set_rules("instagram","instagram","trim");
+    $this->form_validation->set_rules("country","country","trim");
+    $this->form_validation->set_rules("nativeplace","nativeplace","trim");
+    $this->form_validation->set_rules("weight","weight","trim");
+    $this->form_validation->set_rules("height","height","trim");
+    $this->form_validation->set_rules("status","status","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="createplayers";
+        $data["title"]="Create players";
+        $data["status"]=$this->user_model->getstatusdropdown();
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+        $order=$this->input->get_post("order");
+        $type=$this->input->get_post("type");
+        $name=$this->input->get_post("name");
+        $nationality=$this->input->get_post("nationality");
+        $jerseyno=$this->input->get_post("jerseyno");
+        $about=$this->input->get_post("about");
+        $dob=$this->input->get_post("dob");
+        $hname=$this->input->get_post("hname");
+        $habout=$this->input->get_post("habout");
+        $hnationality=$this->input->get_post("hnationality");
+        $fb=$this->input->get_post("fb");
+        $twitter=$this->input->get_post("twitter");
+        $instagram=$this->input->get_post("instagram");
+        $country=$this->input->get_post("country");
+        $nativeplace=$this->input->get_post("nativeplace");
+        $weight=$this->input->get_post("weight");
+        $height=$this->input->get_post("height");
+        $status=$this->input->get_post("status");
+        
+        $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload', $config);
+		$filename="smallimage";
+		$smallimage="";
+		if (  $this->upload->do_upload($filename))
+		{
+            $uploaddata = $this->upload->data();
+            $smallimage=$uploaddata['file_name'];
+		}
+        
+        $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload', $config);
+		$filename="bigimage";
+		$bigimage="";
+		if (  $this->upload->do_upload($filename))
+		{
+            $uploaddata = $this->upload->data();
+            $bigimage=$uploaddata['file_name'];
+		}
+        
+        if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)==0)
+        $data["alerterror"]="New players could not be created.";
+        else
+        $data["alertsuccess"]="players created Successfully.";
+        $data["redirect"]="site/viewplayers";
+        $this->load->view("redirect",$data);
+    }
 }
 public function editplayers()
 {
-$access=array("1");
-$this->checkaccess($access);
-$data["page"]="editplayers";
-$data["title"]="Edit players";
-$data["before"]=$this->players_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="editplayers";
+    $data["page2"]="block/playerblock";
+    $data["title"]="Edit players";
+    $data["status"]=$this->user_model->getstatusdropdown();
+    $data["before"]=$this->players_model->beforeedit($this->input->get("id"));
+    $data['before1']=$this->input->get("id");
+    $data['before2']=$this->input->get("id");
+    $this->load->view("templatewith2",$data);
 }
 public function editplayerssubmit()
 {
-$access=array("1");
-$this->checkaccess($access);
-$this->form_validation->set_rules("id","ID","trim");
-$this->form_validation->set_rules("order","Order","trim");
-$this->form_validation->set_rules("type","Type","trim");
-$this->form_validation->set_rules("name","Name","trim");
-$this->form_validation->set_rules("nationality","Nationality","trim");
-$this->form_validation->set_rules("jerseyno","Jerseyno","trim");
-$this->form_validation->set_rules("about","About","trim");
-$this->form_validation->set_rules("dob","Dob","trim");
-if($this->form_validation->run()==FALSE)
-{
-$data["alerterror"]=validation_errors();
-$data["page"]="editplayers";
-$data["title"]="Edit players";
-$data["before"]=$this->players_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
-}
-else
-{
-$id=$this->input->get_post("id");
-$order=$this->input->get_post("order");
-$type=$this->input->get_post("type");
-$name=$this->input->get_post("name");
-$nationality=$this->input->get_post("nationality");
-$jerseyno=$this->input->get_post("jerseyno");
-$about=$this->input->get_post("about");
-$dob=$this->input->get_post("dob");
-$hname=$this->input->get_post("hname");
-$habout=$this->input->get_post("habout");
-$hnationality=$this->input->get_post("hnationality");
-if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality)==0)
-$data["alerterror"]="New players could not be Updated.";
-else
-$data["alertsuccess"]="players Updated Successfully.";
-$data["redirect"]="site/viewplayers";
-$this->load->view("redirect",$data);
-}
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("order","Order","trim");
+    $this->form_validation->set_rules("type","Type","trim");
+    $this->form_validation->set_rules("name","Name","trim");
+    $this->form_validation->set_rules("nationality","Nationality","trim");
+    $this->form_validation->set_rules("jerseyno","Jerseyno","trim");
+    $this->form_validation->set_rules("about","About","trim");
+    $this->form_validation->set_rules("dob","Dob","trim");
+    $this->form_validation->set_rules("fb","fb","trim");
+    $this->form_validation->set_rules("twitter","twitter","trim");
+    $this->form_validation->set_rules("instagram","instagram","trim");
+    $this->form_validation->set_rules("country","country","trim");
+    $this->form_validation->set_rules("nativeplace","nativeplace","trim");
+    $this->form_validation->set_rules("weight","weight","trim");
+    $this->form_validation->set_rules("height","height","trim");
+    $this->form_validation->set_rules("status","status","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editplayers";
+        $data["title"]="Edit players";
+        $data["status"]=$this->user_model->getstatusdropdown();
+        $data["before"]=$this->players_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+        $order=$this->input->get_post("order");
+        $type=$this->input->get_post("type");
+        $name=$this->input->get_post("name");
+        $nationality=$this->input->get_post("nationality");
+        $jerseyno=$this->input->get_post("jerseyno");
+        $about=$this->input->get_post("about");
+        $dob=$this->input->get_post("dob");
+        $hname=$this->input->get_post("hname");
+        $habout=$this->input->get_post("habout");
+        $hnationality=$this->input->get_post("hnationality");
+        
+        $fb=$this->input->get_post("fb");
+        $twitter=$this->input->get_post("twitter");
+        $instagram=$this->input->get_post("instagram");
+        $country=$this->input->get_post("country");
+        $nativeplace=$this->input->get_post("nativeplace");
+        $weight=$this->input->get_post("weight");
+        $height=$this->input->get_post("height");
+        $status=$this->input->get_post("status");
+        
+        $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload', $config);
+		$filename="smallimage";
+		$smallimage="";
+		if (  $this->upload->do_upload($filename))
+		{
+            $uploaddata = $this->upload->data();
+            $smallimage=$uploaddata['file_name'];
+		}
+        
+        $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload', $config);
+		$filename="bigimage";
+		$bigimage="";
+		if (  $this->upload->do_upload($filename))
+		{
+            $uploaddata = $this->upload->data();
+            $bigimage=$uploaddata['file_name'];
+		}
+        
+        if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)==0)
+        $data["alerterror"]="New players could not be Updated.";
+        else
+        $data["alertsuccess"]="players Updated Successfully.";
+        $data["redirect"]="site/viewplayers";
+        $this->load->view("redirect",$data);
+    }
 }
 public function deleteplayers()
 {
-$access=array("1");
-$this->checkaccess($access);
-$this->players_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewplayers";
-$this->load->view("redirect",$data);
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->players_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewplayers";
+    $this->load->view("redirect",$data);
 }
 public function viewwallpapercategory()
 {
@@ -4683,6 +4856,576 @@ $this->load->view("redirect",$data);
         $this->load->view("redirect",$data);
     }
 
+    // Avinash Newly Added functions
+    
+      
+    
+public function viewtournamentplayed()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewtournamentplayed";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get('id');
+    $data["before2"]=$this->input->get('id');
+    $data["base_url"]=site_url("site/viewtournamentplayedjson?id=").$this->input->get('id');
+    $data["title"]="View tournamentplayed";
+    $this->load->view("templatewith2",$data);
+}
+function viewtournamentplayedjson()
+{
+    $id=$this->input->get('id');
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`tournamentplayed`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`tournamentplayed`.`name`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Name";
+    $elements[1]->alias="name";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`tournamentplayed`.`year`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Year";
+    $elements[2]->alias="year";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`tournamentplayed`.`player`";
+    $elements[4]->sort="1";
+    $elements[4]->header="playerid";
+    $elements[4]->alias="playerid";
+    
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="id";
+    $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `tournamentplayed` LEFT OUTER JOIN `jpp_players` ON `jpp_players`.`id`=`tournamentplayed`.`player`","WHERE `tournamentplayed`.`player`='$id'");
+    $this->load->view("json",$data);
+}
+
+public function createtournamentplayed()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="createtournamentplayed";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data['player']=$this->players_model->getdropdown();
+    $data["title"]="Create tournamentplayed";
+    $this->load->view("templatewith2",$data);
+}
+public function createtournamentplayedsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("year","year","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="createtournamentplayed";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Create tournamentplayed";
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $player=$this->input->get_post("player");
+        $name=$this->input->get_post("name");
+        $year=$this->input->get_post("year");
+//        $status=$this->input->get_post("status");
+     
+    if($this->tournamentplayed_model->create($player,$name,$year)==0)
+    $data["alerterror"]="New tournamentplayed could not be created.";
+    else
+    $data["alertsuccess"]="tournamentplayed created Successfully.";
+    $data["redirect"]="site/viewtournamentplayed?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function edittournamentplayed()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data['player']=$this->players_model->getdropdown();
+    $data["page"]="edittournamentplayed";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data["title"]="Edit tournamentplayed";
+    $data["before"]=$this->tournamentplayed_model->beforeedit($this->input->get("id"));
+    $this->load->view("templatewith2",$data);
+}
+public function edittournamentplayedsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("year","year","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="edittournamentplayed";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Edit tournamentplayed";
+        $data["before"]=$this->tournamentplayed_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+    $id=$this->input->get_post("id");
+      
+        $player=$this->input->get_post("player");
+        $name=$this->input->get_post("name");
+        $year=$this->input->get_post("year");
+     
+    if($this->tournamentplayed_model->edit($id,$player,$name,$year)==0)
+    $data["alerterror"]="New tournamentplayed could not be Updated.";
+    else
+    $data["alertsuccess"]="tournamentplayed Updated Successfully.";
+    $data["redirect"]="site/viewtournamentplayed?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function deletetournamentplayed()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->tournamentplayed_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewtournamentplayed?id=".$this->input->get("playerid");
+    $this->load->view("redirect2",$data);
+}
+   
+
+      
+    
+public function viewachievment()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewachievment";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get('id');
+    $data["before2"]=$this->input->get('id');
+    $data["base_url"]=site_url("site/viewachievmentjson?id=").$this->input->get('id');
+    $data["title"]="View achievment";
+    $this->load->view("templatewith2",$data);
+}
+function viewachievmentjson()
+{
+    $id=$this->input->get('id');
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`achievment`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`achievment`.`name`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Name";
+    $elements[1]->alias="name";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`achievment`.`year`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Year";
+    $elements[2]->alias="year";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`achievment`.`player`";
+    $elements[4]->sort="1";
+    $elements[4]->header="playerid";
+    $elements[4]->alias="playerid";
+    
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="id";
+    $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `achievment` LEFT OUTER JOIN `jpp_players` ON `jpp_players`.`id`=`achievment`.`player`","WHERE `achievment`.`player`='$id'");
+    $this->load->view("json",$data);
+}
+
+public function createachievment()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="createachievment";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data['player']=$this->players_model->getdropdown();
+    $data["title"]="Create achievment";
+    $this->load->view("templatewith2",$data);
+}
+public function createachievmentsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("year","year","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="createachievment";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Create achievment";
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $player=$this->input->get_post("player");
+        $name=$this->input->get_post("name");
+        $year=$this->input->get_post("year");
+//        $status=$this->input->get_post("status");
+     
+    if($this->achievment_model->create($player,$name,$year)==0)
+    $data["alerterror"]="New achievment could not be created.";
+    else
+    $data["alertsuccess"]="achievment created Successfully.";
+    $data["redirect"]="site/viewachievment?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function editachievment()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data['player']=$this->players_model->getdropdown();
+    $data["page"]="editachievment";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data["title"]="Edit achievment";
+    $data["before"]=$this->achievment_model->beforeedit($this->input->get("id"));
+    $this->load->view("templatewith2",$data);
+}
+public function editachievmentsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("year","year","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editachievment";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Edit achievment";
+        $data["before"]=$this->achievment_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+    $id=$this->input->get_post("id");
+      
+        $player=$this->input->get_post("player");
+        $name=$this->input->get_post("name");
+        $year=$this->input->get_post("year");
+     
+    if($this->achievment_model->edit($id,$player,$name,$year)==0)
+    $data["alerterror"]="New achievment could not be Updated.";
+    else
+    $data["alertsuccess"]="achievment Updated Successfully.";
+    $data["redirect"]="site/viewachievment?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function deleteachievment()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->achievment_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewachievment?id=".$this->input->get("playerid");
+    $this->load->view("redirect2",$data);
+}
+  
+      
+    
+public function viewcareer()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewcareer";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get('id');
+    $data["before2"]=$this->input->get('id');
+    $data["base_url"]=site_url("site/viewcareerjson?id=").$this->input->get('id');
+    $data["title"]="View career";
+    $this->load->view("templatewith2",$data);
+}
+function viewcareerjson()
+{
+    $id=$this->input->get('id');
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`career`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`career`.`matchplayed`";
+    $elements[1]->sort="1";
+    $elements[1]->header="matchplayed";
+    $elements[1]->alias="matchplayed";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`career`.`totalpoints`";
+    $elements[2]->sort="1";
+    $elements[2]->header="totalpoints";
+    $elements[2]->alias="totalpoints";
+
+    $elements[3]=new stdClass();
+    $elements[3]->field="`career`.`totalraidpoints`";
+    $elements[3]->sort="1";
+    $elements[3]->header="totalraidpoints";
+    $elements[3]->alias="totalraidpoints";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`career`.`player`";
+    $elements[4]->sort="1";
+    $elements[4]->header="playerid";
+    $elements[4]->alias="playerid";
+    
+    $elements[5]=new stdClass();
+    $elements[5]->field="`career`.`totaldefencepoints`";
+    $elements[5]->sort="1";
+    $elements[5]->header="totaldefencepoints";
+    $elements[5]->alias="totaldefencepoints";
+
+    $elements[6]=new stdClass();
+    $elements[6]->field="`career`.`raids`";
+    $elements[6]->sort="1";
+    $elements[6]->header="raids";
+    $elements[6]->alias="raids";
+
+    $elements[7]=new stdClass();
+    $elements[7]->field="`career`.`successfulraids`";
+    $elements[7]->sort="1";
+    $elements[7]->header="successfulraids";
+    $elements[7]->alias="successfulraids";
+
+    $elements[8]=new stdClass();
+    $elements[8]->field="`career`.`unsuccessfulraids`";
+    $elements[8]->sort="1";
+    $elements[8]->header="unsuccessfulraids";
+    $elements[8]->alias="unsuccessfulraids";
+
+    $elements[9]=new stdClass();
+    $elements[9]->field="`career`.`emptyraids`";
+    $elements[9]->sort="1";
+    $elements[9]->header="emptyraids";
+    $elements[9]->alias="emptyraids";
+
+    $elements[10]=new stdClass();
+    $elements[10]->field="`career`.`tackles`";
+    $elements[10]->sort="1";
+    $elements[10]->header="tackles";
+    $elements[10]->alias="tackles";
+
+    $elements[11]=new stdClass();
+    $elements[11]->field="`career`.`successfultackles`";
+    $elements[11]->sort="1";
+    $elements[11]->header="successfultackles";
+    $elements[11]->alias="successfultackles";
+
+    $elements[12]=new stdClass();
+    $elements[12]->field="`career`.`unsuccessfultackles`";
+    $elements[12]->sort="1";
+    $elements[12]->header="unsuccessfultackles";
+    $elements[12]->alias="unsuccessfultackles";
+
+    $elements[13]=new stdClass();
+    $elements[13]->field="`career`.`greencards`";
+    $elements[13]->sort="1";
+    $elements[13]->header="greencards";
+    $elements[13]->alias="greencards";
+
+    $elements[14]=new stdClass();
+    $elements[14]->field="`career`.`redcards`";
+    $elements[14]->sort="1";
+    $elements[14]->header="redcards";
+    $elements[14]->alias="redcards";
+
+    $elements[15]=new stdClass();
+    $elements[15]->field="`career`.`yellowcards`";
+    $elements[15]->sort="1";
+    $elements[15]->header="yellowcards";
+    $elements[15]->alias="yellowcards";
+
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="id";
+    $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `career` LEFT OUTER JOIN `jpp_players` ON `jpp_players`.`id`=`career`.`player`","WHERE `career`.`player`='$id'");
+    $this->load->view("json",$data);
+}
+
+//public function createcareer()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $data["page"]="createcareer";
+//    $data["page2"]="block/playerblock";
+//    $data["before1"]=$this->input->get("id");
+//    $data["before2"]=$this->input->get("id");
+//    $data['player']=$this->players_model->getdropdown();
+//    $data["title"]="Create career";
+//    $this->load->view("templatewith2",$data);
+//}
+//public function createcareersubmit()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $this->form_validation->set_rules("player","player","trim");
+//    $this->form_validation->set_rules("name","name","trim");
+//    $this->form_validation->set_rules("year","year","trim");
+//    if($this->form_validation->run()==FALSE)
+//    {
+//        $data["alerterror"]=validation_errors();
+//        $data["page"]="createcareer";
+//        $data['player']=$this->players_model->getdropdown();
+//        $data["title"]="Create career";
+//        $this->load->view("template",$data);
+//    }
+//    else
+//    {
+//        $player=$this->input->get_post("player");
+//        $name=$this->input->get_post("name");
+//        $year=$this->input->get_post("year");
+////        $status=$this->input->get_post("status");
+//     
+//    if($this->career_model->create($player,$name,$year)==0)
+//    $data["alerterror"]="New career could not be created.";
+//    else
+//    $data["alertsuccess"]="career created Successfully.";
+//    $data["redirect"]="site/viewcareer?id=".$player;
+//    $this->load->view("redirect2",$data);
+//    }
+//}
+public function editcareer()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data['player']=$this->players_model->getdropdown();
+    $data["page"]="editcareer";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data["title"]="Edit career";
+    $data["before"]=$this->career_model->beforeedit($this->input->get("id"));
+    $this->load->view("templatewith2",$data);
+}
+public function editcareersubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("matchplayed","matchplayed","trim");
+    $this->form_validation->set_rules("totalpoints","totalpoints","trim");
+    $this->form_validation->set_rules("totalraidpoints","totalraidpoints","trim");
+    $this->form_validation->set_rules("totaldefencepoints","totaldefencepoints","trim");
+    $this->form_validation->set_rules("raids","raids","trim");
+    $this->form_validation->set_rules("successfulraids","successfulraids","trim");
+    $this->form_validation->set_rules("unsuccessfulraids","unsuccessfulraids","trim");
+    $this->form_validation->set_rules("emptyraids","emptyraids","trim");
+    $this->form_validation->set_rules("tackles","tackles","trim");
+    $this->form_validation->set_rules("successfultackles","successfultackles","trim");
+    $this->form_validation->set_rules("unsuccessfultackles","unsuccessfultackles","trim");
+    $this->form_validation->set_rules("greencards","greencards","trim");
+    $this->form_validation->set_rules("redcards","redcards","trim");
+    $this->form_validation->set_rules("yellowcards","yellowcards","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editcareer";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Edit career";
+        $data["before"]=$this->career_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+      
+        $player=$this->input->get_post("player");
+        $matchplayed=$this->input->get_post("matchplayed");
+        $totalpoints=$this->input->get_post("totalpoints");
+        $totalraidpoints=$this->input->get_post("totalraidpoints");
+        $totaldefencepoints=$this->input->get_post("totaldefencepoints");
+        $raids=$this->input->get_post("raids");
+        $successfulraids=$this->input->get_post("successfulraids");
+        $unsuccessfulraids=$this->input->get_post("unsuccessfulraids");
+        $emptyraids=$this->input->get_post("emptyraids");
+        $tackles=$this->input->get_post("tackles");
+        $successfultackles=$this->input->get_post("successfultackles");
+        $unsuccessfultackles=$this->input->get_post("unsuccessfultackles");
+        $greencards=$this->input->get_post("greencards");
+        $redcards=$this->input->get_post("redcards");
+        $yellowcards=$this->input->get_post("yellowcards");
+     
+    if($this->career_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+    $data["alerterror"]="New career could not be Updated.";
+    else
+    $data["alertsuccess"]="career Updated Successfully.";
+    $data["redirect"]="site/viewcareer?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function deletecareer()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->career_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewcareer?id=".$this->input->get("playerid");
+    $this->load->view("redirect2",$data);
+}
+   
 
 }
 ?>
