@@ -82,7 +82,7 @@
 					<input class="file-path validate" type="text" placeholder="Upload Small Image" value="<?php echo set_value('smallimage',$before->smallimage);?>">
 				</div>
 			</div>
-			  <span style=" display: block;">1278px X 637px</span>
+			<span style=" display: block;">486px X 492px</span>
 		</div>
         <div class="row">
 			<div class="file-field input-field col m6 s12">
@@ -99,7 +99,7 @@
 					<input class="file-path validate" type="text" placeholder="Upload big Image" value="<?php echo set_value('bigimage',$before->bigimage);?>">
 				</div>
 			</div>
-			  <span style=" display: block;">1278px X 637px</span>
+			<span style=" display: block;">685px X 1128px</span>
 		</div>
         
         

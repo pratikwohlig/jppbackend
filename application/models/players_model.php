@@ -15,6 +15,8 @@ class players_model extends CI_Model
         else
         {
             $insertcareer=$this->db->query("INSERT INTO `career`(`player`) VALUES ($id)");
+            $insertcareer=$this->db->query("INSERT INTO `current`(`player`) VALUES ($id)");
+            $insertcareer=$this->db->query("INSERT INTO `lastseason`(`player`) VALUES ($id)");
             return  $id;
         }
     }

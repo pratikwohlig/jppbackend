@@ -74,6 +74,7 @@
 					<input class="file-path validate" type="text" placeholder="Upload Small Image" value="<?php echo set_value('smallimage');?>">
 				</div>
 			</div>
+			<span style=" display: block;">486px X 492px</span>
 		</div>
         
         <div class="row">
@@ -86,6 +87,7 @@
 					<input class="file-path validate" type="text" placeholder="Upload Small Image" value="<?php echo set_value('bigimage');?>">
 				</div>
 			</div>
+			<span style=" display: block;">685px X 1128px</span>
 		</div>
         
         <div class="row">

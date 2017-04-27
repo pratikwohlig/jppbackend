@@ -345,7 +345,7 @@ $data['message'] = $this->restapi_model->getAllPoints();
         $data['message'] = $this->news_model->getsinglenews($id);
         $this->load->view('json', $data);
     }
-    public function getallplayers()
+    public function getallplayersold()
     {
         $elements = array();
         $elements[0] = new stdClass();
@@ -1007,6 +1007,170 @@ $this->email->message('Testing the email class.');
 $this->email->send();
 
 echo $this->email->print_debugger();
+    }
+    
+    // Player functions by avinash
+    
+    function getallplayers()
+{
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`jpp_players`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`jpp_players`.`order`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Order";
+    $elements[1]->alias="order";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`jpp_players`.`type`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Type";
+    $elements[2]->alias="type";
+    
+    $elements[3]=new stdClass();
+    $elements[3]->field="`jpp_players`.`name`";
+    $elements[3]->sort="1";
+    $elements[3]->header="Name";
+    $elements[3]->alias="name";
+    
+    $elements[4]=new stdClass();
+    $elements[4]->field="`jpp_players`.`nationality`";
+    $elements[4]->sort="1";
+    $elements[4]->header="Nationality";
+    $elements[4]->alias="nationality";
+    
+    $elements[5]=new stdClass();
+    $elements[5]->field="`jpp_players`.`jerseyno`";
+    $elements[5]->sort="1";
+    $elements[5]->header="Jerseyno";
+    $elements[5]->alias="jerseyno";
+    
+    $elements[6]=new stdClass();
+    $elements[6]->field="`jpp_players`.`about`";
+    $elements[6]->sort="1";
+    $elements[6]->header="About";
+    $elements[6]->alias="about";
+    
+    $elements[7]=new stdClass();
+    $elements[7]->field="`jpp_players`.`dob`";
+    $elements[7]->sort="1";
+    $elements[7]->header="Dob";
+    $elements[7]->alias="dob";
+    
+    $elements[8]=new stdClass();
+    $elements[8]->field="`jpp_players`.`hname`";
+    $elements[8]->sort="1";
+    $elements[8]->header="Hindi Name";
+    $elements[8]->alias="hname";
+    
+    $elements[9]=new stdClass();
+    $elements[9]->field="`jpp_players`.`hnationality`";
+    $elements[9]->sort="1";
+    $elements[9]->header="hnationality";
+    $elements[9]->alias="hnationality";
+    
+    $elements[10]=new stdClass();
+    $elements[10]->field="`jpp_players`.`habout`";
+    $elements[10]->sort="1";
+    $elements[10]->header="habout";
+    $elements[10]->alias="habout";
+    
+    $elements[11]=new stdClass();
+    $elements[11]->field="`jpp_players`.`smallimage`";
+    $elements[11]->sort="1";
+    $elements[11]->header="smallimage";
+    $elements[11]->alias="smallimage";
+    
+    $elements[12]=new stdClass();
+    $elements[12]->field="`jpp_players`.`bigimage`";
+    $elements[12]->sort="1";
+    $elements[12]->header="bigimage";
+    $elements[12]->alias="bigimage";
+    
+    $elements[13]=new stdClass();
+    $elements[13]->field="`jpp_players`.`fb`";
+    $elements[13]->sort="1";
+    $elements[13]->header="fb";
+    $elements[13]->alias="fb";
+    
+    $elements[14]=new stdClass();
+    $elements[14]->field="`jpp_players`.`twitter`";
+    $elements[14]->sort="1";
+    $elements[14]->header="twitter";
+    $elements[14]->alias="twitter";
+    
+    $elements[15]=new stdClass();
+    $elements[15]->field="`jpp_players`.`instagram`";
+    $elements[15]->sort="1";
+    $elements[15]->header="instagram";
+    $elements[15]->alias="instagram";
+    
+    $elements[16]=new stdClass();
+    $elements[16]->field="`jpp_players`.`country`";
+    $elements[16]->sort="1";
+    $elements[16]->header="country";
+    $elements[16]->alias="country";
+    
+    $elements[17]=new stdClass();
+    $elements[17]->field="`jpp_players`.`nativeplace`";
+    $elements[17]->sort="1";
+    $elements[17]->header="nativeplace";
+    $elements[17]->alias="nativeplace";
+    
+    $elements[18]=new stdClass();
+    $elements[18]->field="`jpp_players`.`weight`";
+    $elements[18]->sort="1";
+    $elements[18]->header="weight";
+    $elements[18]->alias="weight";
+    
+    $elements[19]=new stdClass();
+    $elements[19]->field="`jpp_players`.`height`";
+    $elements[19]->sort="1";
+    $elements[19]->header="height";
+    $elements[19]->alias="height";
+    
+    $elements[20]=new stdClass();
+    $elements[20]->field="`jpp_players`.`status`";
+    $elements[20]->sort="1";
+    $elements[20]->header="status";
+    $elements[20]->alias="status";
+    
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    
+    if($maxrow=="")
+    {
+        $maxrow=20;
+    }
+    if($orderby=="")
+    {
+        $orderby="order";
+        $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_players`","WHERE `jpp_players`.`status`=1");
+    $this->load->view("json",$data);
+}
+    
+    
+    public function getsingleplayer()
+    {
+        $id = $this->input->get_post('id');
+        $data['message'] = $this->restapi_model->getSinglePlayer($id);
+        $this->load->view('json', $data);
+    }
+    
+    public function getpantherworldguesswho()
+    {
+        $data['message'] = $this->restapi_model->getPantherWorldGuessWho();
+        $this->load->view('json', $data);
     }
     
 }

@@ -19,6 +19,14 @@
     echo 'active';
 } ?>" href="<?php echo site_url('site/viewcareer?id=').$before2; ?>">Career</a></li> 
  
+            <li><a class="waves-effect waves-light <?php if ($this->uri->segment(2) == 'viewcurrent' || $this->uri->segment(2) == 'createcurrent'  || $this->uri->segment(2) == 'editcurrent') {
+    echo 'active';
+} ?>" href="<?php echo site_url('site/viewcurrent?id=').$before2; ?>">Current</a></li> 
+ 
+            <li><a class="waves-effect waves-light <?php if ($this->uri->segment(2) == 'viewlastseason' || $this->uri->segment(2) == 'createlastseason'  || $this->uri->segment(2) == 'editlastseason') {
+    echo 'active';
+} ?>" href="<?php echo site_url('site/viewlastseason?id=').$before2; ?>">Last Season</a></li> 
+ 
         </ul>
     </div>
 </section>

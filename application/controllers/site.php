@@ -5173,7 +5173,7 @@ public function deleteachievment()
     $this->load->view("redirect2",$data);
 }
   
-      
+// career functions      
     
 public function viewcareer()
 {
@@ -5426,6 +5426,659 @@ public function deletecareer()
     $this->load->view("redirect2",$data);
 }
    
+// current functions
+    
+public function viewcurrent()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewcurrent";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get('id');
+    $data["before2"]=$this->input->get('id');
+    $data["base_url"]=site_url("site/viewcurrentjson?id=").$this->input->get('id');
+    $data["title"]="View current";
+    $this->load->view("templatewith2",$data);
+}
+function viewcurrentjson()
+{
+    $id=$this->input->get('id');
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`current`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`current`.`matchplayed`";
+    $elements[1]->sort="1";
+    $elements[1]->header="matchplayed";
+    $elements[1]->alias="matchplayed";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`current`.`totalpoints`";
+    $elements[2]->sort="1";
+    $elements[2]->header="totalpoints";
+    $elements[2]->alias="totalpoints";
+
+    $elements[3]=new stdClass();
+    $elements[3]->field="`current`.`totalraidpoints`";
+    $elements[3]->sort="1";
+    $elements[3]->header="totalraidpoints";
+    $elements[3]->alias="totalraidpoints";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`current`.`player`";
+    $elements[4]->sort="1";
+    $elements[4]->header="playerid";
+    $elements[4]->alias="playerid";
+    
+    $elements[5]=new stdClass();
+    $elements[5]->field="`current`.`totaldefencepoints`";
+    $elements[5]->sort="1";
+    $elements[5]->header="totaldefencepoints";
+    $elements[5]->alias="totaldefencepoints";
+
+    $elements[6]=new stdClass();
+    $elements[6]->field="`current`.`raids`";
+    $elements[6]->sort="1";
+    $elements[6]->header="raids";
+    $elements[6]->alias="raids";
+
+    $elements[7]=new stdClass();
+    $elements[7]->field="`current`.`successfulraids`";
+    $elements[7]->sort="1";
+    $elements[7]->header="successfulraids";
+    $elements[7]->alias="successfulraids";
+
+    $elements[8]=new stdClass();
+    $elements[8]->field="`current`.`unsuccessfulraids`";
+    $elements[8]->sort="1";
+    $elements[8]->header="unsuccessfulraids";
+    $elements[8]->alias="unsuccessfulraids";
+
+    $elements[9]=new stdClass();
+    $elements[9]->field="`current`.`emptyraids`";
+    $elements[9]->sort="1";
+    $elements[9]->header="emptyraids";
+    $elements[9]->alias="emptyraids";
+
+    $elements[10]=new stdClass();
+    $elements[10]->field="`current`.`tackles`";
+    $elements[10]->sort="1";
+    $elements[10]->header="tackles";
+    $elements[10]->alias="tackles";
+
+    $elements[11]=new stdClass();
+    $elements[11]->field="`current`.`successfultackles`";
+    $elements[11]->sort="1";
+    $elements[11]->header="successfultackles";
+    $elements[11]->alias="successfultackles";
+
+    $elements[12]=new stdClass();
+    $elements[12]->field="`current`.`unsuccessfultackles`";
+    $elements[12]->sort="1";
+    $elements[12]->header="unsuccessfultackles";
+    $elements[12]->alias="unsuccessfultackles";
+
+    $elements[13]=new stdClass();
+    $elements[13]->field="`current`.`greencards`";
+    $elements[13]->sort="1";
+    $elements[13]->header="greencards";
+    $elements[13]->alias="greencards";
+
+    $elements[14]=new stdClass();
+    $elements[14]->field="`current`.`redcards`";
+    $elements[14]->sort="1";
+    $elements[14]->header="redcards";
+    $elements[14]->alias="redcards";
+
+    $elements[15]=new stdClass();
+    $elements[15]->field="`current`.`yellowcards`";
+    $elements[15]->sort="1";
+    $elements[15]->header="yellowcards";
+    $elements[15]->alias="yellowcards";
+
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="id";
+    $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `current` LEFT OUTER JOIN `jpp_players` ON `jpp_players`.`id`=`current`.`player`","WHERE `current`.`player`='$id'");
+    $this->load->view("json",$data);
+}
+
+//public function createcurrent()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $data["page"]="createcurrent";
+//    $data["page2"]="block/playerblock";
+//    $data["before1"]=$this->input->get("id");
+//    $data["before2"]=$this->input->get("id");
+//    $data['player']=$this->players_model->getdropdown();
+//    $data["title"]="Create current";
+//    $this->load->view("templatewith2",$data);
+//}
+//public function createcurrentsubmit()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $this->form_validation->set_rules("player","player","trim");
+//    $this->form_validation->set_rules("name","name","trim");
+//    $this->form_validation->set_rules("year","year","trim");
+//    if($this->form_validation->run()==FALSE)
+//    {
+//        $data["alerterror"]=validation_errors();
+//        $data["page"]="createcurrent";
+//        $data['player']=$this->players_model->getdropdown();
+//        $data["title"]="Create current";
+//        $this->load->view("template",$data);
+//    }
+//    else
+//    {
+//        $player=$this->input->get_post("player");
+//        $name=$this->input->get_post("name");
+//        $year=$this->input->get_post("year");
+////        $status=$this->input->get_post("status");
+//     
+//    if($this->current_model->create($player,$name,$year)==0)
+//    $data["alerterror"]="New current could not be created.";
+//    else
+//    $data["alertsuccess"]="current created Successfully.";
+//    $data["redirect"]="site/viewcurrent?id=".$player;
+//    $this->load->view("redirect2",$data);
+//    }
+//}
+public function editcurrent()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data['player']=$this->players_model->getdropdown();
+    $data["page"]="editcurrent";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data["title"]="Edit current";
+    $data["before"]=$this->current_model->beforeedit($this->input->get("id"));
+    $this->load->view("templatewith2",$data);
+}
+public function editcurrentsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("matchplayed","matchplayed","trim");
+    $this->form_validation->set_rules("totalpoints","totalpoints","trim");
+    $this->form_validation->set_rules("totalraidpoints","totalraidpoints","trim");
+    $this->form_validation->set_rules("totaldefencepoints","totaldefencepoints","trim");
+    $this->form_validation->set_rules("raids","raids","trim");
+    $this->form_validation->set_rules("successfulraids","successfulraids","trim");
+    $this->form_validation->set_rules("unsuccessfulraids","unsuccessfulraids","trim");
+    $this->form_validation->set_rules("emptyraids","emptyraids","trim");
+    $this->form_validation->set_rules("tackles","tackles","trim");
+    $this->form_validation->set_rules("successfultackles","successfultackles","trim");
+    $this->form_validation->set_rules("unsuccessfultackles","unsuccessfultackles","trim");
+    $this->form_validation->set_rules("greencards","greencards","trim");
+    $this->form_validation->set_rules("redcards","redcards","trim");
+    $this->form_validation->set_rules("yellowcards","yellowcards","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editcurrent";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Edit current";
+        $data["before"]=$this->current_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+      
+        $player=$this->input->get_post("player");
+        $matchplayed=$this->input->get_post("matchplayed");
+        $totalpoints=$this->input->get_post("totalpoints");
+        $totalraidpoints=$this->input->get_post("totalraidpoints");
+        $totaldefencepoints=$this->input->get_post("totaldefencepoints");
+        $raids=$this->input->get_post("raids");
+        $successfulraids=$this->input->get_post("successfulraids");
+        $unsuccessfulraids=$this->input->get_post("unsuccessfulraids");
+        $emptyraids=$this->input->get_post("emptyraids");
+        $tackles=$this->input->get_post("tackles");
+        $successfultackles=$this->input->get_post("successfultackles");
+        $unsuccessfultackles=$this->input->get_post("unsuccessfultackles");
+        $greencards=$this->input->get_post("greencards");
+        $redcards=$this->input->get_post("redcards");
+        $yellowcards=$this->input->get_post("yellowcards");
+     
+    if($this->current_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+    $data["alerterror"]="New current could not be Updated.";
+    else
+    $data["alertsuccess"]="current Updated Successfully.";
+    $data["redirect"]="site/viewcurrent?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function deletecurrent()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->current_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewcurrent?id=".$this->input->get("playerid");
+    $this->load->view("redirect2",$data);
+}
+   
+   
+public function viewlastseason()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewlastseason";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get('id');
+    $data["before2"]=$this->input->get('id');
+    $data["base_url"]=site_url("site/viewlastseasonjson?id=").$this->input->get('id');
+    $data["title"]="View lastseason";
+    $this->load->view("templatewith2",$data);
+}
+function viewlastseasonjson()
+{
+    $id=$this->input->get('id');
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`lastseason`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`lastseason`.`matchplayed`";
+    $elements[1]->sort="1";
+    $elements[1]->header="matchplayed";
+    $elements[1]->alias="matchplayed";
+    
+    $elements[2]=new stdClass();
+    $elements[2]->field="`lastseason`.`totalpoints`";
+    $elements[2]->sort="1";
+    $elements[2]->header="totalpoints";
+    $elements[2]->alias="totalpoints";
+
+    $elements[3]=new stdClass();
+    $elements[3]->field="`lastseason`.`totalraidpoints`";
+    $elements[3]->sort="1";
+    $elements[3]->header="totalraidpoints";
+    $elements[3]->alias="totalraidpoints";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`lastseason`.`player`";
+    $elements[4]->sort="1";
+    $elements[4]->header="playerid";
+    $elements[4]->alias="playerid";
+    
+    $elements[5]=new stdClass();
+    $elements[5]->field="`lastseason`.`totaldefencepoints`";
+    $elements[5]->sort="1";
+    $elements[5]->header="totaldefencepoints";
+    $elements[5]->alias="totaldefencepoints";
+
+    $elements[6]=new stdClass();
+    $elements[6]->field="`lastseason`.`raids`";
+    $elements[6]->sort="1";
+    $elements[6]->header="raids";
+    $elements[6]->alias="raids";
+
+    $elements[7]=new stdClass();
+    $elements[7]->field="`lastseason`.`successfulraids`";
+    $elements[7]->sort="1";
+    $elements[7]->header="successfulraids";
+    $elements[7]->alias="successfulraids";
+
+    $elements[8]=new stdClass();
+    $elements[8]->field="`lastseason`.`unsuccessfulraids`";
+    $elements[8]->sort="1";
+    $elements[8]->header="unsuccessfulraids";
+    $elements[8]->alias="unsuccessfulraids";
+
+    $elements[9]=new stdClass();
+    $elements[9]->field="`lastseason`.`emptyraids`";
+    $elements[9]->sort="1";
+    $elements[9]->header="emptyraids";
+    $elements[9]->alias="emptyraids";
+
+    $elements[10]=new stdClass();
+    $elements[10]->field="`lastseason`.`tackles`";
+    $elements[10]->sort="1";
+    $elements[10]->header="tackles";
+    $elements[10]->alias="tackles";
+
+    $elements[11]=new stdClass();
+    $elements[11]->field="`lastseason`.`successfultackles`";
+    $elements[11]->sort="1";
+    $elements[11]->header="successfultackles";
+    $elements[11]->alias="successfultackles";
+
+    $elements[12]=new stdClass();
+    $elements[12]->field="`lastseason`.`unsuccessfultackles`";
+    $elements[12]->sort="1";
+    $elements[12]->header="unsuccessfultackles";
+    $elements[12]->alias="unsuccessfultackles";
+
+    $elements[13]=new stdClass();
+    $elements[13]->field="`lastseason`.`greencards`";
+    $elements[13]->sort="1";
+    $elements[13]->header="greencards";
+    $elements[13]->alias="greencards";
+
+    $elements[14]=new stdClass();
+    $elements[14]->field="`lastseason`.`redcards`";
+    $elements[14]->sort="1";
+    $elements[14]->header="redcards";
+    $elements[14]->alias="redcards";
+
+    $elements[15]=new stdClass();
+    $elements[15]->field="`lastseason`.`yellowcards`";
+    $elements[15]->sort="1";
+    $elements[15]->header="yellowcards";
+    $elements[15]->alias="yellowcards";
+
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="id";
+    $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `lastseason` LEFT OUTER JOIN `jpp_players` ON `jpp_players`.`id`=`lastseason`.`player`","WHERE `lastseason`.`player`='$id'");
+    $this->load->view("json",$data);
+}
+
+//public function createlastseason()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $data["page"]="createlastseason";
+//    $data["page2"]="block/playerblock";
+//    $data["before1"]=$this->input->get("id");
+//    $data["before2"]=$this->input->get("id");
+//    $data['player']=$this->players_model->getdropdown();
+//    $data["title"]="Create lastseason";
+//    $this->load->view("templatewith2",$data);
+//}
+//public function createlastseasonsubmit()
+//{
+//    $access=array("1");
+//    $this->checkaccess($access);
+//    $this->form_validation->set_rules("player","player","trim");
+//    $this->form_validation->set_rules("name","name","trim");
+//    $this->form_validation->set_rules("year","year","trim");
+//    if($this->form_validation->run()==FALSE)
+//    {
+//        $data["alerterror"]=validation_errors();
+//        $data["page"]="createlastseason";
+//        $data['player']=$this->players_model->getdropdown();
+//        $data["title"]="Create lastseason";
+//        $this->load->view("template",$data);
+//    }
+//    else
+//    {
+//        $player=$this->input->get_post("player");
+//        $name=$this->input->get_post("name");
+//        $year=$this->input->get_post("year");
+////        $status=$this->input->get_post("status");
+//     
+//    if($this->lastseason_model->create($player,$name,$year)==0)
+//    $data["alerterror"]="New lastseason could not be created.";
+//    else
+//    $data["alertsuccess"]="lastseason created Successfully.";
+//    $data["redirect"]="site/viewlastseason?id=".$player;
+//    $this->load->view("redirect2",$data);
+//    }
+//}
+public function editlastseason()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data['player']=$this->players_model->getdropdown();
+    $data["page"]="editlastseason";
+    $data["page2"]="block/playerblock";
+    $data["before1"]=$this->input->get("id");
+    $data["before2"]=$this->input->get("id");
+    $data["title"]="Edit lastseason";
+    $data["before"]=$this->lastseason_model->beforeedit($this->input->get("id"));
+    $this->load->view("templatewith2",$data);
+}
+public function editlastseasonsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("player","player","trim");
+    $this->form_validation->set_rules("matchplayed","matchplayed","trim");
+    $this->form_validation->set_rules("totalpoints","totalpoints","trim");
+    $this->form_validation->set_rules("totalraidpoints","totalraidpoints","trim");
+    $this->form_validation->set_rules("totaldefencepoints","totaldefencepoints","trim");
+    $this->form_validation->set_rules("raids","raids","trim");
+    $this->form_validation->set_rules("successfulraids","successfulraids","trim");
+    $this->form_validation->set_rules("unsuccessfulraids","unsuccessfulraids","trim");
+    $this->form_validation->set_rules("emptyraids","emptyraids","trim");
+    $this->form_validation->set_rules("tackles","tackles","trim");
+    $this->form_validation->set_rules("successfultackles","successfultackles","trim");
+    $this->form_validation->set_rules("unsuccessfultackles","unsuccessfultackles","trim");
+    $this->form_validation->set_rules("greencards","greencards","trim");
+    $this->form_validation->set_rules("redcards","redcards","trim");
+    $this->form_validation->set_rules("yellowcards","yellowcards","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editlastseason";
+        $data['player']=$this->players_model->getdropdown();
+        $data["title"]="Edit lastseason";
+        $data["before"]=$this->lastseason_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+      
+        $player=$this->input->get_post("player");
+        $matchplayed=$this->input->get_post("matchplayed");
+        $totalpoints=$this->input->get_post("totalpoints");
+        $totalraidpoints=$this->input->get_post("totalraidpoints");
+        $totaldefencepoints=$this->input->get_post("totaldefencepoints");
+        $raids=$this->input->get_post("raids");
+        $successfulraids=$this->input->get_post("successfulraids");
+        $unsuccessfulraids=$this->input->get_post("unsuccessfulraids");
+        $emptyraids=$this->input->get_post("emptyraids");
+        $tackles=$this->input->get_post("tackles");
+        $successfultackles=$this->input->get_post("successfultackles");
+        $unsuccessfultackles=$this->input->get_post("unsuccessfultackles");
+        $greencards=$this->input->get_post("greencards");
+        $redcards=$this->input->get_post("redcards");
+        $yellowcards=$this->input->get_post("yellowcards");
+     
+    if($this->lastseason_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+    $data["alerterror"]="New lastseason could not be Updated.";
+    else
+    $data["alertsuccess"]="lastseason Updated Successfully.";
+    $data["redirect"]="site/viewlastseason?id=".$player;
+    $this->load->view("redirect2",$data);
+    }
+}
+public function deletelastseason()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->lastseason_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewlastseason?id=".$this->input->get("playerid");
+    $this->load->view("redirect2",$data);
+}
+   
+    
+    public function viewpantherworldguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="viewpantherworldguesswho";
+        $data["base_url"]=site_url("site/viewpantherworldguesswhojson");
+        $data["title"]="View pantherworldguesswho";
+        $this->load->view("template",$data);
+    }
+    function viewpantherworldguesswhojson()
+    {
+        $elements=array();
+        
+        $elements[0]=new stdClass();
+        $elements[0]->field="`jpp_pantherworldguesswho`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`jpp_pantherworldguesswho`.`image`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Image";
+        $elements[1]->alias="image";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`jpp_pantherworldguesswho`.`link`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Link";
+        $elements[2]->alias="link";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`jpp_pantherworldguesswho`.`status`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Status";
+        $elements[3]->alias="status";
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_pantherworldguesswho`");
+        $this->load->view("json",$data);
+    }
+
+    public function createpantherworldguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="createpantherworldguesswho";
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["title"]="Create pantherworldguesswho";
+        $this->load->view("template",$data);
+    }
+    public function createpantherworldguesswhosubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data[ 'type' ] =$this->pantherworldguesswho_model->gettypedropdown();
+            $data["page"]="createpantherworldguesswho";
+            $data["title"]="Create pantherworldguesswho";
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            if($this->pantherworldguesswho_model->create($image,$link,$status)==0)
+                $data["alerterror"]="New pantherworldguesswho could not be created.";
+            else
+                $data["alertsuccess"]="pantherworldguesswho created Successfully.";
+            $data["redirect"]="site/viewpantherworldguesswho";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function editpantherworldguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="editpantherworldguesswho";
+        $data["before1"]=$this->input->get('id');
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["before2"]=$this->input->get('id');
+        $data["title"]="Edit pantherworldguesswho";
+        $data["before"]=$this->pantherworldguesswho_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    public function editpantherworldguesswhosubmit()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->form_validation->set_rules("id","ID","trim");
+        $this->form_validation->set_rules("link","link","trim");
+        $this->form_validation->set_rules("status","status","trim");
+        if($this->form_validation->run()==FALSE)
+        {
+            $data["alerterror"]=validation_errors();
+            $data["page"]="editpantherworldguesswho";
+            $data[ 'status' ] =$this->user_model->getstatusdropdown();
+            $data["title"]="Edit pantherworldguesswho";
+            $data["before"]=$this->pantherworldguesswho_model->beforeedit($this->input->get("id"));
+            $this->load->view("template",$data);
+        }
+        else
+        {
+            $id=$this->input->get_post("id");
+            $image=$this->input->get_post("image");
+            $link=$this->input->get_post("link");
+            $status=$this->input->get_post("status");
+            $image=$this->menu_model->createImage();
+            $type=$this->input->get_post("type");
+            if($this->pantherworldguesswho_model->edit($id,$image,$link,$status)==0)
+                $data["alerterror"]="New pantherworldguesswho could not be Updated.";
+            else
+                $data["alertsuccess"]="pantherworldguesswho Updated Successfully.";
+            $data["redirect"]="site/viewpantherworldguesswho";
+            $this->load->view("redirect",$data);
+        }
+    }
+    public function deletepantherworldguesswho()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $this->pantherworldguesswho_model->delete($this->input->get("id"));
+        $data["redirect"]="site/viewpantherworldguesswho";
+        $this->load->view("redirect",$data);
+    }
+
+
 
 }
 ?>

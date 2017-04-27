@@ -358,6 +358,49 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
         }
     }
     
+public function getSinglePlayer($id)
+{
+    $query['player']=$this->db->query("SELECT `id`, `order`, `type`, `name`, `nationality`, `jerseyno`, `about`, `dob`, `hname`, `hnationality`, `habout`, `smallimage`, `bigimage`, `fb`, `twitter`, `instagram`, `country`, `nativeplace`, `weight`, `height`, `status` FROM `jpp_players` WHERE `id`=$id")->row();
+    $query['player']->career=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `career` WHERE `player`=$id")->row();
+    $query['player']->current=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `current` WHERE `player`=$id")->row();
+    $query['player']->lastseason=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `lastseason` WHERE `player`=$id")->row();
+    
+  $query['tournamentplayed']=$this->db->query("SELECT `id`, `player`, `name`, `year` FROM `tournamentplayed` WHERE `player`=$id")->result();
+  $query['achievmant']=$this->db->query("SELECT `id`, `player`, `name`, `year` FROM `achievment` WHERE `player`=$id")->result();
+    
+  $query['alsoview']=$this->db->query("SELECT `id`, `order`, `type`, `name`, `nationality`, `jerseyno`, `about`, `dob`, `hname`, `hnationality`, `habout`, `smallimage`, `bigimage`, `fb`, `twitter`, `instagram`, `country`, `nativeplace`, `weight`, `height`, `status` FROM `jpp_players` WHERE `id`!=$id ")->result();
+    
+  if($query)
+  {
+    $obj->value = true;
+    $obj->data = $query;
+    return $obj;
+  }
+  else
+  {
+    $obj->value = false;
+    $obj->data = "No data found";
+    return $obj;
+  }
+}
+    
+    public function getPantherWorldGuessWho()
+    {
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_pantherworldguesswho` WHERE `status`=1")->row();
+  
+        if($query)
+        {
+            $obj->value = true;
+            $obj->data = $query;
+            return $obj;
+        }
+        else
+        {
+            $obj->value = false;
+            $obj->data = "No data found";
+            return $obj;
+        }
+    }
     
     
 }
