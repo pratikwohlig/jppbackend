@@ -105,49 +105,49 @@
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="fb">fb</label>
+            <label for="fb">Facebook</label>
             <input type="text" id="fb" name="fb" value='<?php echo set_value('fb',$before->fb);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="twitter">twitter</label>
+            <label for="twitter">Twitter</label>
             <input type="text" id="twitter" name="twitter" value='<?php echo set_value('twitter',$before->twitter);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="instagram">instagram</label>
+            <label for="instagram">Instagram</label>
             <input type="text" id="instagram" name="instagram" value='<?php echo set_value('instagram',$before->instagram);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="country">country</label>
+            <label for="country">Country</label>
             <input type="text" id="country" name="country" value='<?php echo set_value('country',$before->country);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="nativeplace">nativeplace</label>
+            <label for="nativeplace">Native Place</label>
             <input type="text" id="nativeplace" name="nativeplace" value='<?php echo set_value('nativeplace',$before->nativeplace);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="weight">weight</label>
+            <label for="weight">Weight</label>
             <input type="text" id="weight" name="weight" value='<?php echo set_value('weight',$before->weight);?>'>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s6">
-            <label for="height">height</label>
+            <label for="height">Height</label>
             <input type="text" id="height" name="height" value='<?php echo set_value('height',$before->height);?>'>
             </div>
         </div>
