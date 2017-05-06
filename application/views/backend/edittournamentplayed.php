@@ -23,6 +23,12 @@
     </div>
       <div class="row">
         <div class="input-field col s6">
+            <label for="Namehindi">Name In Hindi</label>
+            <input type="text" id="namehindi" name="namehindi" value='<?php echo set_value('namehindi',$before->namehindi);?>'>
+        </div>
+    </div>
+      <div class="row">
+        <div class="input-field col s6">
             <label for="Year">Year</label>
             <input type="text" id="year" name="year" value='<?php echo set_value('year',$before->year);?>'>
         </div>

@@ -124,7 +124,7 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row"  style="display:none;">
             <div class="input-field col s6">
             <label for="country">Country</label>
             <input type="text" id="country" name="country" value='<?php echo set_value('country',$before->country);?>'>
@@ -135,6 +135,13 @@
             <div class="input-field col s6">
             <label for="nativeplace">Native Place</label>
             <input type="text" id="nativeplace" name="nativeplace" value='<?php echo set_value('nativeplace',$before->nativeplace);?>'>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s6">
+            <label for="nativeplacehindi">Native Place (In Hindi)</label>
+            <input type="text" id="nativeplacehindi" name="nativeplacehindi" value='<?php echo set_value('nativeplacehindi',$before->nativeplacehindi);?>'>
             </div>
         </div>
         

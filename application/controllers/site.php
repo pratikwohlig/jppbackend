@@ -2206,6 +2206,12 @@ function viewplayersjson()
     $elements[20]->header="status";
     $elements[20]->alias="status";
     
+    $elements[21]=new stdClass();
+    $elements[21]->field="`jpp_players`.`nativeplacehindi`";
+    $elements[21]->sort="1";
+    $elements[21]->header="nativeplacehindi";
+    $elements[21]->alias="nativeplacehindi";
+    
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -2253,6 +2259,7 @@ public function createplayerssubmit()
     $this->form_validation->set_rules("weight","weight","trim");
     $this->form_validation->set_rules("height","height","trim");
     $this->form_validation->set_rules("status","status","trim");
+    $this->form_validation->set_rules("nativeplacehindi","nativeplacehindi","trim");
     if($this->form_validation->run()==FALSE)
     {
         $data["alerterror"]=validation_errors();
@@ -2282,6 +2289,7 @@ public function createplayerssubmit()
         $weight=$this->input->get_post("weight");
         $height=$this->input->get_post("height");
         $status=$this->input->get_post("status");
+        $nativeplacehindi=$this->input->get_post("nativeplacehindi");
         
         $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -2305,7 +2313,7 @@ public function createplayerssubmit()
             $bigimage=$uploaddata['file_name'];
 		}
         
-        if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)==0)
+        if($this->players_model->create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status,$nativeplacehindi)==0)
         $data["alerterror"]="New players could not be created.";
         else
         $data["alertsuccess"]="players created Successfully.";
@@ -2346,6 +2354,7 @@ public function editplayerssubmit()
     $this->form_validation->set_rules("weight","weight","trim");
     $this->form_validation->set_rules("height","height","trim");
     $this->form_validation->set_rules("status","status","trim");
+    $this->form_validation->set_rules("nativeplacehindi","nativeplacehindi","trim");
     if($this->form_validation->run()==FALSE)
     {
         $data["alerterror"]=validation_errors();
@@ -2377,6 +2386,7 @@ public function editplayerssubmit()
         $weight=$this->input->get_post("weight");
         $height=$this->input->get_post("height");
         $status=$this->input->get_post("status");
+        $nativeplacehindi=$this->input->get_post("nativeplacehindi");
         
         $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -2400,7 +2410,7 @@ public function editplayerssubmit()
             $bigimage=$uploaddata['file_name'];
 		}
         
-        if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)==0)
+        if($this->players_model->edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status,$nativeplacehindi)==0)
         $data["alerterror"]="New players could not be Updated.";
         else
         $data["alertsuccess"]="players Updated Successfully.";
@@ -4900,6 +4910,12 @@ function viewtournamentplayedjson()
     $elements[4]->header="playerid";
     $elements[4]->alias="playerid";
     
+    $elements[5]=new stdClass();
+    $elements[5]->field="`tournamentplayed`.`namehindi`";
+    $elements[5]->sort="1";
+    $elements[5]->header="Name In Hindi";
+    $elements[5]->alias="namehindi";
+    
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -4936,6 +4952,7 @@ public function createtournamentplayedsubmit()
     $this->checkaccess($access);
     $this->form_validation->set_rules("player","player","trim");
     $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("namehindi","namehindi","trim");
     $this->form_validation->set_rules("year","year","trim");
     if($this->form_validation->run()==FALSE)
     {
@@ -4949,10 +4966,11 @@ public function createtournamentplayedsubmit()
     {
         $player=$this->input->get_post("player");
         $name=$this->input->get_post("name");
+        $namehindi=$this->input->get_post("namehindi");
         $year=$this->input->get_post("year");
 //        $status=$this->input->get_post("status");
      
-    if($this->tournamentplayed_model->create($player,$name,$year)==0)
+    if($this->tournamentplayed_model->create($player,$name,$year,$namehindi)==0)
     $data["alerterror"]="New tournamentplayed could not be created.";
     else
     $data["alertsuccess"]="tournamentplayed created Successfully.";
@@ -4980,6 +4998,7 @@ public function edittournamentplayedsubmit()
     $this->form_validation->set_rules("id","ID","trim");
     $this->form_validation->set_rules("player","player","trim");
     $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("namehindi","namehindi","trim");
     $this->form_validation->set_rules("year","year","trim");
     if($this->form_validation->run()==FALSE)
     {
@@ -4996,9 +5015,10 @@ public function edittournamentplayedsubmit()
       
         $player=$this->input->get_post("player");
         $name=$this->input->get_post("name");
+        $namehindi=$this->input->get_post("namehindi");
         $year=$this->input->get_post("year");
      
-    if($this->tournamentplayed_model->edit($id,$player,$name,$year)==0)
+    if($this->tournamentplayed_model->edit($id,$player,$name,$year,$namehindi)==0)
     $data["alerterror"]="New tournamentplayed could not be Updated.";
     else
     $data["alertsuccess"]="tournamentplayed Updated Successfully.";
@@ -5058,6 +5078,12 @@ function viewachievmentjson()
     $elements[4]->header="playerid";
     $elements[4]->alias="playerid";
     
+    $elements[5]=new stdClass();
+    $elements[5]->field="`achievment`.`namehindi`";
+    $elements[5]->sort="1";
+    $elements[5]->header="Name In Hindi";
+    $elements[5]->alias="namehindi";
+    
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -5094,6 +5120,7 @@ public function createachievmentsubmit()
     $this->checkaccess($access);
     $this->form_validation->set_rules("player","player","trim");
     $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("namehindi","namehindi","trim");
     $this->form_validation->set_rules("year","year","trim");
     if($this->form_validation->run()==FALSE)
     {
@@ -5107,10 +5134,11 @@ public function createachievmentsubmit()
     {
         $player=$this->input->get_post("player");
         $name=$this->input->get_post("name");
+        $namehindi=$this->input->get_post("namehindi");
         $year=$this->input->get_post("year");
 //        $status=$this->input->get_post("status");
      
-    if($this->achievment_model->create($player,$name,$year)==0)
+    if($this->achievment_model->create($player,$name,$year,$namehindi)==0)
     $data["alerterror"]="New achievment could not be created.";
     else
     $data["alertsuccess"]="achievment created Successfully.";
@@ -5138,6 +5166,7 @@ public function editachievmentsubmit()
     $this->form_validation->set_rules("id","ID","trim");
     $this->form_validation->set_rules("player","player","trim");
     $this->form_validation->set_rules("name","name","trim");
+    $this->form_validation->set_rules("namehindi","namehindi","trim");
     $this->form_validation->set_rules("year","year","trim");
     if($this->form_validation->run()==FALSE)
     {
@@ -5154,9 +5183,10 @@ public function editachievmentsubmit()
       
         $player=$this->input->get_post("player");
         $name=$this->input->get_post("name");
+        $namehindi=$this->input->get_post("namehindi");
         $year=$this->input->get_post("year");
      
-    if($this->achievment_model->edit($id,$player,$name,$year)==0)
+    if($this->achievment_model->edit($id,$player,$name,$year,$namehindi)==0)
     $data["alerterror"]="New achievment could not be Updated.";
     else
     $data["alertsuccess"]="achievment Updated Successfully.";

@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class achievment_model extends CI_Model
 {
-    public function create($player,$name,$year)
+    public function create($player,$name,$year,$namehindi)
     {
-        $data=array("player" => $player,"name" => $name,"year" => $year);
+        $data=array("player" => $player,"name" => $name,"year" => $year,"namehindi" => $namehindi);
         $query=$this->db->insert( "achievment", $data );
         $id=$this->db->insert_id();
         if(!$query)
@@ -25,9 +25,9 @@ class achievment_model extends CI_Model
         $query=$this->db->get("achievment")->row();
         return $query;
     }
-    public function edit($id,$player,$name,$year)
+    public function edit($id,$player,$name,$year,$namehindi)
     {
-        $data=array("player" => $player,"name" => $name,"year" => $year);
+        $data=array("player" => $player,"name" => $name,"year" => $year,"namehindi" => $namehindi);
         $this->db->where( "id", $id );
         $query=$this->db->update( "achievment", $data );
         return 1;

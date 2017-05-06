@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class players_model extends CI_Model
 {
-    public function create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)
+    public function create($order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status,$nativeplacehindi)
     {
-        $data=array("order" => $order,"type" => $type,"name" => $name,"nationality" => $nationality,"jerseyno" => $jerseyno,"about" => $about,"dob" => $dob,"hname" => $hname,"habout" => $habout,"hnationality" => $hnationality,"smallimage" => $smallimage,"bigimage" => $bigimage,"fb" => $fb,"twitter" => $twitter,"instagram" => $instagram,"country" => $country,"nativeplace" => $nativeplace,"weight" => $weight,"height" => $height,"status" => $status);
+        $data=array("order" => $order,"type" => $type,"name" => $name,"nationality" => $nationality,"jerseyno" => $jerseyno,"about" => $about,"dob" => $dob,"hname" => $hname,"habout" => $habout,"hnationality" => $hnationality,"smallimage" => $smallimage,"bigimage" => $bigimage,"fb" => $fb,"twitter" => $twitter,"instagram" => $instagram,"country" => $country,"nativeplace" => $nativeplace,"weight" => $weight,"height" => $height,"status" => $status,"nativeplacehindi" => $nativeplacehindi);
         $query=$this->db->insert( "jpp_players", $data );
         $id=$this->db->insert_id();
         
@@ -32,7 +32,7 @@ class players_model extends CI_Model
         $query=$this->db->get("jpp_players")->row();
         return $query;
     }
-    public function edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status)
+    public function edit($id,$order,$type,$name,$nationality,$jerseyno,$about,$dob,$hname,$habout,$hnationality,$smallimage,$bigimage,$fb,$twitter,$instagram,$country,$nativeplace,$weight,$height,$status,$nativeplacehindi)
     {
         
         if($smallimage=="")
@@ -45,7 +45,7 @@ class players_model extends CI_Model
             $bigimage=$this->players_model->getbigimagebyid($id);
             $bigimage=$bigimage->bigimage;
         }
-        $data=array("order" => $order,"type" => $type,"name" => $name,"nationality" => $nationality,"jerseyno" => $jerseyno,"about" => $about,"dob" => $dob,"hname" => $hname,"habout" => $habout,"hnationality" => $hnationality,"smallimage" => $smallimage,"bigimage" => $bigimage,"fb" => $fb,"twitter" => $twitter,"instagram" => $instagram,"country" => $country,"nativeplace" => $nativeplace,"weight" => $weight,"height" => $height,"status" => $status);
+        $data=array("order" => $order,"type" => $type,"name" => $name,"nationality" => $nationality,"jerseyno" => $jerseyno,"about" => $about,"dob" => $dob,"hname" => $hname,"habout" => $habout,"hnationality" => $hnationality,"smallimage" => $smallimage,"bigimage" => $bigimage,"fb" => $fb,"twitter" => $twitter,"instagram" => $instagram,"country" => $country,"nativeplace" => $nativeplace,"weight" => $weight,"height" => $height,"status" => $status,"nativeplacehindi" => $nativeplacehindi);
         $this->db->where( "id", $id );
         $query=$this->db->update( "jpp_players", $data );
         return 1;

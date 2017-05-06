@@ -7,7 +7,8 @@
                 <thead>
                 <tr>
                 <th data-field="id">ID</th>
-                <th data-field="name">name</th>
+                <th data-field="name">Name</th>
+                <th data-field="namehindi">Name In Hindi</th>
                 <th data-field="year">year</th>
                 <th data-field="action">action</th>
                 </tr>
@@ -24,7 +25,7 @@
 <script>
 function drawtable(resultrow) {
      
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.name + "</td><td>" + resultrow.year + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad tooltipped' href='<?php echo site_url('site/edittournamentplayed?id=');?>"+resultrow.id+"&playerid="+resultrow.playerid+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad tooltipped' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletetournamentplayed?id='); ?>"+resultrow.id+"&playerid="+resultrow.playerid+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.name + "</td><td>" + resultrow.namehindi + "</td><td>" + resultrow.year + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad tooltipped' href='<?php echo site_url('site/edittournamentplayed?id=');?>"+resultrow.id+"&playerid="+resultrow.playerid+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad tooltipped' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletetournamentplayed?id='); ?>"+resultrow.id+"&playerid="+resultrow.playerid+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

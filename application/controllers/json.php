@@ -1110,11 +1110,11 @@ echo $this->email->print_debugger();
     $elements[15]->header="instagram";
     $elements[15]->alias="instagram";
     
-    $elements[16]=new stdClass();
-    $elements[16]->field="`jpp_players`.`country`";
-    $elements[16]->sort="1";
-    $elements[16]->header="country";
-    $elements[16]->alias="country";
+//    $elements[16]=new stdClass();
+//    $elements[16]->field="`jpp_players`.`country`";
+//    $elements[16]->sort="1";
+//    $elements[16]->header="country";
+//    $elements[16]->alias="country";
     
     $elements[17]=new stdClass();
     $elements[17]->field="`jpp_players`.`nativeplace`";
@@ -1139,6 +1139,12 @@ echo $this->email->print_debugger();
     $elements[20]->sort="1";
     $elements[20]->header="status";
     $elements[20]->alias="status";
+    
+    $elements[21]=new stdClass();
+    $elements[21]->field="`jpp_players`.`nativeplacehindi`";
+    $elements[21]->sort="1";
+    $elements[21]->header="nativeplacehindi";
+    $elements[21]->alias="nativeplacehindi";
     
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");

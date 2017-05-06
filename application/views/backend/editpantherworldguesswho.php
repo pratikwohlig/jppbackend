@@ -23,7 +23,7 @@
                 </div>
             </div>
               <span style=" display: block;
-           ">978px X 705px </span>
+           ">743px X 453px </span>
         </div>
         <div class="row">
             <div class="input-field col s6">
