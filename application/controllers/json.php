@@ -995,6 +995,16 @@ public function getsinglevideogallery()
         $this->load->view('json',$data);
         
     }
+    
+    public function signupotpsubmit()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $otp=$data['otp'];
+        $hashcode=$data['hashcode'];
+        $data['message']=$this->user_model->signupotpsubmit($hashcode,$otp);
+        $this->load->view('json',$data);
+    }
+    
     public function test123()
     {
         $this->load->library('email');
@@ -1178,5 +1188,53 @@ echo $this->email->print_debugger();
         $data['message'] = $this->restapi_model->getPantherWorldGuessWho();
         $this->load->view('json', $data);
     }
+    
+    //Avinash functions for Signup and Forgot Password Emailer Apis
+    
+     
+    public function forgotpassword()
+    {
+        //set POST variables
+        $email=$this->input->get_post('email');
+        $userid=$this->user_model->getidbyemail($email);
+//        echo "userid=".$userid."end";
+        if($userid=="")
+        {
+            $data['message']="Not A Valid Email.";
+            $this->load->view("json",$data);
+        }
+        else
+        {
+            $hashvalue=base64_encode ($userid."&jpp");
+            $link="<a href='http://jaipurpinkpnthers.com/forgotpassword/$hashvalue'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Change Password.";
+            $data["otp"]=$value;
+            $data["fullname"]=$fullname;
+            $data["link"]=$link;
+            
+            $dig = 3; // Amount of digits
+            $min = pow(10,$dig);
+            $max = pow(10,$dig+1)-1;
+            $value = rand($min, $max);
+            
+            $this->db->update("UPDATE `user` SET `forgototp`='$value',`forgototptimestamp`=NULL  WHERE `id`='$userid'");
+            $htmltext = $this->load->view('emailer/forgotpassword', $data, true);
+            $this->menu_model->emailer($htmltext,'Forgot Password!',$email,$fullname);
+            
+            $data["message"] = 'true';
+            $this->load->view("json", $data);
+        
+        }
+    }
+    
+    public function forgotpasswordsubmit()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $password=$data['password'];
+        $hashcode=$data['hashcode'];
+        $forgototp=$data['otp'];
+        $data['message']=$this->user_model->forgotpasswordsubmit($hashcode,$password,$forgototp);
+        $this->load->view('json',$data);
+    }
+    
     
 }

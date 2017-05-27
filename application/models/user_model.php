@@ -698,19 +698,34 @@ class User_model extends CI_Model
         $query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email'");
         if($query->num_rows == 0)
         {
-            $this->db->query("INSERT INTO `user`(`firstname`, `lastname`, `password`, `email`, `phone`, `accesslevel`, `status`) VALUES ('$firstname','$lastname','$password','$email','$phoneno','3','1')");
-            $user=$this->db->insert_id();
-            $newdata = array(
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'email'     => $email,
-                'accesslevel' => 3,
-                'logged_in' => true,
-                'id'=> $user
-            );
-            $this->session->set_userdata($newdata);
+            $dig = 3; // Amount of digits
+            $min = pow(10,$dig);
+            $max = pow(10,$dig+1)-1;
+            $value = rand($min, $max);
             
-           return $newdata;
+            $fullname=$firstname." ".$lastname;
+            $this->db->query("INSERT INTO `user`(`firstname`, `lastname`, `password`, `email`, `phone`, `accesslevel`, `status`,`otp`) VALUES ('$firstname','$lastname','$password','$email','$phoneno','3','2','$value')");
+            $user=$this->db->insert_id();
+            
+            $hashvalue=base64_encode ($user."&jpp");
+            $link="<a href='http://jaipurpinkpnthers.com/signupotp/$hashvalue'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Verify your Account.";
+            $data["otp"]=$value;
+            $data["fullname"]=$fullname;
+            $data["link"]=$link;
+            $htmltext = $this->load->view('emailer/signup', $data, true);
+            $this->menu_model->emailer($htmltext,'Welcome to the JPP Family!',$email,$fullname);
+//            return $return;
+//            $newdata = array(
+//                'firstname' => $firstname,
+//                'lastname' => $lastname,
+//                'email'     => $email,
+//                'accesslevel' => 3,
+//                'logged_in' => true,
+//                'id'=> $user
+//            );
+//            $this->session->set_userdata($newdata);
+            
+//           return $newdata;
         }
         else
          return false;
@@ -753,6 +768,101 @@ class User_model extends CI_Model
             return $this->session->all_userdata();
         }
     }
+    
+    
+    
+    function signupotpsubmit($hashcode,$otp)
+    {
+        $normalfromhash=base64_decode ($hashcode);
+        $returnvalue=explode("&",$normalfromhash);
+//        print_r($returnvalue);
+//        echo $returnvalue[0]."<br>";
+        $userid=$returnvalue[0];
+        
+        $userdetails=$this->db->query("SELECT * FROM `user` WHERE `id`='$userid' AND `otp`='$otp'")->row();
+        if(!empty($userdetails))
+        {
+            $userdetailsotp=$userdetails->otp;
+            $userdetailsfirstname=$userdetails->firstname;
+            $userdetailslastname=$userdetails->lastname;
+            $userdetailsemail=$userdetails->email;
+            $userdetailsid=$userdetails->id;
+            $updateuser=$this->db->query("UPDATE `user` SET `status`='1' WHERE `id`='$userdetailsid'");
+            $newdata = array(
+                'firstname' => $userdetailsfirstname,
+                'lastname' => $userdetailslastname,
+                'email'     => $userdetailsemail,
+                'accesslevel' => 3,
+                'logged_in' => true,
+                'id'=> $userdetailsid
+            );
+            $this->session->set_userdata($newdata);
+
+            return $newdata;
+        }
+        else
+        {
+            return false;
+        }
+         
+    }
+
+	function getidbyemail($useremail)
+	{
+		$query = $this->db->query("SELECT `id` FROM `user`
+		WHERE `email`='$useremail'")->row();
+        $userid=$query->id;
+		return $userid;
+	}
+    
+    
+    function forgotpasswordsubmit($hashcode,$password,$forgototp)
+    {
+        $normalfromhash=base64_decode ($hashcode);
+        $returnvalue=explode("&",$normalfromhash);
+//        print_r($returnvalue);
+//        echo $returnvalue[0]."<br>";
+        $userid=$returnvalue[0];
+        $password=md5($password);
+        
+        $checkotp=$this->db->query("SELECT * FROM `user` WHERE `id`='$userid' AND `forgototp`='$forgototp'")->row();
+        if(!empty($checkotp))
+        {
+            $query=$this->db->query("UPDATE `user` SET `password`='$password' WHERE `id`='$userid'");
+
+            $getemailbyid=$this->db->query("SELECT `email`,`firstname`,`lastname` FROM `user` WHERE `id`='$userid'")->row();
+            $email=$getemailbyid->email;
+            $firstname=$getemailbyid->firstname;
+            $lastname=$getemailbyid->lastname;
+            $fullname=$firstname." ".$lastname;
+
+            $link="<a href='http://jaipurpinkpnthers.com/login'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Login.";
+            $data["fullname"]=$fullname;
+            $data["link"]=$link;
+    //            
+    //            $dig = 3; // Amount of digits
+    //            $min = pow(10,$dig);
+    //            $max = pow(10,$dig+1)-1;
+    //            $value = rand($min, $max);
+    //            
+    //            $this->db->update("UPDATE `user` SET `forgototp`='$value',`forgototptimestamp`=NULL  WHERE `id`='$userid'");
+
+            $htmltext = $this->load->view('emailer/passwordchangesuccess', $data, true);
+            $this->menu_model->emailer($htmltext,'Forgot Password!',$email,$fullname);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+        if(!$query)
+			return  0;
+		else
+			return  1;
+    }
+
+    
     
 }
 ?>

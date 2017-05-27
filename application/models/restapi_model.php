@@ -323,7 +323,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
       
     public function getJourney()
     {
-        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_journey` WHERE `status`=1")->row();
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_journey`")->row();
   
         if($query)
         {
@@ -342,7 +342,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
       
     public function getCongratulation()
     {
-        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_congratulation` WHERE `status`=1")->row();
+        $query=$this->db->query("SELECT `id`, `image`, `link`, `status`, `timestamp` FROM `jpp_congratulation`")->row();
   
         if($query)
         {
