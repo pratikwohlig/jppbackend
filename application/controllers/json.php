@@ -1000,8 +1000,8 @@ public function getsinglevideogallery()
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $otp=$data['otp'];
-        $hashcode=$data['hashcode'];
-        $data['message']=$this->user_model->signupotpsubmit($hashcode,$otp);
+        $userid=$data['userid'];
+        $data['message']=$this->user_model->signupotpsubmit($userid,$otp);
         $this->load->view('json',$data);
     }
     
@@ -1171,7 +1171,7 @@ echo $this->email->print_debugger();
         $orderby="order";
         $orderorder="ASC";
     }
-    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_players`","WHERE `jpp_players`.`status`=1");
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_players`");
     $this->load->view("json",$data);
 }
     
@@ -1195,8 +1195,10 @@ echo $this->email->print_debugger();
     public function forgotpassword()
     {
         //set POST variables
-        $email=$this->input->get_post('email');
+        $data = json_decode(file_get_contents('php://input'), true);
+        $email=$data['email'];
         $userid=$this->user_model->getidbyemail($email);
+        
 //        echo "userid=".$userid."end";
         if($userid=="")
         {
@@ -1205,9 +1207,21 @@ echo $this->email->print_debugger();
         }
         else
         {
+            
+            $userdetails=$this->user_model->getuserbyemail($email);
+        $firstname=$userdetails->firstname;
+        $lastname=$userdetails->lastname;
+        $email=$userdetails->email;
+        $user=$userdetails->id;
+         $newdata = array(
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email'     => $email,
+                'accesslevel' => 3,
+                'id'=> $user
+            );
             $hashvalue=base64_encode ($userid."&jpp");
             $link="<a href='http://jaipurpinkpnthers.com/forgotpassword/$hashvalue'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Change Password.";
-            $data["otp"]=$value;
             $data["fullname"]=$fullname;
             $data["link"]=$link;
             
@@ -1215,12 +1229,13 @@ echo $this->email->print_debugger();
             $min = pow(10,$dig);
             $max = pow(10,$dig+1)-1;
             $value = rand($min, $max);
-            
-            $this->db->update("UPDATE `user` SET `forgototp`='$value',`forgototptimestamp`=NULL  WHERE `id`='$userid'");
-            $htmltext = $this->load->view('emailer/forgotpassword', $data, true);
+            $data["otp"]=$value;
+//            echo $value." OTP";
+            $this->db->query("UPDATE `user` SET `forgototp`='$value',`forgototptimestamp`=NULL  WHERE `id`='$userid'");
+            $htmltext = $this->load->view('emailer/password', $data, true);
             $this->menu_model->emailer($htmltext,'Forgot Password!',$email,$fullname);
-            
-            $data["message"] = 'true';
+//            $data["userdata"]=$newdata;
+            $data["message"] = $newdata;
             $this->load->view("json", $data);
         
         }
@@ -1230,9 +1245,9 @@ echo $this->email->print_debugger();
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $password=$data['password'];
-        $hashcode=$data['hashcode'];
+        $userid=$data['userid'];
         $forgototp=$data['otp'];
-        $data['message']=$this->user_model->forgotpasswordsubmit($hashcode,$password,$forgototp);
+        $data['message']=$this->user_model->forgotpasswordsubmit($userid,$password,$forgototp);
         $this->load->view('json',$data);
     }
     

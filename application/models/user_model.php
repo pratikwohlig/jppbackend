@@ -712,20 +712,19 @@ class User_model extends CI_Model
             $data["otp"]=$value;
             $data["fullname"]=$fullname;
             $data["link"]=$link;
-            $htmltext = $this->load->view('emailer/signup', $data, true);
+            $htmltext = $this->load->view('emailer/otp', $data, true);
             $this->menu_model->emailer($htmltext,'Welcome to the JPP Family!',$email,$fullname);
 //            return $return;
-//            $newdata = array(
-//                'firstname' => $firstname,
-//                'lastname' => $lastname,
-//                'email'     => $email,
-//                'accesslevel' => 3,
-//                'logged_in' => true,
-//                'id'=> $user
-//            );
+            $newdata = array(
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email'     => $email,
+                'accesslevel' => 3,
+                'id'=> $user
+            );
 //            $this->session->set_userdata($newdata);
             
-//           return $newdata;
+           return $newdata;
         }
         else
          return false;
@@ -771,13 +770,13 @@ class User_model extends CI_Model
     
     
     
-    function signupotpsubmit($hashcode,$otp)
+    function signupotpsubmit($userid,$otp)
     {
-        $normalfromhash=base64_decode ($hashcode);
-        $returnvalue=explode("&",$normalfromhash);
-//        print_r($returnvalue);
-//        echo $returnvalue[0]."<br>";
-        $userid=$returnvalue[0];
+//        $normalfromhash=base64_decode ($hashcode);
+//        $returnvalue=explode("&",$normalfromhash);
+////        print_r($returnvalue);
+////        echo $returnvalue[0]."<br>";
+//        $userid=$returnvalue[0];
         
         $userdetails=$this->db->query("SELECT * FROM `user` WHERE `id`='$userid' AND `otp`='$otp'")->row();
         if(!empty($userdetails))
@@ -814,41 +813,40 @@ class User_model extends CI_Model
         $userid=$query->id;
 		return $userid;
 	}
+    function getuserbyemail($useremail)
+	{
+		$query = $this->db->query("SELECT * FROM `user`
+		WHERE `email`='$useremail'")->row();
+		return $query;
+	}
     
     
-    function forgotpasswordsubmit($hashcode,$password,$forgototp)
+    function forgotpasswordsubmit($userid,$password,$forgototp)
     {
-        $normalfromhash=base64_decode ($hashcode);
-        $returnvalue=explode("&",$normalfromhash);
-//        print_r($returnvalue);
-//        echo $returnvalue[0]."<br>";
-        $userid=$returnvalue[0];
+//        $normalfromhash=base64_decode ($hashcode);
+//        $returnvalue=explode("&",$normalfromhash);
+////        print_r($returnvalue);
+////        echo $returnvalue[0]."<br>";
+//        $userid=$returnvalue[0];
         $password=md5($password);
-        
+        $q="SELECT * FROM `user` WHERE `id`='$userid' AND `forgototp`='$forgototp'";
+        echo $q;
         $checkotp=$this->db->query("SELECT * FROM `user` WHERE `id`='$userid' AND `forgototp`='$forgototp'")->row();
         if(!empty($checkotp))
         {
             $query=$this->db->query("UPDATE `user` SET `password`='$password' WHERE `id`='$userid'");
 
-            $getemailbyid=$this->db->query("SELECT `email`,`firstname`,`lastname` FROM `user` WHERE `id`='$userid'")->row();
-            $email=$getemailbyid->email;
-            $firstname=$getemailbyid->firstname;
-            $lastname=$getemailbyid->lastname;
-            $fullname=$firstname." ".$lastname;
-
-            $link="<a href='http://jaipurpinkpnthers.com/login'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Login.";
-            $data["fullname"]=$fullname;
-            $data["link"]=$link;
-    //            
-    //            $dig = 3; // Amount of digits
-    //            $min = pow(10,$dig);
-    //            $max = pow(10,$dig+1)-1;
-    //            $value = rand($min, $max);
-    //            
-    //            $this->db->update("UPDATE `user` SET `forgototp`='$value',`forgototptimestamp`=NULL  WHERE `id`='$userid'");
-
-            $htmltext = $this->load->view('emailer/passwordchangesuccess', $data, true);
-            $this->menu_model->emailer($htmltext,'Forgot Password!',$email,$fullname);
+//            $getemailbyid=$this->db->query("SELECT `email`,`firstname`,`lastname` FROM `user` WHERE `id`='$userid'")->row();
+//            $email=$getemailbyid->email;
+//            $firstname=$getemailbyid->firstname;
+//            $lastname=$getemailbyid->lastname;
+//            $fullname=$firstname." ".$lastname;
+//
+//            $link="<a href='http://jaipurpinkpnthers.com/login'><img src='http://jaipurpinkpanthers.com/emailers/invited/click.png' /></a> To Login.";
+//            $data["fullname"]=$fullname;
+//            $data["link"]=$link;
+//            $htmltext = $this->load->view('emailer/passwordchangesuccess', $data, true);
+//            $this->menu_model->emailer($htmltext,'Forgot Password!',$email,$fullname);
             return true;
         }
         else
@@ -856,10 +854,6 @@ class User_model extends CI_Model
             return false;
         }
         
-        if(!$query)
-			return  0;
-		else
-			return  1;
     }
 
     

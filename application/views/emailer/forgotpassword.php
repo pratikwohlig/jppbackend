@@ -30,7 +30,10 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                                           <b>Hey <?php echo $fullname;?>,</b>
                                           <br>
                                           <br>
-                                          Click Below L To Reset Your Password.
+                                          Your OTP Is <?php echo $otp;?>.
+                                          <br>
+                                          <br>
+                                          Copy Above OTP and Click Below Link To Reset Your Password.
                                           <br>
                                           <br>
                                           <b><?php echo $link;?></b>

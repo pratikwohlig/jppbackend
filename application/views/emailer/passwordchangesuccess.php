@@ -30,7 +30,7 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                                           <b>Hey <?php echo $fullname;?>,</b>
                                           <br>
                                           <br>
-                                          Password Changed Successfully.
+                                          Your Password has been Changed Successfully. Click Below Link to Login.
                                           <br>
                                           <br>
                                           <b><?php echo $link;?></b>
