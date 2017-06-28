@@ -112,7 +112,12 @@
                 <input type="text" id="yellowcards" name="yellowcards" value='<?php echo set_value('yellowcards',$before->yellowcards);?>'>
             </div>
         </div>
-        
+        <div class="row">
+		<div class="input-field col m6 s12">
+			<?php echo form_dropdown( 'status',$status,set_value( 'status',$before->status)); ?>
+				<label> Status</label>
+		</div>
+	</div>
         <div class="row saveclick createbuttonplacement">
 		  <div class="col m12 s12">
 			<button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>

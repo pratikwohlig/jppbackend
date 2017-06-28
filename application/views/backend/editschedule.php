@@ -19,7 +19,7 @@
             </div>
         </div>
        <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s6 hidden">
                 <label for="matchtitle">Match Title</label>
                 <input type="text" id="matchtitle" name="matchtitle" value='<?php echo set_value(' matchtitle ',$before->matchtitle);?>'>
             </div>
@@ -100,6 +100,12 @@
                 <input type="text" id="level" name="level" value='<?php echo set_value(' level ',$before->level);?>'>
             </div>
         </div>
+        <div class="row">
+			<div class="input-field col m6 s12">
+				<?php echo form_dropdown( 'levelstatus',$status,set_value( 'status',$before->levelstatus)); ?>
+					<label>Level Status</label>
+			</div>
+		</div>
         <div class="row">
             <div class="input-field col s6">
                 <label for="Timestamp">Timestamp</label>

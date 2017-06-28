@@ -829,8 +829,7 @@ class User_model extends CI_Model
 ////        echo $returnvalue[0]."<br>";
 //        $userid=$returnvalue[0];
         $password=md5($password);
-        $q="SELECT * FROM `user` WHERE `id`='$userid' AND `forgototp`='$forgototp'";
-        echo $q;
+        
         $checkotp=$this->db->query("SELECT * FROM `user` WHERE `id`='$userid' AND `forgototp`='$forgototp'")->row();
         if(!empty($checkotp))
         {

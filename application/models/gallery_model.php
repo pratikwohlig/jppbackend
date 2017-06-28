@@ -11,6 +11,15 @@ public function create($order,$name,$image1,$type,$season,$hname)
     else if($season==2){
         $seasonname="Season 4";
     }
+    else if($season==3){
+        $seasonname="Kabaddi World Cup 2016";
+    }
+    else if($season==4){
+        $seasonname="Season 5";
+    }
+     $seasonquery = $this->season_model->getsingleseason($season);
+    if($season != "" || $season != "0")
+        $seasonname=$seasonquery->name;
 $data=array("order" => $order,"name" => $name,"image1" => $image1,"image2" => $image2,"type" => $type,"season" => $season,"seasonname" => $seasonname,"hname" => $hname);
 $query=$this->db->insert( "jpp_gallery", $data );
 $id=$this->db->insert_id();
@@ -38,6 +47,15 @@ public function edit($id,$order,$name,$image1,$type,$season,$hname)
     else if($season==2){
         $seasonname="Season 4";
     }
+    else if($season==3){
+        $seasonname="Kabaddi World Cup 2016";
+    }
+    else if($season==4){
+        $seasonname="Season 5";
+    }
+     $seasonquery = $this->season_model->getsingleseason($season);
+    if($season != "" || $season != "0")
+        $seasonname=$seasonquery->name;
 //if($image1=="")
 //{
 //$image1=$this->gallery_model->getimage1byid($id);

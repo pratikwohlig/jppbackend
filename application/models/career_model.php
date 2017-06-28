@@ -25,9 +25,9 @@ class career_model extends CI_Model
         $query=$this->db->get("career")->row();
         return $query;
     }
-    public function edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)
+    public function edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards,$status)
     {
-        $data=array("player" => $player,"matchplayed" => $matchplayed,"totalpoints" => $totalpoints,"totalraidpoints" => $totalraidpoints,"totaldefencepoints" => $totaldefencepoints,"raids" => $raids,"successfulraids" => $successfulraids,"unsuccessfulraids" => $unsuccessfulraids,"emptyraids" => $emptyraids,"tackles" => $tackles,"successfultackles" => $successfultackles,"unsuccessfultackles" => $unsuccessfultackles,"greencards" => $greencards,"redcards" => $redcards,"yellowcards" => $yellowcards);
+        $data=array("player" => $player,"matchplayed" => $matchplayed,"totalpoints" => $totalpoints,"totalraidpoints" => $totalraidpoints,"totaldefencepoints" => $totaldefencepoints,"raids" => $raids,"successfulraids" => $successfulraids,"unsuccessfulraids" => $unsuccessfulraids,"emptyraids" => $emptyraids,"tackles" => $tackles,"successfultackles" => $successfultackles,"unsuccessfultackles" => $unsuccessfultackles,"greencards" => $greencards,"redcards" => $redcards,"yellowcards" => $yellowcards,"status"=> $status);
         $this->db->where( "id", $id );
         $query=$this->db->update( "career", $data );
         return 1;

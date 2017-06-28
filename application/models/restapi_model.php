@@ -25,11 +25,12 @@ class restapi_model extends CI_Model
     }
     public function getAllPoints()
     {
-         $query=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost` , `jpp_point`.`draw` AS `draw`, `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC")->result();
+         $query=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost` , `jpp_point`.`draw` AS `draw`, `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname`,`jpp_point`.`sd` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC")->result();
+        /*
         for($i=0;$i<count($query);$i++)
         {
             $query[$i]->id = $i+1;
-        }
+        }*/
         return $query;
     }
     public function getAllGallery()
@@ -174,7 +175,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
     }
     public function getLatestMatch()
     {
-         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`matchtitle`, `jpp_stadium`.`name` as `stadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`starttime` as `matchtime`,`jpp_schedule`.`matchtime` as `totalmatchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`level`
+         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`matchtitle`, `jpp_stadium`.`name` as `stadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%a %b %e %Y'), ' ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%a %b %e %Y'), ' ', `starttime`)) ) as `starttimedate`,`jpp_schedule`.`starttime` as `matchtime`,`jpp_schedule`.`matchtime` as `totalmatchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`level`
 FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
@@ -361,9 +362,9 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
 public function getSinglePlayer($id)
 {
     $query['player']=$this->db->query("SELECT `id`, `order`, `type`, `name`, `nationality`, `jerseyno`, `about`, `dob`, `hname`, `hnationality`, `habout`, `smallimage`, `bigimage`, `fb`, `twitter`, `instagram`, `nativeplace`, `weight`, `height`, `status`, `nativeplacehindi` FROM `jpp_players` WHERE `id`=$id")->row();
-    $query['player']->career=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `career` WHERE `player`=$id")->row();
-    $query['player']->current=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `current` WHERE `player`=$id")->row();
-    $query['player']->lastseason=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards` FROM `lastseason` WHERE `player`=$id")->row();
+    $query['player']->career=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards`,`status` FROM `career` WHERE `player`=$id")->row();
+    $query['player']->current=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards`,`status` FROM `current` WHERE `player`=$id")->row();
+    $query['player']->lastseason=$this->db->query("SELECT `id`, `player`, `matchplayed`, `totalpoints`, `totalraidpoints`, `totaldefencepoints`, `raids`, `successfulraids`, `unsuccessfulraids`, `emptyraids`, `tackles`, `successfultackles`, `unsuccessfultackles`, `greencards`, `redcards`, `yellowcards`,`status` FROM `lastseason` WHERE `player`=$id")->row();
     
   $query['tournamentplayed']=$this->db->query("SELECT `id`, `player`, `name`,`namehindi`, `year` FROM `tournamentplayed` WHERE `player`=$id")->result();
   $query['achievmant']=$this->db->query("SELECT `id`, `player`, `name`,`namehindi`, `year` FROM `achievment` WHERE `player`=$id")->result();
@@ -401,7 +402,11 @@ public function getSinglePlayer($id)
             return $obj;
         }
     }
-    
+    public function getallseason()
+    {
+         $query=$this->db->query("SELECT `jpp_season`.`id` AS `id` , `jpp_season`.`name` AS `name`,`jpp_season`.`orderno`  FROM `jpp_season` ORDER BY `orderno` ASC")->result();
+        return $query;
+    }
     
 }
 ?>

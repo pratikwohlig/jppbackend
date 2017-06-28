@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class schedule_model extends CI_Model
 {
-public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)
+public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle,$levelstatus)
 {
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
@@ -14,7 +14,18 @@ public function create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,
     else if($season==2){
         $seasonname="Season 4";
     }
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle);
+    else if($season==3){
+        $seasonname="Kabaddi World Cup 2016";
+    }$seasonquery = $this->season_model->getsingleseason($season);
+    if($season != "" || $season != "0")
+        $seasonname=$seasonquery->name;
+    else if($season==4){
+        $seasonname="Season 5";
+    }
+    $seasonquery = $this->season_model->getsingleseason($season);
+    if($season != "" || $season != "0")
+        $seasonname=$seasonquery->name;
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" => $timestamp,"starttime" => $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle,"levelstatus"=>$levelstatus);
 $query=$this->db->insert( "jpp_schedule", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -33,7 +44,7 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_schedule")->row();
 return $query;
 }
-public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)
+public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle,$levelstatus)
 {
      if($season==1){
         $seasonname="Season 3";
@@ -41,10 +52,19 @@ public function edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttim
     else if($season==2){
         $seasonname="Season 4";
     }
+    else if($season==3){
+        $seasonname="Kabaddi World Cup 2016";
+    }
+    else if($season==4){
+        $seasonname="Season 5";
+    }
+    $seasonquery = $this->season_model->getsingleseason($season);
+    if($season != "" || $season != "0")
+        $seasonname=$seasonquery->name;
     $starttime=$hour.":".$minute;
     $startdate = new DateTime($startdate);
         $startdate = $startdate->format('Y-m-d');
-$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle);
+$data=array("stadium" => $stadium,"team1" => $team1,"team2" => $team2,"bookticket" => $bookticket,"timestamp" =>$timestamp,"starttime"=> $starttime,"score1" => $score1,"score2" => $score2,"startdate" => $startdate,"ishome" => $ishome,"hour" => $hour,"minute" => $minute,"matchtime" => $matchtime,"season" => $season,"seasonname" => $seasonname,"level" => $level,"matchtitle" => $matchtitle,"levelstatus"=>$levelstatus);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_schedule", $data );
 return 1;
@@ -78,7 +98,8 @@ return $return;
     "" => "Select Season",
     "1" => "Season 3",
     "2" => "Season 4",
-    "3" => "Kabaddi World Cup 2016"
+    "4" => "Season 5",
+    "3" => "Kabaddi World Cup 2016",
     );
 
     return $return;

@@ -930,7 +930,8 @@ $data["hour"]=$this->schedule_model->gethourdropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
+$data["status"]=$this->user_model->getstatusdropdown();
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
 }
@@ -952,7 +953,8 @@ $data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
+$data["status"]=$this->user_model->getstatusdropdown();
 $data["page"]="createschedule";
 $data["title"]="Create schedule";
 $this->load->view("template",$data);
@@ -975,7 +977,8 @@ $startdate=$this->input->get_post("startdate");
     $season=$this->input->get_post("season");
     $level=$this->input->get_post("level");
     $matchtitle=$this->input->get_post("matchtitle");
-if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)==0)
+                   $levelstatus=$this->input->get_post("levelstatus");
+if($this->schedule_model->create($stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle,$levelstatus)==0)
 $data["alerterror"]="New schedule could not be created.";
 else
 $data["alertsuccess"]="schedule created Successfully.";
@@ -992,12 +995,13 @@ $data["page2"]="block/scheduleblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["hour"]=$this->schedule_model->gethourdropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["ishome"]=$this->fixture_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
+$data["status"]=$this->user_model->getstatusdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
     if($data["before"]->ishome==1) {
@@ -1023,13 +1027,14 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["hour"]=$this->schedule_model->gethourdropdown();
-    $data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["minute"]=$this->schedule_model->getminutedropdown();
 $data["page"]="editschedule";
 $data["ishome"]=$this->fixture_model->getdropdown();
 $data["stadium"]=$this->stadium_model->getdropdown();
 $data["team1"]=$this->team_model->getdropdown();
 $data["team2"]=$this->team_model->getdropdown();
+$data["status"]=$this->user_model->getstatusdropdown();
 $data["title"]="Edit schedule";
 $data["before"]=$this->schedule_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -1053,7 +1058,8 @@ $score2=$this->input->get_post("score2");
     $season=$this->input->get_post("season");
 		  $level=$this->input->get_post("level");
            $matchtitle=$this->input->get_post("matchtitle");
-if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle)==0)
+                          $levelstatus=$this->input->get_post("levelstatus");
+if($this->schedule_model->edit($id,$stadium,$team1,$team2,$bookticket,$timestamp,$starttime,$score1,$score2,$startdate,$ishome,$hour,$minute,$matchtime,$season,$level,$matchtitle,$levelstatus)==0)
 $data["alerterror"]="New schedule could not be Updated.";
 else
 $data["alertsuccess"]="schedule Updated Successfully.";
@@ -1426,7 +1432,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="creategallery";
 $data['type']=$this->gallery_model->gettypedropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1442,7 +1448,7 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="creategallery";
 $data['type']=$this->gallery_model->gettypedropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["title"]="Create gallery";
 $this->load->view("template",$data);
 }
@@ -1504,7 +1510,7 @@ $this->checkaccess($access);
 $data["page"]="editgallery";
 $data["page2"]="block/galleryblock";
 $data['type']=$this->gallery_model->gettypedropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["title"]="Edit gallery";
@@ -1523,7 +1529,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data['type']=$this->gallery_model->gettypedropdown();
-$data["season"]=$this->schedule_model->getseasondropdown();
+$data["season"]=$this->season_model->getseasondropdown();
 $data["page"]="editgallery";
 $data["title"]="Edit gallery";
 $data["before"]=$this->gallery_model->beforeedit($this->input->get("id"));
@@ -2998,6 +3004,11 @@ $elements[4]->field="`jpp_team`.`content`";
 $elements[4]->sort="1";
 $elements[4]->header="Content";
 $elements[4]->alias="content";
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_team`.`appimage`";
+$elements[5]->sort="1";
+$elements[5]->header="Appimage";
+$elements[5]->alias="appimage";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -3033,6 +3044,7 @@ $this->checkaccess($access);
 $this->form_validation->set_rules("type","Type","trim");
 $this->form_validation->set_rules("name","Name","trim");
 $this->form_validation->set_rules("image","Image","trim");
+$this->form_validation->set_rules("appimage","App Image","trim");
 $this->form_validation->set_rules("content","Content","trim");
 if($this->form_validation->run()==FALSE)
 {
@@ -3048,11 +3060,13 @@ $language=$this->input->get_post("language");
 $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+$appimage=$this->input->get_post("appimage");
 $content=$this->input->get_post("content");
 $hname=$this->input->get_post("hname");
 $hcontent=$this->input->get_post("hcontent");
 $image=$this->menu_model->createImage();
-if($this->team_model->create($type,$name,$image,$content,$hname,$hcontent)==0)
+$appimage=$this->menu_model->createImage();
+if($this->team_model->create($type,$name,$image,$content,$hname,$hcontent,$appimage)==0)
 $data["alerterror"]="New team could not be created.";
 else
 $data["alertsuccess"]="team created Successfully.";
@@ -3077,6 +3091,7 @@ $this->form_validation->set_rules("id","ID","trim");
 $this->form_validation->set_rules("type","Type","trim");
 $this->form_validation->set_rules("name","Name","trim");
 $this->form_validation->set_rules("image","Image","trim");
+$this->form_validation->set_rules("appimage","App Image","trim");
 $this->form_validation->set_rules("content","Content","trim");
 if($this->form_validation->run()==FALSE)
 {
@@ -3092,11 +3107,23 @@ $id=$this->input->get_post("id");
 $type=$this->input->get_post("type");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
+//$appimage=$this->input->get_post("appimage");
 $content=$this->input->get_post("content");
 $hname=$this->input->get_post("hname");
 $hcontent=$this->input->get_post("hcontent");
 $image=$this->menu_model->createImage();
-if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent)==0)
+//$appimage=$this->menu_model->createImage();
+$config['upload_path'] = './uploads/';
+$config['allowed_types'] = 'gif|jpg|png';
+$this->load->library('upload', $config);
+$filename="appimage";
+$appimage="";
+if (  $this->upload->do_upload($filename))
+{
+    $uploaddata = $this->upload->data();
+    $appimage=$uploaddata['file_name'];
+}
+if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent,$appimage)==0)
 $data["alerterror"]="New team could not be Updated.";
 else
 $data["alertsuccess"]="team Updated Successfully.";
@@ -5317,6 +5344,12 @@ function viewcareerjson()
     $elements[15]->header="yellowcards";
     $elements[15]->alias="yellowcards";
 
+    $elements[16]=new stdClass();
+    $elements[16]->field="`career`.`status`";
+    $elements[16]->sort="1";
+    $elements[16]->header="status";
+    $elements[16]->alias="status";
+
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -5386,6 +5419,7 @@ public function editcareer()
     $data["page2"]="block/playerblock";
     $data["before1"]=$this->input->get("id");
     $data["before2"]=$this->input->get("id");
+    $data["status"]=$this->user_model->getstatusdropdown();
     $data["title"]="Edit career";
     $data["before"]=$this->career_model->beforeedit($this->input->get("id"));
     $this->load->view("templatewith2",$data);
@@ -5415,6 +5449,7 @@ public function editcareersubmit()
         $data["alerterror"]=validation_errors();
         $data["page"]="editcareer";
         $data['player']=$this->players_model->getdropdown();
+        $data["status"]=$this->user_model->getstatusdropdown();
         $data["title"]="Edit career";
         $data["before"]=$this->career_model->beforeedit($this->input->get("id"));
         $this->load->view("template",$data);
@@ -5438,8 +5473,8 @@ public function editcareersubmit()
         $greencards=$this->input->get_post("greencards");
         $redcards=$this->input->get_post("redcards");
         $yellowcards=$this->input->get_post("yellowcards");
-     
-    if($this->career_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+     	$status=$this->input->get_post("status");
+    if($this->career_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards,$status)==0)
     $data["alerterror"]="New career could not be Updated.";
     else
     $data["alertsuccess"]="career Updated Successfully.";
@@ -5569,7 +5604,11 @@ function viewcurrentjson()
     $elements[15]->sort="1";
     $elements[15]->header="yellowcards";
     $elements[15]->alias="yellowcards";
-
+    $elements[16]=new stdClass();
+    $elements[16]->field="`current`.`status`";
+    $elements[16]->sort="1";
+    $elements[16]->header="status";
+    $elements[16]->alias="status"; 	
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -5639,6 +5678,7 @@ public function editcurrent()
     $data["page2"]="block/playerblock";
     $data["before1"]=$this->input->get("id");
     $data["before2"]=$this->input->get("id");
+    $data["status"]=$this->user_model->getstatusdropdown();
     $data["title"]="Edit current";
     $data["before"]=$this->current_model->beforeedit($this->input->get("id"));
     $this->load->view("templatewith2",$data);
@@ -5668,6 +5708,7 @@ public function editcurrentsubmit()
         $data["alerterror"]=validation_errors();
         $data["page"]="editcurrent";
         $data['player']=$this->players_model->getdropdown();
+        $data["status"]=$this->user_model->getstatusdropdown();
         $data["title"]="Edit current";
         $data["before"]=$this->current_model->beforeedit($this->input->get("id"));
         $this->load->view("template",$data);
@@ -5691,8 +5732,8 @@ public function editcurrentsubmit()
         $greencards=$this->input->get_post("greencards");
         $redcards=$this->input->get_post("redcards");
         $yellowcards=$this->input->get_post("yellowcards");
-     
-    if($this->current_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+     	$status=$this->input->get_post("status");
+    if($this->current_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards,$status)==0)
     $data["alerterror"]="New current could not be Updated.";
     else
     $data["alertsuccess"]="current Updated Successfully.";
@@ -5822,6 +5863,11 @@ function viewlastseasonjson()
     $elements[15]->header="yellowcards";
     $elements[15]->alias="yellowcards";
 
+    $elements[16]=new stdClass();
+    $elements[16]->field="`lastseason`.`status`";
+    $elements[16]->sort="1";
+    $elements[16]->header="status";
+    $elements[16]->alias="status";
     $search=$this->input->get_post("search");
     $pageno=$this->input->get_post("pageno");
     $orderby=$this->input->get_post("orderby");
@@ -5891,6 +5937,7 @@ public function editlastseason()
     $data["page2"]="block/playerblock";
     $data["before1"]=$this->input->get("id");
     $data["before2"]=$this->input->get("id");
+    $data["status"]=$this->user_model->getstatusdropdown();
     $data["title"]="Edit lastseason";
     $data["before"]=$this->lastseason_model->beforeedit($this->input->get("id"));
     $this->load->view("templatewith2",$data);
@@ -5920,6 +5967,7 @@ public function editlastseasonsubmit()
         $data["alerterror"]=validation_errors();
         $data["page"]="editlastseason";
         $data['player']=$this->players_model->getdropdown();
+        $data["status"]=$this->user_model->getstatusdropdown();
         $data["title"]="Edit lastseason";
         $data["before"]=$this->lastseason_model->beforeedit($this->input->get("id"));
         $this->load->view("template",$data);
@@ -5943,8 +5991,9 @@ public function editlastseasonsubmit()
         $greencards=$this->input->get_post("greencards");
         $redcards=$this->input->get_post("redcards");
         $yellowcards=$this->input->get_post("yellowcards");
+        $status=$this->input->get_post("status");
      
-    if($this->lastseason_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards)==0)
+    if($this->lastseason_model->edit($id,$player,$matchplayed,$totalpoints,$totalraidpoints,$totaldefencepoints,$raids,$successfulraids,$unsuccessfulraids,$emptyraids,$tackles,$successfultackles,$unsuccessfultackles,$greencards,$redcards,$yellowcards,$status)==0)
     $data["alerterror"]="New lastseason could not be Updated.";
     else
     $data["alertsuccess"]="lastseason Updated Successfully.";
@@ -6108,6 +6157,167 @@ public function deletelastseason()
         $this->load->view("redirect",$data);
     }
 
+    // season
+
+    public function viewseason()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewseason";
+$data["base_url"]=site_url("site/viewseasonjson");
+$data["title"]="View season";
+$this->load->view("template",$data);
+}
+function viewseasonjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`jpp_season`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`jpp_season`.`name`";
+$elements[1]->sort="1";
+$elements[1]->header="Name";
+$elements[1]->alias="name";
+$elements[2]=new stdClass();
+$elements[2]->field="`jpp_season`.`orderno`";
+$elements[2]->sort="1";
+$elements[2]->header="orderno";
+$elements[2]->alias="orderno";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_season`");
+$this->load->view("json",$data);
+}
+
+public function createseason()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createseason";
+$data["title"]="Create season";
+$this->load->view("template",$data);
+}
+public function createseasonsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("orderno","Orderno","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createseason";
+$data["title"]="Create season";
+$this->load->view("template",$data);
+}
+else
+{
+$name=$this->input->get_post("name");
+$orderno=$this->input->get_post("orderno");
+if($this->season_model->create($name,$orderno)==0)
+$data["alerterror"]="New season could not be created.";
+else
+$data["alertsuccess"]="season created Successfully.";
+$data["redirect"]="site/viewseason";
+$this->load->view("redirect",$data);
+}
+}
+public function editseason()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editseason";
+$data["before1"]=$this->input->get('id');
+$data["title"]="Edit season";
+$data["before"]=$this->season_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editseasonsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("name","Name","trim");
+$this->form_validation->set_rules("orderno","Orderno","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editseason";
+$data["title"]="Edit season";
+$data["before"]=$this->season_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$name=$this->input->get_post("name");
+$orderno=$this->input->get_post("orderno");
+if($this->season_model->edit($id,$name,$orderno)==0)
+$data["alerterror"]="New season could not be Updated.";
+else
+$data["alertsuccess"]="season Updated Successfully.";
+$data["redirect"]="site/viewseason";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteseason()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->season_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewseason";
+$this->load->view("redirect",$data);
+}
+
+public function viewapphomepage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["before"]=$this->team_model->beforeeditapphomeimage();
+$data["page"]="viewapphomeimage";
+$data["title"]="View App Home Image";
+$this->load->view("template",$data);
+}
+public function apphomeimagesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+//$this->form_validation->set_rules("image","App Home Image","trim");
+/*if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="viewapphomeimage";
+$data["before"]=$this->team_model->beforeeditapphomeimage();
+$data["title"]="View App Home Image";
+$this->load->view("template",$data);
+}
+else*/
+{
+$image=$this->input->get_post("image");
+$image=$this->menu_model->createImage();
+if($this->team_model->apphomecreate($image)==0)
+$data["alerterror"]="New App Home Image could not be created.";
+else
+$data["alertsuccess"]="New App Home Image created Successfully.";
+$data["redirect"]="site/viewapphomepage";
+$this->load->view("redirect",$data);
+}
+}
 
 
 }

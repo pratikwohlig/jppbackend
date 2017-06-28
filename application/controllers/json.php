@@ -536,33 +536,40 @@ public function getsinglewallpapercategory()
         $elements[0]->header = 'ID';
         $elements[0]->alias = 'id';
 
-        $elements = array();
+        //$elements = array();
         $elements[1] = new stdClass();
         $elements[1]->field = '`jpp_team`.`type`';
         $elements[1]->sort = '1';
         $elements[1]->header = 'Type';
         $elements[1]->alias = 'type';
 
-        $elements = array();
+        //$elements = array();
         $elements[2] = new stdClass();
         $elements[2]->field = '`jpp_team`.`name`';
         $elements[2]->sort = '1';
         $elements[2]->header = 'Name';
         $elements[2]->alias = 'name';
 
-        $elements = array();
+        //$elements = array();
         $elements[3] = new stdClass();
         $elements[3]->field = '`jpp_team`.`image`';
         $elements[3]->sort = '1';
         $elements[3]->header = 'Image';
         $elements[3]->alias = 'image';
 
-        $elements = array();
+	//$elements = array();
         $elements[4] = new stdClass();
         $elements[4]->field = '`jpp_team`.`content`';
         $elements[4]->sort = '1';
         $elements[4]->header = 'Content';
         $elements[4]->alias = 'content';
+        
+        //$elements = array();
+        $elements[5] = new stdClass();
+        $elements[5]->field = '`jpp_team`.`appimage`';
+        $elements[5]->sort = '1';
+        $elements[5]->header = 'appimage';
+        $elements[5]->alias = 'appimage';
 
         $search = $this->input->get_post('search');
         $pageno = $this->input->get_post('pageno');
@@ -1250,6 +1257,22 @@ echo $this->email->print_debugger();
         $data['message']=$this->user_model->forgotpasswordsubmit($userid,$password,$forgototp);
         $this->load->view('json',$data);
     }
-    
+    public function getAllSeason()
+    {
+        $data['message'] = $this->restapi_model->getallseason();
+        $this->load->view('json', $data);
+    }
+    public function getsingleseason()
+    {
+        $id = $this->input->get_post('id');
+        $data['message'] = $this->session_model->getsingleseason($id);
+        $this->load->view('json', $data);
+    }
+    public function getapphomeimage()
+    {
+        //$id = $this->input->get_post('id');
+        $data['message'] = $this->team_model->beforeeditapphomeimage();
+        $this->load->view('json', $data);
+    }
     
 }

@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class team_model extends CI_Model
 {
-public function create($type,$name,$image,$content,$hname,$hcontent)
+public function create($type,$name,$image,$content,$hname,$hcontent,$appimage)
 {
-$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent);
+$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent,"appimage"=>$appimage);
 $query=$this->db->insert( "jpp_team", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("jpp_team")->row();
 return $query;
 }
-public function edit($id,$type,$name,$image,$content,$hname,$hcontent)
+public function edit($id,$type,$name,$image,$content,$hname,$hcontent,$appimage)
 {
 if($image=="")
 {
 $image=$this->team_model->getimagebyid($id);
 $image=$image->image;
 }
-$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent);
+$data=array("type" => $type,"name" => $name,"image" => $image,"content" => $content,"hname" => $hname,"hcontent" => $hcontent,"appimage" => $appimage);
 $this->db->where( "id", $id );
 $query=$this->db->update( "jpp_team", $data );
 return 1;
@@ -57,6 +57,32 @@ foreach($query as $row)
 $return[$row->id]=$row->name;
 }
 return $return;
+}
+public function apphomecreate($image)
+{
+    $id=0;
+    $data=array("image" => $image);
+    //print_r($data);
+    $q2= $this->db->query("SELECT COUNT(*) as `cnt` FROM `jpp_apphomeimage`")->row();
+    if($q2->cnt == 0)
+    {
+        $query=$this->db->insert( "jpp_apphomeimage", $data );
+    	$id=$this->db->insert_id();
+    	//echo "inserting";
+    }
+    else
+        $query=$this->db->update( "jpp_apphomeimage", $data );
+    if(!$query)
+    echo  $id;
+    else
+    echo  $id;
+
+}
+public function beforeeditapphomeimage()
+{
+//$this->db->where("id",$id);
+$query=$this->db->get("jpp_apphomeimage")->row();
+return $query;
 }
 }
 ?>
