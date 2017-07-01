@@ -2,7 +2,7 @@
     <div class="col s12">
         <h4 class="pad-left-15 capitalize">Create schedule</h4>
     </div>
-    <form class='col s12' method='post' action='<?php echo site_url("site/createschedulesubmit");?>' enctype='multipart/form-data'>
+    <form class='col s12' method='post' name="editscheduleform" class="editscheduleform" id="editscheduleform" action='<?php echo site_url("site/createschedulesubmit");?>' enctype='multipart/form-data'>
          <div class=" row">
             <div class=" input-field col s6">
                 <?php echo form_dropdown("season",$season,set_value('season'));?>
@@ -100,19 +100,20 @@
         </div>
         <div class="row">
 			<div class="input-field col m6 s12">
-				<?php echo form_dropdown( 'levelstatus',$status,set_value( 'status')); ?>
-					<label>Level Status</label>
+				<?php echo form_dropdown( 'levelstatus',$status,set_value( 'status'),"class='levelstatus'"); ?>
+					<label>Match Status</label>
 			</div>
 		</div>
         <div class="row">
             <div class="col s12 m6">
-                <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light blue darken-4 btnsubmit">Save</button>
                 <a href="<?php echo site_url("site/viewschedule"); ?>" class="btn btn-secondary waves-effect waves-light red">Cancel</a>
             </div>
         </div>
     </form>
 </div>
 <script>
+var site_url="<?php echo site_url(); ?>";
     $(document).ready(function() {
 
         function changestarttime() {
@@ -131,6 +132,33 @@
                 $(".chupado").hide();
             }
 
+        });
+        $(".btnsubmit").click(function(){
+            console.log($("select.levelstatus").val());
+            if($("select.levelstatus").val()==1)
+            {
+                var form_data = {scheduleid:0};
+                $.getJSON(site_url+"/json/checkenabledmatchstatus",form_data, function( data ) {
+                    if(data==null || data=="")
+                    {
+                        $("#editscheduleform").submit();
+
+                    }
+                     else
+                    {
+                        alert("Disable Previous Match Status to countinue");
+
+                        var win=window.open(site_url+"/site/editschedule?id="+data.id, '_blank');
+                        win.focus();
+                        return false;
+                    }
+                });
+            }
+            else
+            {
+                    console.log("submitting");
+                 $("#editscheduleform").submit();
+            }
         });
     });
 

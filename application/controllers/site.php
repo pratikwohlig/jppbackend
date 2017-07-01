@@ -900,6 +900,12 @@ $elements[7]->field="`jpp_schedule`.`seasonname`";
 $elements[7]->sort="1";
 $elements[7]->header="Seasonname";
 $elements[7]->alias="seasonname";
+
+ $elements[8]=new stdClass();
+$elements[8]->field="`jpp_schedule`.`startdate`";
+$elements[8]->sort="1";
+$elements[8]->header="startdate";
+$elements[8]->alias="startdate";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -911,8 +917,8 @@ $maxrow=20;
 }
 if($orderby=="")
 {
-$orderby="id";
-$orderorder="ASC";
+$orderby="startdate";
+$orderorder="DESC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_team` as `jppteam1` ON `jppteam1`.`id`=`jpp_schedule`.`team1` LEFT OUTER JOIN `jpp_team` as `jppteam2` ON `jppteam2`.`id`=`jpp_schedule`.`team2` LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`");
@@ -3282,21 +3288,22 @@ $elements[0]->field="`jpp_videogallery`.`id`";
 $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
+
 $elements[1]=new stdClass();
-$elements[1]->field="`jpp_videogallery`.`order`";
+$elements[1]->field="`jpp_videogallery`.`name`";
 $elements[1]->sort="1";
-$elements[1]->header="Order";
-$elements[1]->alias="order";
+$elements[1]->header="Name";
+$elements[1]->alias="name";
 $elements[2]=new stdClass();
-$elements[2]->field="`jpp_videogallery`.`name`";
+$elements[2]->field="`jpp_videogallery`.`image`";
 $elements[2]->sort="1";
-$elements[2]->header="Name";
-$elements[2]->alias="name";
+$elements[2]->header="Image";
+$elements[2]->alias="image";
 $elements[3]=new stdClass();
-$elements[3]->field="`jpp_videogallery`.`image`";
+$elements[3]->field="`jpp_videogallery`.`order`";
 $elements[3]->sort="1";
-$elements[3]->header="Image";
-$elements[3]->alias="image";
+$elements[3]->header="order";
+$elements[3]->alias="order";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -3306,10 +3313,10 @@ if($maxrow=="")
 {
 $maxrow=20;
 }
-if($orderby=="")
+//if($orderby=="")
 {
-$orderby="id";
-$orderorder="ASC";
+$orderby="order";
+$orderorder="DESC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_videogallery`");
 $this->load->view("json",$data);
@@ -6289,6 +6296,7 @@ public function viewapphomepage()
 $access=array("1");
 $this->checkaccess($access);
 $data["before"]=$this->team_model->beforeeditapphomeimage();
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
 $data["page"]="viewapphomeimage";
 $data["title"]="View App Home Image";
 $this->load->view("template",$data);
@@ -6309,8 +6317,9 @@ $this->load->view("template",$data);
 else*/
 {
 $image=$this->input->get_post("image");
+$status=$this->input->get_post("status");
 $image=$this->menu_model->createImage();
-if($this->team_model->apphomecreate($image)==0)
+if($this->team_model->apphomecreate($image,$status)==0)
 $data["alerterror"]="New App Home Image could not be created.";
 else
 $data["alertsuccess"]="New App Home Image created Successfully.";
@@ -6318,7 +6327,66 @@ $data["redirect"]="site/viewapphomepage";
 $this->load->view("redirect",$data);
 }
 }
-
+public function viewcontestscore()
+    {
+        $access=array("1");
+        $this->checkaccess($access);
+        $data["page"]="viewcontestscore";
+        $data["base_url"]=site_url("site/viewcontestscorejson");
+        $data["title"]="View contactus";
+        $this->load->view("template",$data);
+    }
+    function viewcontestscorejson()
+    {
+    $elements=array();
+    $elements[0]=new stdClass();
+    $elements[0]->field="`contestscore`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    $elements[1]=new stdClass();
+    $elements[1]->field="`user`.`email`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Email";
+    $elements[1]->alias="email";
+    $elements[2]=new stdClass();
+    $elements[2]->field="`contestscore`.`createtimestamp`";
+    $elements[2]->sort="1";
+    $elements[2]->header="createtimestamp";
+    $elements[2]->alias="timestamp";
+    $elements[3]=new stdClass();
+    $elements[3]->field="`contest`.`name`";
+    $elements[3]->sort="1";
+    $elements[3]->header="ContestName";
+    $elements[3]->alias="contestname";
+    $elements[4]=new stdClass();
+    $elements[4]->field="`contestscore`.`score`";
+    $elements[4]->sort="1";
+    $elements[4]->header="score";
+    $elements[4]->alias="score";
+    $elements[5]=new stdClass();
+    $elements[5]->field="`user`.`name`";
+    $elements[5]->sort="1";
+    $elements[5]->header="username";
+    $elements[5]->alias="username";
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+    $maxrow=20;
+    }
+    if($orderby=="")
+    {
+    $orderby="createtimestamp";
+    $orderorder="DESC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `contestscore`
+    INNER JOIN `user` ON `user`.`id`=`contestscore`.`user` INNER JOIN `contest` ON `contest`.`id`=`contestscore`.`contest`");
+    $this->load->view("json",$data);
+    }
 
 }
 ?>

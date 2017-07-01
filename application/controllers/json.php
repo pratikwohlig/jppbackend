@@ -1274,5 +1274,22 @@ echo $this->email->print_debugger();
         $data['message'] = $this->team_model->beforeeditapphomeimage();
         $this->load->view('json', $data);
     }
-    
+    public function checkenabledmatchstatus()
+    {
+        $scheduleid = $this->input->get_post('scheduleid');
+        $data['message'] = $this->schedule_model->checkenabledmatchstatus($scheduleid);
+        $this->load->view('json', $data);
+
+    }
+    public function savescore()
+    {
+	$data = json_decode(file_get_contents('php://input'), true);
+	$score=$data['score'];
+        $user=$data['user'];
+        $totalquestions=$data['totalquestions'];
+        $correctanswer=$data['score'];
+        $contest=$data['contest'];
+        $data['message']=$this->contest_model->savescore($user,$contest,$score,$totalquestions,$correctanswer);
+        $this->load->view('json',$data);
+    }
 }

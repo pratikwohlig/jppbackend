@@ -49,7 +49,7 @@
 			</div>
     
             <span style=" display: block;
-            padding-top: 30px;">800px X 800px </span>
+            padding-top: 30px;"> 400 x 400px</span>
 		</div>
 <div class="row">
 <div class="input-field col s12">

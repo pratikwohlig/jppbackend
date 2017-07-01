@@ -22,10 +22,14 @@
 				</div>
 			</div>
     
-              <span style=" display: none;
-           ">800px X 800px </span>
+              <span style=" ">1178px x 860px </span>
 		</div>
-	
+		<div class="row">
+			<div class="input-field col m6 s12">
+				<?php echo form_dropdown( 'status',$status,set_value( 'status',$before->status)); ?>
+					<label>Status</label>
+			</div>
+		</div>
 <div class="row">
 <div class="col s6">
 <button type="submit" class="btn btn-primary waves-effect waves-light  blue darken-4">Save</button>

@@ -139,7 +139,14 @@ return $return;
 
 		return $gender;
 }
-
+public function checkenabledmatchstatus($scheduleid)
+{
+    $query = $this->db->query("SELECT `jpp_schedule`.`id` FROM `jpp_schedule` 
+    WHERE `jpp_schedule`.`id` NOT IN ('$scheduleid') AND `jpp_schedule`.levelstatus = 1 
+    ORDER BY `jpp_schedule`.`startdate` DESC 
+    LIMIT 0,1")->row();
+    return $query;
+}
 
     public function getminutedropdown()
 {

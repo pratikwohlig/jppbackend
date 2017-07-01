@@ -58,10 +58,12 @@ $return[$row->id]=$row->name;
 }
 return $return;
 }
-public function apphomecreate($image)
+public function apphomecreate($image,$status)
 {
     $id=0;
-    $data=array("image" => $image);
+    $data=array("status"=>$status);
+    if($image!="")
+        $data["image"]=$image;
     //print_r($data);
     $q2= $this->db->query("SELECT COUNT(*) as `cnt` FROM `jpp_apphomeimage`")->row();
     if($q2->cnt == 0)
@@ -73,9 +75,9 @@ public function apphomecreate($image)
     else
         $query=$this->db->update( "jpp_apphomeimage", $data );
     if(!$query)
-    echo  $id;
+    return  $id;
     else
-    echo  $id;
+    return $id;
 
 }
 public function beforeeditapphomeimage()

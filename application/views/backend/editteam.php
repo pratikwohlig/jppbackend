@@ -61,7 +61,7 @@
 			</div>
     
               <span style=" display: block;
-           ">800px X 800px </span>
+           ">400 x 400px </span>
 		</div>
 <div class="row">
 <div class="col s12 m6">

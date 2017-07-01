@@ -4,8 +4,8 @@
     </div>
 </div>
 <div class="row">
-    <form class='col s12' method='post' action='<?php echo site_url("site/editschedulesubmit");?>' enctype='multipart/form-data'>
-        <input type="hidden" id="normal-field" class="form-control" name="id" value="<?php echo set_value('id',$before->id);?>" style="display:none;">
+    <form class='col s12' name="editscheduleform" id="editscheduleform" class="editscheduleform" method='post' action='<?php echo site_url("site/editschedulesubmit");?>' enctype='multipart/form-data'>
+        <input type="hidden" id="normal-field" class="form-control scheduleid" name="id" value="<?php echo set_value('id',$before->id);?>" style="display:none;">
                  <div class=" row">
             <div class=" input-field col s6">
                 <?php echo form_dropdown("season",$season,set_value('season',$before->season));?>
@@ -102,8 +102,8 @@
         </div>
         <div class="row">
 			<div class="input-field col m6 s12">
-				<?php echo form_dropdown( 'levelstatus',$status,set_value( 'status',$before->levelstatus)); ?>
-					<label>Level Status</label>
+				<?php echo form_dropdown( 'levelstatus',$status,set_value( 'status',$before->levelstatus),"class='levelstatus'"); ?>
+					<label>Match Status</label>
 			</div>
 		</div>
         <div class="row">
@@ -114,13 +114,14 @@
         </div>
         <div class="row">
             <div class="col s6">
-                <button type="submit" class="btn btn-primary waves-effect waves-light  blue darken-4">Save</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light btnsubmit  blue darken-4">Save</button>
                 <a href='<?php echo site_url("site/viewschedule"); ?>' class='btn btn-secondary waves-effect waves-light red'>Cancel</a>
             </div>
         </div>
     </form>
 </div>
 <script>
+    var site_url="<?php echo site_url(); ?>";
     $(document).ready(function() {
 //        function changestarttime() {
 //            console.log("Changed");
@@ -148,6 +149,33 @@
                 $(".chupado").hide();
             }
 
+        });
+        $(".btnsubmit").click(function(){
+            console.log($("select.levelstatus").val());
+            if($("select.levelstatus").val()==1)
+            {
+                var form_data = {scheduleid:$(".scheduleid").val()};
+                $.getJSON(site_url+"/json/checkenabledmatchstatus",form_data, function( data ) {
+                    if(data==null || data=="")
+                    {
+                        $("#editscheduleform").submit();
+
+                    }
+                     else
+                    {
+                        alert("Disable Previous Match Status to countinue");
+
+                        var win=window.open(site_url+"/site/editschedule?id="+data.id, '_blank');
+                        win.focus();
+                        return false;
+                    }
+                });
+            }
+            else
+            {
+                    console.log("submitting");
+                 $("#editscheduleform").submit();
+            }
         });
     });
 
