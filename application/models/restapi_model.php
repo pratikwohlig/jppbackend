@@ -41,7 +41,7 @@ class restapi_model extends CI_Model
     }
     public function getAllVideoGallery()
     {
-         $query=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` ASC")->result();
+         $query=$this->db->query("SELECT * FROM `jpp_videogallery` ORDER BY `order` DESC")->result();
         return $query;
     }
     public function getAllSliders()
@@ -102,13 +102,25 @@ LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
 WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>'' AND `jpp_schedule`.`timestamp` < NOW() 
 ORDER BY `jpp_schedule`.`startdate` DESC")->result();
-        $query['latestupdate']=$this->db->query("SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
+        /*latestupdate=SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
 FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
 WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>'' AND `jpp_schedule`.`timestamp` < NOW()
-ORDER BY `jpp_schedule`.`startdate` DESC")->row();
+ORDER BY `jpp_schedule`.`startdate` DESC*/
+        $query2=$this->db->query("SELECT `id` FROM `jpp_season` ORDER BY `orderno` DESC LIMIT 0,1")->row();
+        $seasonid=$query2->id;
+        $query['latestupdate']=$this->db->query("SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
+FROM `jpp_schedule`
+LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
+LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
+LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
+WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>'' AND `jpp_schedule`.`starttime` < NOW() AND `jpp_schedule`.`season`='$seasonid'
+ORDER BY `jpp_schedule`.`startdate` DESC,`jpp_schedule`.`starttime` DESC,`jpp_schedule`.`season` DESC
+")->row();
+
+
 $query['latestMatch']=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`matchtitle`, `jpp_stadium`.`name` as `stadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`starttime` as `matchtime`,`jpp_schedule`.`matchtime` as `totalmatchtime`,`jpp_schedule`.`ishome`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
 FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
@@ -118,12 +130,14 @@ WHERE (`jpp_schedule`.`startdate`= CURDATE() OR CONCAT(`jpp_schedule`.`startdate
 ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
         $query['news']=$this->db->query("SELECT `id`, `name`,`hname` AS 'hindiname', `image`, DATE_FORMAT(`timestamp`,'%d %b %Y, %h:%i') as `timestamp`, `content`,`hcontent` AS 'hindicontent' FROM `jpp_news` ORDER BY `id` DESC")->row();
 
-
-        $query['points']=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost`,`jpp_point`.`draw` AS `draw`  , `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC")->result();
+        //ORDER BY `jpp_point`.`point` DESC, `jpp_point`.`sd` DESC
+        $query['points']=$this->db->query("SELECT `jpp_point`.`id` AS `id` , `jpp_point`.`played` AS `played` , `jpp_point`.`wins` AS `wins` , `jpp_point`.`lost` AS `lost`,`jpp_point`.`draw` AS `draw`  , `jpp_point`.`point` AS `point` , `jpp_team`.`name` AS `name`,`jpp_team`.`hname` AS `hindiname` FROM `jpp_point` LEFT OUTER JOIN `jpp_team` ON `jpp_team`.`id`=`jpp_point`.`team` ORDER BY `jpp_team`.`orderno` DESC")->result();
             for($i=0;$i<count($query['points']);$i++)
             {
                 $query['points'][$i]->id = $i+1;
             }
+        $query["apphomeimage"]=$this->db->get("jpp_apphomeimage")->row();
+        $query["sponsorimage"]=$this->db->query("SELECT `image` FROM `jpp_sponsor` ORDER BY `jpp_sponsor`.`order` DESC LIMIT 0,1")->row();
         return $query;
     }
 
@@ -138,7 +152,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
     // }
     public function getSchedule()
     {
-         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`level` FROM `jpp_schedule` LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium` LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1` LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2` WHERE `jpp_schedule`.`score1`='' AND `jpp_schedule`.`score2`='' AND CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) > NOW() ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->result();
+         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2` FROM `jpp_schedule` LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium` LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1` LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2` WHERE `jpp_schedule`.`score1`='' AND `jpp_schedule`.`score2`='' AND CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) > NOW() ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->result();
 
 
         return $query;
@@ -197,15 +211,35 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) ASC")->row();
     }
     public function getScheduleForIosAndroidSeason4()
     {
-         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level` FROM `jpp_schedule`
+        /*SELECT `jpp_schedule`.`id`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `teamimage1`,`jppteam2`.`appimage` as `teamimage2` FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
 WHERE `jpp_schedule`.`season`=2 AND (`jpp_schedule`.`startdate`!=CURDATE() AND `jpp_schedule`.`startdate`< CURDATE())
 GROUP BY `jpp_schedule`.`id`
-ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
-
+ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC*/
+        $query2=$this->db->query("SELECT `id` FROM `jpp_season` ORDER BY `orderno` ASC LIMIT 0,1")->row();
+        $seasonid=$query2->id;
+         /*echo  "SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `teamimage1`,`jppteam2`.`appimage` as `teamimage2`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
+FROM `jpp_schedule`
+LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
+LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
+LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
+LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
+WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>'' AND `jpp_schedule`.`starttime` < NOW() AND `jpp_schedule`.`season`='$seasonid'
+GROUP BY `jpp_schedule`.`id`
+ORDER BY `jpp_schedule`.`startdate` DESC,`jpp_schedule`.`starttime` DESC,`jpp_schedule`.`season` DESC";*/
+         $query=$this->db->query("SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `teamimage1`,`jppteam2`.`appimage` as `teamimage2`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
+FROM `jpp_schedule`
+LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
+LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
+LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
+LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
+WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>'' AND `jpp_schedule`.`starttime` < NOW() AND `jpp_schedule`.`season`='$seasonid'
+GROUP BY `jpp_schedule`.`id`
+ORDER BY `jpp_schedule`.`startdate` DESC,`jpp_schedule`.`starttime` DESC,`jpp_schedule`.`season` DESC")->result();
+        //print_r($query);
         foreach($query as $row){
              $row->fixture=$this->db->query("SELECT `id`, `schedule`, `team1player1name`,`team1player1nameh`, `team1player2name`,`team1player2nameh`, `team1player1score`, `team1player2score`, `team2player1name`,`team2player1nameh`, `team2player2name`,`team2player2nameh`, `team2player1score`, `team2player2score`, `raidpointsteam1`, `raidpointsteam2`, `tacklepointsteam1`, `tacklepointsteam2`, `alloutpointteam1`, `alloutpointteam2`, `extrapointsteam1`, `extrapointsteam2` FROM `jpp_fixture` WHERE `schedule`='$row->id'")->row();
 
@@ -214,7 +248,7 @@ ORDER BY CONCAT(`jpp_schedule`.`startdate`, ' ', `starttime`) DESC")->result();
     }
     public function getScheduleForIosAndroidWorldCup2016()
     {
-         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level` FROM `jpp_schedule`
+         $query=$this->db->query("SELECT `jpp_schedule`.`id`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`,`jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2` FROM `jpp_schedule`
 LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
