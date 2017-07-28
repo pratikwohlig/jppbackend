@@ -1,97 +1,203 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <style>
+        body {
+
+            margin: 0;
+        }
+
+        .main {
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .f_img {
+            width: 100%;
+        }
+
+        div {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .block_1 {
+            background-color: #32a3c6;
+            width: 100%;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .text_1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+            padding: 20px;
+            letter-spacing: 1.2px;
+            margin: auto;
+            height: 12px;
+        }
+
+        .block_2 {
+            width: 93%;
+
+            padding-top: 20px;
+            margin: 0 auto;
+        }
+
+
+        .block_3 {
+            background-color: #32a3c6;
+            height: 250px;
+        }
+
+
+        .f-screen_3 {
+            width: 45%;
+            float: left;
+            padding-top: 40px;
+            padding-left: 40px;
+        }
+
+        .s-screen_3 {
+            width: 45%;
+            float: right;
+            padding-top: 50px;
+
+            padding-right: 20px;
+        }
+
+        .block_5 {
+            padding: 10px;
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .phone_5 {
+            width: 50%;
+            float: left;
+        }
+
+
+        .download-app_5 {
+            width: 50%;
+            float: right;
+            font-family: 'Oswald', sans-serif;
+            margin-top: 20px;
+        }
+        /*footer*/
+
+        .footer {
+            background-color: #32a3c6;
+            width: 100%;
+            height: 45px;
+            clear: both;
+        }
+
+        .img-res {
+            vertical-align: middle;
+            margin: 10px 7px;
+        }
+
+
+        .foo {
+            padding-left: 25px;
+            font-family: 'Hind', sans-serif;
+            letter-spacing: 1.5px;
+            font-size: .7em;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+    </style>
+        </head>
+        
+        <body>
+ <div class="main">
+        <img class="f_img" src="http://jaipurpinkpanthers.com/emailers/mailer/1.jpg" />
+        <div class="block_1 ">
+            <div class="text_1">
+                <div style=" font-weight:300; "> Get exclusive access to the Panthers' universe!</div>
+
+            </div>
+
+
+            <a href="http://jaipurpinkpanthers.com/">
+                <img src="http://jaipurpinkpanthers.com/emailers/mailer/signup.png " style="padding-bottom:10px;" />
+                </a>
+        </div>
+        <div style="margin-top:4px;">
+            <div style="float:left;">
+                <a href="http://jaipurpinkpanthers.com/#/wallpaper"> 
+                <img src="http://jaipurpinkpanthers.com/emailers/mailer/wallpapers.png" style="height:206px; width:295px;"> </a>
+
+            </div>
+            <div style="float:right">
+                <a href="http://jaipurpinkpanthers.com/#/gallery"><img src="http://jaipurpinkpanthers.com/emailers/mailer/gallery.jpg "> </a>
+
+            </div>
+
+            <a href="http://jaipurpinkpanthers.com/#/jpp-tv"> <img src="http://jaipurpinkpanthers.com/emailers/mailer/jpptv.jpg " style="width:100%;"></a>
+        </div>
+
+        <!--end of block 2-->
+        <div class="block_3 ">
+            <div class="f-screen_3">
+                <img src="http://jaipurpinkpanthers.com/emailers/mailer/shirt.png " style="width:100%;"> 
+            </div>
+            <div class="s-screen_3 ">
+                <p style="color: white;  font-size: 17px;">Tackle the challenges and stand a chance to win exclusive JPP tickets and merchandises!
+                </p>
+                <a href="http://jaipurpinkpanthers.com/pantherworld/#/comingsoon">
+                    <img src="http://jaipurpinkpanthers.com/emailers/mailer/explore.png " style="display:block;margin:0 auto;">
+                </a>
+            </div>
+        </div>
 
 
 
+        <div class="block_5 ">
+            <div class="phone_5 ">
+                <img src="http://jaipurpinkpanthers.com/emailers/mailer/3.png ">
+            </div>
+            <div class="download-app_5 ">
+                    <div style="font-weight:700; font-size:50px; ">DOWNLOAD</div>
+                    <div style="font-weight:700; letter-spacing: 1px; ">THE JPP APP ON IOS AND ANDROID</div>
+                    <div style="margin-top:5px; ">
+                        <a href="https://play.google.com/store/apps/details?id=com.jaipurpinkpanthers.android"><img style="margin:0 10px; " src="http://jaipurpinkpanthers.com/emailers/mailer/google.png "></a>
+                        <a href="https://itunes.apple.com/in/app/jaipur-pink-panthers/id1084678272?mt=8"><img style="margin:0 10px; " src="http://jaipurpinkpanthers.com/emailers/mailer/apple.png "></a>
+                    </div>
+
+            </div>
+        </div>
+        <div style=" padding:10px; font-size:17px;">
+            <div class="text "><b>Invite your friends to be a part of the JPP family!</b></div>
+            <a href="http://jaipurpinkpanthers.com/#/invite-friends"><img src="http://jaipurpinkpanthers.com/emailers/mailer/clickhere.png " style="padding:10px;"></a>
+        </div>
 
 
+        <div class="footer ">
 
-  <div style="display:block!important;font-family:&#39;Oswald&#39;,sans-serif;margin:0;padding:0">
+            <div class="foo " style="float:left; margin:10px; margin-top:13px; ">
 
-        <table style="border-collapse:collapse" border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#fff">
-            <tbody>
-                <tr>
-                    <td align="center">
-                        <table style="border-collapse:collapse" border="0" cellpadding="0" cellspacing="0" bgcolor="#093647">
-                            <tbody>
-                                <tr>
-                                    <td colspan="2">
-                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/1a.jpg">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://jaipurpinkpanthers.com/wallpaper" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/2a.jpg"></a>
-                                    </td>
-                                    <td>
-                                        <a href="http://jaipurpinkpanthers.com/gallery" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/3a.jpg"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="http://jaipurpinkpanthers.com/ticket-merchandise" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/4a.jpg"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <table style="border-collapse:collapse" border="0" cellpadding="0" cellspacing="0" bgcolor="#093647">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="https://play.google.com/store/apps/details?id=com.jaipurpinkpanthers.android" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/5a.jpg"></a>
-                                                    </td>
-                                                    <td>
-                                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/6a.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <a href="https://itunes.apple.com/in/app/id1084678272?mt=8" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/7a.jpg"></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="http://jaipurpinkpanthers.com/jpp-tv" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/7.jpg"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="http://jaipurpinkpanthers.com/invite-friends" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/10.jpg"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <table style="border-collapse:collapse" border="0" cellpadding="0" cellspacing="0" bgcolor="#093647">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="http://jaipurpinkpanthers.com/emailers/fancor/8a.jpg">
-                                                    </td>
-                                                    <td>
-                                                        <a href="https://www.facebook.com/JaipurPinkPanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/11.jpg"></a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="https://twitter.com/JaipurPanthers" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/12.jpg"></a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="https://www.instagram.com/jaipur_pinkpanthers/" target="_blank"><img src="http://jaipurpinkpanthers.com/emailers/fancor/13.jpg"></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
+                &copy; 2017 <a href="http://jaipurpinkpanthers.com/">Jaipur Pink Panthers</a>
+            </div>
+            <div class="foo " style="float:right; margin-right:25px; ">
+                Follow US ON
+                <a href="https://www.facebook.com/JaipurPinkPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/5.png " alt="FacebookLink "></a>
+                <a href="https://twitter.com/JaipurPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/6.png " alt="TwitterLink "></a>
+                <a href="https://www.instagram.com/jaipur_pinkpanthers/"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/7.png " alt="instagramLink "></a>
 
-                            </tbody>
+            </div>
+        </div>
+    </div>
 
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
     </div>
 
-</body></html>
+</body>
+
+</html>

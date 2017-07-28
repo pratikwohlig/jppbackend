@@ -4,145 +4,107 @@
 <head>
     <meata charset="UTF-8">
         <title>Emailer</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Dosis:500');
-            @import url('https://fonts.googleapis.com/css?family=Damion');
+      <style>
+        * {
+            box-sizing: border-box;
+        }
 
-            @font-face {
-   font-family: Verdana, sans-serif;
-    src: url("../fonts/Verdana.ttf");
-} 
-            table {
-                width: 600px;
-                margin: 0 auto;
-                border-collapse: collapse;
-                background-image:url("http://admin.jaipurpinkpanthers.com/otpimagesnew/bgs.png");
-               
-            }
-/*
-            body{
-                  background-image:url("http://admin.jaipurpinkpanthers.com/otpimagesnew/bgs.png");
-            }
-            */
-            td {
-                font-family: Verdana, sans-serif;
-            }
-            
-            caption>div.logo {
-                width: 120px;
-                height: auto;
-                padding: 5px 0;
-                display: inline-block;
-            }
-            
-            /*tbody>tr:nth-child(2)>td {
-                font-size: 13pt;
-                padding: 25px 0px;
-                font-family: Helvetica, sans-serif;
-            }*/
-            
-            tfoot {
-                background-color: #4ecaf5;
-                 font-family: "Verdana";
-                color: white;
-                font-size: 15px;
-            }
-            
-            tfoot>ul.list-inline {
-                padding-left: 0;
-                list-style: none;
-                margin-left: -5px;
-            }
-            
-            tfoot>ul {
-                -webkit-margin-before: 0!important;
-                -webkit-margin-after: 0!important;
-            }
-            
-            .list-inline>li {
-                display: inline-block;
-                padding-left: 5px;
-                padding-right: 5px;
-            }
-            
-            .img-responsive {
-                display: block;
-                max-width: 100%;
-                height: auto;
-            }
-            
-            .cpyright {
-                line-height: 1.6;
-                padding: 10px 30px;
-            }
-            
-            .social-icns {
-                padding: 10px 30px;
-            }
-            
-            .social-icns>ul.list-inline>li {
-                vertical-align: -webkit-baseline-middle;
-            }
-        </style>
+        a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+
+        #main {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        .noBorder {
+            border: none !important;
+            padding: 5px;
+            padding-left: 5%;
+            font-family: 'Oswald', sans-serif;
+            line-height: 1;
+            color: aliceblue;
+            letter-spacing: 2.5px;
+            font-size: 20px;
+        }
+
+        .j_footer {
+            background-color: #32a3c6;
+            width: 100%;
+            height: 45px;
+        }
+
+        .img-res {
+            vertical-align: middle;
+            margin: 10px 7px;
+        }
+
+
+        .foo {
+            padding-left: 25px;
+            font-family: 'Hind', sans-serif;
+            letter-spacing: 1.5px;
+            font-size: .7em;
+        }
+
+
+        .img {
+            background-image: url("http://jaipurpinkpanthers.com/emailers/mailer/3.jpg");
+        }
+    </style>
 </head>
 
 <body>
-    <table >
-        <!--<thead>
-            <caption>
-                <div class="logo">
-                    <img src="http://admin.jaipurpinkpanthers.com/otpimagesnew/cmlogo.png" alt="Logo" class="img-responsive">
-                </div>
-            </caption>
-        </thead>-->
-        <tbody>
-            <tr>
-                <td>
- <img src="http://admin.jaipurpinkpanthers.com/otpimagesnew/welcome.png" class="img-responsive" alt="" style="margin: 0 auto;
-    padding: 15px 0;">
-                </td>
-               
-            </tr>
-           
-            <tr>
-                  <td style="padding: 30px 50px 40px;
-    color: #fff;
-    font-weight: 500;
-    font-size: 20px;">
-                   Dear  <span style="color: #b72c7a"><?php echo $fullname;?></span>,<br>Use below OTP to create an account on JPP. <br> 
-                    <?php echo $otp;?> 
-                    <br>
-                    <br><br> CHEERS! 
-                    <br> TEAM JPP
-                </td>
-            </tr>
-        </tbody>
-        <tfoot >
-            <tr>
-                <td>
-                    <div class="cpyright" style="float: left; color:#000;    margin-top: 5px;">
-                        &copy; 2017 Jaipur Pink Panthers
-                    </div>
-                    <div class="social-icns" style="float: right">
-                        <ul class="list-inline" style="-webkit-margin-before: 0!important;-webkit-margin-after: 0!important; -webkit-padding-before: 0 !important;
-    -webkit-padding-start: 0 !important; color:#000;">
-    <li>FOLLOW US ON</li>
-                            <li>
-                                <a href="https://www.facebook.com/JaipurPinkPanthers/" target="_blank"><img src="http://admin.jaipurpinkpanthers.com/otpimagesnew/fb.png" alt="FacebookLink"></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/JaipurPanthers" target="_blank"><img src="http://admin.jaipurpinkpanthers.com/otpimagesnew/tw.png" alt="TwitterLink"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/jaipur_pinkpanthers/
-" target="_blank"><img src="http://admin.jaipurpinkpanthers.com/otpimagesnew/insta.png" alt="InstagramLink"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+        <div id="main">
+        <div class=img>
+            <img src="http://jaipurpinkpanthers.com/emailers/mailer/2.png">
+            <div class=" noBorder">
+                <table width="100%">
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="noBorder" style="padding-bottom:30px;">Dear <?php echo $fullname;?>,</td>
+                    </tr>
+                    <tr>
+                        <td class="noBorder">
+                            Use below OTP to create an account on JPP.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noBorder">
+                            <?php echo $otp;?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noBorder" style="padding-top:35px;line-height:.8">CHEERS!</td>
+                    </tr>
+                    <tr>
+                        <td class="noBorder" style="line-height:.8; padding-bottom:35px;">TEAM JPP</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="j_footer">
+
+            <div class="foo" style="float:left; margin:10px; margin-top:13px;">
+
+                &copy; 2017 <a href="http://jaipurpinkpanthers.com">Jaipur Pink Panthers</a>
+            </div>
+            <div class="foo" style="float:right; margin-right:25px;">
+                Follow US ON
+                <a href="https://www.facebook.com/JaipurPinkPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/5.png " alt="FacebookLink "></a>
+                <a href="https://twitter.com/JaipurPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/6.png " alt="TwitterLink "></a>
+                <a href="https://www.instagram.com/jaipur_pinkpanthers/"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/7.png " alt="instagramLink "></a>
+
+            </div>
+        </div>
+
+    </div>
 </body>
 
 </html>
