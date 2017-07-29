@@ -9,7 +9,7 @@ class Menu_model extends CI_Model
 				
         $this->load->library('email');
         
-        $this->email->from('no-reply@jaipurpinkpanthers.com', 'Jasvir Singh');
+        $this->email->from('no-reply@jaipurpinkpanthers.com', 'Manjeet Chhillar');
         $this->email->to($toemail);
         $this->email->subject($subject);
         $this->email->message($htmltext);
@@ -34,7 +34,7 @@ class Menu_model extends CI_Model
 						'html'      => $htmltext,
 						'text'      => 'Jaipur Pink Panthers',
 						'from'      => 'no-reply@jaipurpinkpanthers.com',
-						'fromname'      => 'Jasvir Singh'
+						'fromname'      => 'Manjeet Chhillar'
 					);
 				$request =  $url.'api/mail.send.json';
 				$session = curl_init($request);

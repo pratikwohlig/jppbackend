@@ -192,7 +192,15 @@
     </style>
 </head>
 
-<body>
+  <body class="body" style="display: block !important; -webkit-text-size-adjust: none; font-family: 'Oswald', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; padding: 0;">
+      <style type="text/css">
+@font-face {
+font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https://fonts.gstatic.com/s/oswald/v11/Y_TKV6o8WovbUd3m_X9aAA.ttf') format('truetype');
+}
+@font-face {
+font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald Bold'), local('Oswald-Bold'), url('https://fonts.gstatic.com/s/oswald/v11/bH7276GfdCjMjApa_dkG6aCWcynf_cDxXwCLxiixG1c.ttf') format('truetype');
+}
+</style>
       <div id="main">
         <div class=img>
             <img src="http://jaipurpinkpanthers.com/emailers/mailer/2.png">
@@ -229,7 +237,7 @@
 
             <div class="foo" style="float:left; margin:10px; margin-top:13px;">
 
-                &copy; 2017 <a href="http://jaipurpinkpanthers.com">Jaipur Pink Panthers</a>
+                &copy; 2017 <a href="http://jaipurpinkpanthers.com" style="color:#000;">Jaipur Pink Panthers</a>
             </div>
             <div class="foo" style="float:right; margin-right:25px;">
                 Follow US ON
