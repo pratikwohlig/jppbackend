@@ -6,17 +6,13 @@
         <title>Emailer</title>
             <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton|Oswald:200,300,400,700" rel="stylesheet">
-      <style>
+     <style>
         * {
             box-sizing: border-box;
         }
 
-        a {
-            text-decoration: none !important;
-            color: inherit;
-        }
 
-        #main {
+        .main {
             width: 600px;
             margin: 0 auto;
         }
@@ -50,11 +46,6 @@
             letter-spacing: 1.5px;
             font-size: .7em;
         }
-
-
-        .img {
-            background-image: url("http://jaipurpinkpanthers.com/emailers/mailer/3.jpg");
-        }
     </style>
 </head>
 
@@ -66,54 +57,72 @@ font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald 
 font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald Bold'), local('Oswald-Bold'), url('https://fonts.gstatic.com/s/oswald/v11/bH7276GfdCjMjApa_dkG6aCWcynf_cDxXwCLxiixG1c.ttf') format('truetype');
 }
 </style>
-        <div id="main">
-        <div class=img>
-            <img src="http://jaipurpinkpanthers.com/emailers/mailer/2.png">
-            <div class=" noBorder">
-                <table width="100%">
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="noBorder" style="padding-bottom:30px;">Dear <?php echo $fullname;?>,</td>
-                    </tr>
-                    <tr>
-                        <td class="noBorder">
-                            Use below OTP to create an account on JPP.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="noBorder">
-                            <?php echo $otp;?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="noBorder" style="padding-top:35px;line-height:.8">CHEERS!</td>
-                    </tr>
-                    <tr>
-                        <td class="noBorder" style="line-height:.8; padding-bottom:35px;">TEAM JPP</td>
-                    </tr>
 
-                </table>
-            </div>
-        </div>
+    <table class="main" style="border-collapse: collapse; border-spacing: 2px;">
+        <tbody class="img" style=" background-image:url('http://jaipurpinkpanthers.com/emailers/mailer/3.jpg');">
+            <tr>
+                <td>
+                    <img src="http://jaipurpinkpanthers.com/emailers/mailer/2.png">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class=" noBorder">
+                        <table width="100%">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="noBorder" style="padding-bottom:30px;">Dear <?php echo $fullname;?>,</td>
+                            </tr>
+                            <tr>
+                                <td class="noBorder">
+                                    Use below OTP to create an account on JPP.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="noBorder">
+                                     <?php echo $otp;?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="noBorder" style="padding-top:35px;line-height:.8">CHEERS!</td>
+                            </tr>
+                            <tr>
+                                <td class="noBorder" style="line-height:.8; padding-bottom:35px;">TEAM JPP</td>
+                            </tr>
 
-        <div class="j_footer">
+                        </table>
 
-            <div class="foo" style="float:left; margin:10px; margin-top:13px;">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="padding:0px; color: #000000;
+    text-decoration: none;">
+                    <div class="j_footer">
 
-                &copy; 2017 <a href="http://jaipurpinkpanthers.com" style="color:#000;">Jaipur Pink Panthers</a>
-            </div>
-            <div class="foo" style="float:right; margin-right:25px;">
-                Follow US ON
-                <a href="https://www.facebook.com/JaipurPinkPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/5.png " alt="FacebookLink "></a>
-                <a href="https://twitter.com/JaipurPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/6.png " alt="TwitterLink "></a>
-                <a href="https://www.instagram.com/jaipur_pinkpanthers/"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/7.png " alt="instagramLink "></a>
+                        <div class="foo" style="float:left; margin:10px; margin-top:13px;color: #000000; ">
 
-            </div>
-        </div>
+                            &copy; 2017 <a href="http://jaipurpinkpanthers.com/" style="color: #000000;
+    text-decoration: none;">Jaipur Pink Panthers</a>
+                        </div>
+                        <div class="foo" style="float:right; margin-right:25px; color: #000000;">
+                            Follow US ON
+                            <a href="https://www.facebook.com/JaipurPinkPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/5.png " alt="FacebookLink "></a>
+                            <a href="https://twitter.com/JaipurPanthers"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/6.png " alt="TwitterLink "></a>
+                            <a href="https://www.instagram.com/jaipur_pinkpanthers/"><img class="img-res " src="http://jaipurpinkpanthers.com/emailers/mailer/7.png " alt="instagramLink "></a>
 
-    </div>
+                        </div>
+                    </div>
+
+
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </body>
 
 </html>
