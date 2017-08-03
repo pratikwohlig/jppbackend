@@ -63,6 +63,19 @@
               <span style=" display: block;
            ">400 x 400px </span>
 		</div>
+
+		<div class="row">
+			<div class="input-field col m6 s12">
+				<label>Zone</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col m6 s12">
+				<?php echo form_dropdown( 'zone',$zone,set_value( 'zone',$before->zone),'class="browser-default" '); ?>
+					
+			</div>
+		</div>
 <div class="row">
 <div class="col s12 m6">
 <label>Content</label>

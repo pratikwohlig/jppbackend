@@ -48,6 +48,7 @@ class Json extends CI_Controller
         $data['message'] = $this->stadium_model->getsinglestadium($id);
         $this->load->view('json', $data);
     }
+    //api for points table
     public function getallpoint()
     {
 

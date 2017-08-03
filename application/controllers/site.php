@@ -3015,6 +3015,11 @@ $elements[5]->field="`jpp_team`.`appimage`";
 $elements[5]->sort="1";
 $elements[5]->header="Appimage";
 $elements[5]->alias="appimage";
+$elements[6]=new stdClass();
+$elements[6]->field="`zone`.`name`";
+$elements[6]->sort="1";
+$elements[6]->header="Zone";
+$elements[6]->alias="zone";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -3029,7 +3034,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_team`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_team` LEFT OUTER JOIN `zone` ON `jpp_team`.`zone`=`zone`.`id`");
 $this->load->view("json",$data);
 }
 
@@ -3037,8 +3042,9 @@ public function createteam()
 {
 $access=array("1");
 $this->checkaccess($access);
-// $data['language']=$this->user_model->getlanguagedropdown();
-// print_r($data['language']);
+$data["zone"]=$this->team_model->getzonedropdown();
+$data["status"]=$this->user_model->getstatusdropdown();
+// print_r($data['zone']);
 $data["page"]="createteam";
 $data["title"]="Create team";
 $this->load->view("template",$data);
@@ -3057,6 +3063,7 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="createteam";
 $data["title"]="Create team";
+$data["zone"]=$this->team_model->getzonedropdown();
 $this->load->view("template",$data);
 }
 else
@@ -3072,7 +3079,8 @@ $hname=$this->input->get_post("hname");
 $hcontent=$this->input->get_post("hcontent");
 $image=$this->menu_model->createImage();
 $appimage=$this->menu_model->createImage();
-if($this->team_model->create($type,$name,$image,$content,$hname,$hcontent,$appimage)==0)
+$zone=$this->input->get_post("zone");
+if($this->team_model->create($type,$name,$image,$content,$hname,$hcontent,$appimage,$zone)==0)
 $data["alerterror"]="New team could not be created.";
 else
 $data["alertsuccess"]="team created Successfully.";
@@ -3086,6 +3094,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editteam";
 $data["title"]="Edit team";
+$data["zone"]=$this->team_model->getzonedropdown();
 $data["before"]=$this->team_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
 }
@@ -3104,6 +3113,7 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="editteam";
 $data["title"]="Edit team";
+$data["zone"]=$this->team_model->getzonedropdown();
 $data["before"]=$this->team_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
 }
@@ -3129,7 +3139,8 @@ if (  $this->upload->do_upload($filename))
     $uploaddata = $this->upload->data();
     $appimage=$uploaddata['file_name'];
 }
-if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent,$appimage)==0)
+$zone=$this->input->get_post("zone");
+if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent,$appimage,$zone)==0)
 $data["alerterror"]="New team could not be Updated.";
 else
 $data["alertsuccess"]="team Updated Successfully.";
@@ -6388,5 +6399,34 @@ public function viewcontestscore()
     $this->load->view("json",$data);
     }
 
+//avinash functions for aftergroupstage
+
+public function viewaftergroupstage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["before"]=$this->team_model->beforeeditaftergroupstage();
+$data[ 'status' ] =$this->user_model->getstatusdropdown();
+$data["page"]="viewaftergroupstage";
+$data["title"]="View After Group Stage Image";
+$this->load->view("template",$data);
 }
+public function aftergroupstagesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+// $image=$this->input->get_post("image");
+$status=$this->input->get_post("status");
+            
+$image=$this->menu_model->createImage();
+if($this->team_model->aftergroupstagecreate($image,$status)==0)
+$data["alerterror"]="After Group Stage could not be updated.";
+else
+$data["alertsuccess"]="New After Group Stage Updated Successfully.";
+$data["redirect"]="site/viewaftergroupstage";
+$this->load->view("redirect",$data);
+
+}
+}
+
 ?>

@@ -57,6 +57,20 @@
 <label>Content</label>
 </div>
 </div>
+
+<div class="row">
+			<div class="input-field col m6 s8"><label>Zone</label>
+			</div>
+		</div>
+
+
+<div class="row">
+			<div class="input-field col m6 s8">
+				<?php echo form_dropdown( 'zone',$zone,set_value( 'zone'),'class="browser-default" '); ?>
+					
+			</div>
+		</div>
+
 <div class="row">
 <div class="input-field col s12">
 <textarea name="hcontent" class="materialize-textarea" length="400"><?php echo set_value( 'hcontent');?></textarea>
