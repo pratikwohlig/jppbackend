@@ -186,33 +186,35 @@ $data['message'] = $this->restapi_model->getAllPoints();
         $elements[0]->header = 'ID';
         $elements[0]->alias = 'id';
 
-        $elements = array();
         $elements[1] = new stdClass();
         $elements[1]->field = '`jpp_merchandize`.`order`';
         $elements[1]->sort = '1';
         $elements[1]->header = 'Order';
         $elements[1]->alias = 'order';
 
-        $elements = array();
         $elements[2] = new stdClass();
         $elements[2]->field = '`jpp_merchandize`.`name`';
         $elements[2]->sort = '1';
         $elements[2]->header = 'Name';
         $elements[2]->alias = 'name';
 
-        $elements = array();
         $elements[3] = new stdClass();
         $elements[3]->field = '`jpp_merchandize`.`image`';
         $elements[3]->sort = '1';
         $elements[3]->header = 'Image';
         $elements[3]->alias = 'image';
 
-        $elements = array();
         $elements[4] = new stdClass();
         $elements[4]->field = '`jpp_merchandize`.`link`';
         $elements[4]->sort = '1';
         $elements[4]->header = 'Link';
         $elements[4]->alias = 'link';
+
+        $elements[5] = new stdClass();
+        $elements[5]->field = '`jpp_merchandize`.`price`';
+        $elements[5]->sort = '1';
+        $elements[5]->header = 'Price';
+        $elements[5]->alias = 'price';
 
         $search = $this->input->get_post('search');
         $pageno = $this->input->get_post('pageno');
@@ -222,7 +224,7 @@ $data['message'] = $this->restapi_model->getAllPoints();
         if ($maxrow == '') {
         }
         if ($orderby == '') {
-            $orderby = 'id';
+            $orderby = 'order';
             $orderorder = 'ASC';
         }
         $data['message'] = $this->chintantable->query($pageno, $maxrow, $orderby, $orderorder, $search, $elements, 'FROM `jpp_merchandize`');

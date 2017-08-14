@@ -33,7 +33,7 @@
 					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->image);?>">
 				</div>
 			</div>
-			<span style=" ">1920  ×  973 px </span>
+			<span style=" ">600 x 625 px </span>
 		</div>
 <div class="row">
 <div class="input-field col s6">
@@ -41,6 +41,14 @@
 <input type="text" id="Link" name="link" value='<?php echo set_value('link',$before->link);?>'>
 </div>
 </div>
+
+<div class="row">
+<div class="input-field col s6">
+<label for="price">Price</label>
+<input type="text" id="price" name="price" value='<?php echo set_value('price',$before->price);?>'>
+</div>
+</div>
+
 <div class="row">
 <div class="col s6">
 <button type="submit" class="btn btn-primary waves-effect waves-light  blue darken-4">Save</button>

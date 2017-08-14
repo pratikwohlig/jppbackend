@@ -1263,6 +1263,11 @@ $elements[4]->field="`jpp_merchandize`.`link`";
 $elements[4]->sort="1";
 $elements[4]->header="Link";
 $elements[4]->alias="link";
+$elements[5]=new stdClass();
+$elements[5]->field="`jpp_merchandize`.`price`";
+$elements[5]->sort="1";
+$elements[5]->header="Price";
+$elements[5]->alias="price";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1311,8 +1316,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $link=$this->input->get_post("link");
+$price=$this->input->get_post("price");
     $image=$this->menu_model->createImage();
-if($this->merchandize_model->create($order,$name,$image,$link)==0)
+if($this->merchandize_model->create($order,$name,$image,$link,$price)==0)
 $data["alerterror"]="New merchandize could not be created.";
 else
 $data["alertsuccess"]="merchandize created Successfully.";
@@ -1353,8 +1359,9 @@ $order=$this->input->get_post("order");
 $name=$this->input->get_post("name");
 $image=$this->input->get_post("image");
 $link=$this->input->get_post("link");
+$price=$this->input->get_post("price");
 $image=$this->menu_model->createImage();
-if($this->merchandize_model->edit($id,$order,$name,$image,$link)==0)
+if($this->merchandize_model->edit($id,$order,$name,$image,$link,$price)==0)
 $data["alerterror"]="New merchandize could not be Updated.";
 else
 $data["alertsuccess"]="merchandize Updated Successfully.";
