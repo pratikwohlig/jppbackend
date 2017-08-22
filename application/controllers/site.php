@@ -3146,6 +3146,12 @@ if (  $this->upload->do_upload($filename))
     $uploaddata = $this->upload->data();
     $appimage=$uploaddata['file_name'];
 }
+if($appimage=="")
+{
+    $appimage=$this->team_model->getteamappimagebyid($id);
+    // print_r($image);
+    $appimage=$appimage->appimage;
+}
 $zone=$this->input->get_post("zone");
 if($this->team_model->edit($id,$type,$name,$image,$content,$hname,$hcontent,$appimage,$zone)==0)
 $data["alerterror"]="New team could not be Updated.";

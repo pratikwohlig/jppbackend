@@ -129,5 +129,13 @@ return $query;
 
 		return $return;
 	}
+
+
+	public function getteamappimagebyid($id)
+	{
+		$query=$this->db->query("SELECT `appimage` FROM `jpp_team` WHERE `id`='$id'")->row();
+		return $query;
+	}
+
 }
 ?>

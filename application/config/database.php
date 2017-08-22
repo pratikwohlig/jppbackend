@@ -74,7 +74,7 @@ else
 {
     $db['default']['hostname'] = 'localhost';
     $db['default']['username'] = 'root';
-    $db['default']['password'] = '';
+    $db['default']['password'] = 'wohlig123';
     $db['default']['database'] = 'jpp_admin';
     $db['default']['dbdriver'] = 'mysqli';
     $db['default']['dbprefix'] = '';
