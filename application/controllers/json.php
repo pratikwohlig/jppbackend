@@ -1295,4 +1295,56 @@ echo $this->email->print_debugger();
         $data['message']=$this->contest_model->savescore($user,$contest,$score,$totalquestions,$correctanswer);
         $this->load->view('json',$data);
     }
+
+function getAllTicket()
+{
+    $elements=array();
+
+    $elements[0]=new stdClass();
+    $elements[0]->field="`jpp_ticket`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`jpp_ticket`.`order`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Order";
+    $elements[1]->alias="order";
+
+    $elements[2]=new stdClass();
+    $elements[2]->field="`jpp_ticket`.`link`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Link";
+    $elements[2]->alias="link";
+
+    $elements[3]=new stdClass();
+    $elements[3]->field="`jpp_ticket`.`image`";
+    $elements[3]->sort="1";
+    $elements[3]->header="Image";
+    $elements[3]->alias="image";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`jpp_ticket`.`status`";
+    $elements[4]->sort="1";
+    $elements[4]->header="Status";
+    $elements[4]->alias="status";
+
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+        $maxrow=20;
+    }
+    if($orderby=="")
+    {
+        $orderby="order";
+        $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_ticket`","WHERE `jpp_ticket`.`status`=1");
+    $this->load->view("json",$data);
+}
 }

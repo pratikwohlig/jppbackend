@@ -6440,6 +6440,163 @@ $data["redirect"]="site/viewaftergroupstage";
 $this->load->view("redirect",$data);
 
 }
+
+//tickets functions
+
+    public function viewticket()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="viewticket";
+    $data["base_url"]=site_url("site/viewticketjson");
+    $data["title"]="View ticket";
+    $this->load->view("template",$data);
+}
+function viewticketjson()
+{
+    $elements=array();
+
+    $elements[0]=new stdClass();
+    $elements[0]->field="`jpp_ticket`.`id`";
+    $elements[0]->sort="1";
+    $elements[0]->header="ID";
+    $elements[0]->alias="id";
+    
+    $elements[1]=new stdClass();
+    $elements[1]->field="`jpp_ticket`.`order`";
+    $elements[1]->sort="1";
+    $elements[1]->header="Order";
+    $elements[1]->alias="order";
+
+    $elements[2]=new stdClass();
+    $elements[2]->field="`jpp_ticket`.`link`";
+    $elements[2]->sort="1";
+    $elements[2]->header="Link";
+    $elements[2]->alias="link";
+
+    $elements[3]=new stdClass();
+    $elements[3]->field="`jpp_ticket`.`image`";
+    $elements[3]->sort="1";
+    $elements[3]->header="Image";
+    $elements[3]->alias="image";
+
+    $elements[4]=new stdClass();
+    $elements[4]->field="`jpp_ticket`.`status`";
+    $elements[4]->sort="1";
+    $elements[4]->header="Status";
+    $elements[4]->alias="status";
+
+    $search=$this->input->get_post("search");
+    $pageno=$this->input->get_post("pageno");
+    $orderby=$this->input->get_post("orderby");
+    $orderorder=$this->input->get_post("orderorder");
+    $maxrow=$this->input->get_post("maxrow");
+    if($maxrow=="")
+    {
+        $maxrow=20;
+    }
+    if($orderby=="")
+    {
+        $orderby="id";
+        $orderorder="ASC";
+    }
+    $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_ticket`");
+    $this->load->view("json",$data);
+}
+
+public function createticket()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="createticket";
+    $data[ 'status' ] =$this->user_model->getstatusdropdown();
+    $data["title"]="Create ticket";
+    $this->load->view("template",$data);
+}
+public function createticketsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("order","Order","trim");
+    $this->form_validation->set_rules("link","Link","trim");
+    $this->form_validation->set_rules("status","Status","trim");
+    $this->form_validation->set_rules("order","Order","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data["page"]="createticket";
+        $data["title"]="Create ticket";
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $order=$this->input->get_post("order");
+        $link=$this->input->get_post("link");
+        $status=$this->input->get_post("status");
+        $image=$this->menu_model->createImage();
+        if($this->ticket_model->create($image,$link,$status,$order)==0)
+        $data["alerterror"]="New ticket could not be created.";
+        else
+        $data["alertsuccess"]="ticket created Successfully.";
+        $data["redirect"]="site/viewticket";
+        $this->load->view("redirect",$data);
+    }
+}
+public function editticket()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $data["page"]="editticket";
+    $data["before1"]=$this->input->get('id');
+    $data[ 'status' ] =$this->user_model->getstatusdropdown();
+    $data["before2"]=$this->input->get('id');
+    $data["title"]="Edit ticket";
+    $data["before"]=$this->ticket_model->beforeedit($this->input->get("id"));
+    $this->load->view("template",$data);
+}
+public function editticketsubmit()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->form_validation->set_rules("id","ID","trim");
+    $this->form_validation->set_rules("order","Order","trim");
+    $this->form_validation->set_rules("name","Name","trim");
+    $this->form_validation->set_rules("image","Image","trim");
+    if($this->form_validation->run()==FALSE)
+    {
+        $data["alerterror"]=validation_errors();
+        $data["page"]="editticket";
+        $data[ 'status' ] =$this->user_model->getstatusdropdown();
+        $data[ 'type' ] =$this->ticket_model->gettypedropdown();
+        $data["title"]="Edit ticket";
+        $data["before"]=$this->ticket_model->beforeedit($this->input->get("id"));
+        $this->load->view("template",$data);
+    }
+    else
+    {
+        $id=$this->input->get_post("id");
+        $order=$this->input->get_post("order");
+        $link=$this->input->get_post("link");
+        $status=$this->input->get_post("status");
+        $image=$this->menu_model->createImage();
+        if($this->ticket_model->edit($id,$image,$link,$status,$order)==0)
+        $data["alerterror"]="New ticket could not be Updated.";
+        else
+        $data["alertsuccess"]="ticket Updated Successfully.";
+        $data["redirect"]="site/viewticket";
+        $this->load->view("redirect",$data);
+    }
+}
+public function deleteticket()
+{
+    $access=array("1");
+    $this->checkaccess($access);
+    $this->ticket_model->delete($this->input->get("id"));
+    $data["redirect"]="site/viewticket";
+    $this->load->view("redirect",$data);
+}
+
 }
 
 ?>
