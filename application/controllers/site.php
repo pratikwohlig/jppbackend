@@ -890,7 +890,7 @@ $elements[5]->header="Timestamp";
 $elements[5]->alias="timestamp";
 
     $elements[6]=new stdClass();
-$elements[6]->field="`jpp_schedule`.`season`";
+$elements[6]->field="`jpp_schedule`.`seasonname`";
 $elements[6]->sort="1";
 $elements[6]->header="Season";
 $elements[6]->alias="season";
@@ -1827,7 +1827,7 @@ $maxrow=20;
 if($orderby=="")
 {
 $orderby="id";
-$orderorder="ASC";
+$orderorder="DESC";
 }
 $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `jpp_news`");
 $this->load->view("json",$data);
