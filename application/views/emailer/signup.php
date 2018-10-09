@@ -45,6 +45,5 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
                 </tr>
             </tbody>
         </table>
-
     </body>
 </html>
