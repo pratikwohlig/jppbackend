@@ -268,7 +268,8 @@ ORDER BY `jpp_schedule`.`startdate` DESC,`jpp_schedule`.`starttime` DESC,`jpp_sc
     }
     public function getScheduleForIosAndroidSeason4()
     {
-        $query2=$this->db->query("SELECT `id` FROM `jpp_season` ORDER BY `orderno` ASC LIMIT 0,1")->row();
+        //$query2=$this->db->query("SELECT `id` FROM `jpp_season` ORDER BY `orderno` ASC LIMIT 0,1")->row();
+        $query2=$this->db->query("SELECT `id` FROM `jpp_season` ORDER BY `orderno` DESC LIMIT 0,1")->row();//changed seq to desc 10-10-18 pratik
         $seasonid=$query2->id;
          $query=$this->db->query("SELECT `jpp_schedule`.`id`, `jpp_stadium`.`name` as `stadium`,`jpp_stadium`.`hname` as `hindistadium`, `jppteam1`.`name` as `team1`,`jppteam1`.`hname` as `hinditeam1`,`jppteam1`.`id` as `team1id`, `jppteam2`.`name` as `team2`,`jppteam2`.`hname` as `hinditeam2`,`jppteam2`.`id` as `team2id`, `jpp_schedule`.`bookticket` as `link`, `jpp_schedule`.`score1`, `jpp_schedule`.`score2`,substring(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`), 1, length(CONCAT(DATE_FORMAT(`jpp_schedule`.`startdate`, '%d %b %Y'), ', ', `starttime`)) - 3) as `starttimedate`,IFNULL(`jpp_schedule`.`ishome`,0) as `ishome`,`jpp_schedule`.`matchtime`,`jpp_schedule`.`level`,`jppteam1`.`appimage` as `teamimage1`,`jppteam2`.`appimage` as `teamimage2`,`jpp_schedule`.`bookticket`,`jpp_schedule`.`season`,`jppteam1`.`appimage` as `appteamimage1`,`jppteam2`.`appimage` as `appteamimage2`
 FROM `jpp_schedule`
