@@ -276,7 +276,7 @@ LEFT OUTER JOIN `jpp_stadium` ON `jpp_stadium`.`id`=`jpp_schedule`.`stadium`
 LEFT OUTER JOIN `jpp_fixture` ON `jpp_fixture`.`schedule`=`jpp_schedule`.`id`
 LEFT OUTER JOIN `jpp_team` as `jppteam1`ON `jppteam1`.`id`=`jpp_schedule`.`team1`
 LEFT OUTER JOIN `jpp_team` as `jppteam2`ON `jppteam2`.`id`=`jpp_schedule`.`team2`
-WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>''  AND `jpp_schedule`.`season`='$seasonid'
+WHERE `jpp_schedule`.`score1`<>'' AND `jpp_schedule`.`score2`<>''  AND `jpp_schedule`.`season`='$seasonid' AND `jpp_schedule`.`levelstatus`=1
 GROUP BY `jpp_schedule`.`id`
 ORDER BY `jpp_schedule`.`startdate` DESC,`jpp_schedule`.`starttime` DESC,`jpp_schedule`.`season` DESC")->result();
         //print_r($query);
