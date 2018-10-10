@@ -59,7 +59,7 @@ font-family: 'Oswald'; font-style: normal; font-weight: 700; src: local('Oswald 
 </style>
 
     <table class="main" style="border-collapse: collapse; border-spacing: 2px;">
-        <tbody class="img" style=" background-image:url('http://jaipurpinkpanthers.com/emailers/mailer/bg-img.jpg');">
+        <tbody class="img" style=" background-image:url('http://jaipurpinkpanthers.com/emailers/mailer/3.jpg');">
             <tr>
                 <td>
                     <img src="http://jaipurpinkpanthers.com/emailers/mailer/2.png">
